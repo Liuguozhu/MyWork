@@ -1,0 +1,73 @@
+###################龙之江湖协议##############################
+
+#新手引导数据
+message c_transmitData {
+	int32 index; #新手引导编号
+}
+
+#新手引导透传数据
+message s_transmitData {
+	int32 result; #结果（0.成功接收，1.失败）
+}
+
+#新手引导特殊数据
+message c_transmitSpecialData {
+	int32 index; #新手引导特殊编号
+}
+
+#新手引导透传特殊数据
+message s_transmitSpecialData {
+	int32 result; #结果（0.成功接收，1.失败）
+}
+
+#刷新新手引导
+message s_refreshGuide {
+	int32 index; #新手引导编号
+	int32 specialIndex; #新手引导特殊编号
+}
+
+#兑换激活码
+message c_cdkey {
+	string cdKey; #激活码
+}
+
+#兑换激活码返回信息
+message s_cdkey {
+	int32 result; #返回结果（0.成功，1.失败）
+	string reason; #原因
+}
+
+#绑定手机号
+message c_binding {
+	string phone; #手机号
+}
+
+#绑定手机号返回信息
+message s_binding {
+	int32 result; #返回结果（0.成功，1.失败）
+	string reason; #原因
+}
+
+#超级客户端
+message c_superClient {
+	int32 serverId; #服务器编号
+	int64 roleId; #角色编号
+}
+
+#超级客户端返回信息
+message s_superClient {
+	int32 result; #返回结果（0.成功，1.失败）
+	string reason; #原因
+}
+
+#请求活力值
+message c_energyInit {
+	int32 index; #校验码（1）
+}
+	
+#请求活力值返回信息（服务器会主动刷新此协议）
+message s_energyInit {
+	int32 energy; #活力值
+	int32 energyMax; #活力值上限
+	int32 timeOut; #距离下次刷新剩余时间（秒）
+}

@@ -1,0 +1,1 @@
+[{"action":"加人","exp":2},{"action":"每日登录","exp":1},{"action":"拜神","exp":2},{"action":"帮派入侵","exp":2},{"action":"帮战","exp":5},{"action":"商店兑换","exp":3},{"action":"退帮","exp":-2}]

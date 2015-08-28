@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="gangTaskTimeTrigger" />
+				<!-- <ref bean="clock24TimeTrigger" /> -->
+
+				<ref bean="answerTimeTrigger" /><!-- 每日答题 -->
+				<ref bean="huntskillTimeTrigger" /><!-- 猎技 -->
+				<ref bean="invasionTimeTrigger" /><!-- 帮派入侵 -->
+				<ref bean="gangFightRoundTimeTrigger" /><!-- 帮派战循环赛 -->
+				<ref bean="gangFightApplyTimeTrigger" /><!-- 帮派战报名 -->
+				<ref bean="gangFightOutTimeTrigger" /><!-- 帮派战淘汰赛 -->
+				<ref bean="onlineNumberTimeTrigger" /><!-- 在线人数日志 -->
+			</list>
+		</property>
+		<property name="autoStartup" value="true" />
+	</bean>
+
+	<!-- 帮派任务 -->
+	<bean id="gangTaskTimeTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="gangTaskTimeDetail" />
+		<!-- 0，6，12，18点各执行一次 -->
+		<property name="cronExpression" value="0 0 0/6 * * ?" /><!-- -->
+	</bean>
+
+	<bean id="gangTaskTimeDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="job" />
+		<property name="targetMethod" value="refreshGangTask" />
+	</bean>
+
+	<bean id="job" class="iyunu.NewTLOL.timer.TimeJobGangTask" />
+	<!-- 帮派任务 -->
+
+	<!-- 每日重置 -->
+	<bean id="clock24TimeTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="clock24TimeDetail" />
+		<!--24点执行一次 -->
+		<property name="cronExpression" value="0 0 0 * * ?" /><!-- -->
+	</bean>
+
+	<bean id="clock24TimeDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="job1" />
+		<property name="targetMethod" value="refreshClock24" />
+	</bean>
+
+	<bean id="job1" class="iyunu.NewTLOL.timer.TimeJob24Clock" />
+	<!-- 每日重置 -->
+
+	<!-- 每日答题 -->
+	<bean id="answerTimeTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="answerTimeDetail" />
+		<property name="cronExpression" value="0 0 10,21 * * ?" /><!-- 
+			每日10点和21点开启 -->
+	</bean>
+
+	<bean id="answerTimeDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="answerJob" />
+		<property name="targetMethod" value="excute" />
+	</bean>
+
+	<bean id="answerJob" class="iyunu.NewTLOL.timer.TimeJobAnswer" />
+	<!-- 每日答题 -->
+
+	<!-- 猎技 -->
+	<bean id="huntskillTimeTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="huntskillTimeDetail" />
+		<property name="cronExpression" value="0 0 12 * * ?" /><!-- 每日12点开启 -->
+	</bean>
+
+	<bean id="huntskillTimeDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="huntskillJob" />
+		<property name="targetMethod" value="excute" />
+	</bean>
+
+	<bean id="huntskillJob" class="iyunu.NewTLOL.timer.TimeJobHuntskill" />
+	<!-- 猎技 -->
+
+	<!-- 帮派入侵 -->
+	<bean id="invasionTimeTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="invasionTimeDetail" />
+		<property name="cronExpression" value="0 30 18 * * ?" /><!-- 每日18点30分开启 -->
+	</bean>
+
+	<bean id="invasionTimeDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="invasionJob" />
+		<property name="targetMethod" value="excute" />
+	</bean>
+
+	<bean id="invasionJob" class="iyunu.NewTLOL.timer.TimeJobInvasion" />
+	<!-- 帮派入侵 -->
+
+	<!-- 帮派战 -->
+	<bean id="gangFightRoundTimeTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean"> <!-- 循环赛 -->
+		<property name="jobDetail" ref="gangFightRoundTimeDetail" />
+		<property name="cronExpression" value="0 0 20 * * ?" /><!-- 每日20点开启 -->
+	</bean>
+
+	<bean id="gangFightRoundTimeDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="gangFightJob" />
+		<property name="targetMethod" value="excute" />
+	</bean>
+
+	<bean id="gangFightApplyTimeTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean"> <!-- 报名 -->
+		<property name="jobDetail" ref="gangFightApplyTimeDetail" />
+		<property name="cronExpression" value="0 0 0 ? * SAT" /><!-- 每周六0点开启 -->
+	</bean>
+
+	<bean id="gangFightApplyTimeDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="gangFightJob" />
+		<property name="targetMethod" value="apply" />
+	</bean>
+
+	<bean id="gangFightOutTimeTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean"> <!-- 淘汰赛 -->
+		<property name="jobDetail" ref="gangFightOutTimeDetail" />
+		<property name="cronExpression" value="0 0 16 ? * SAT" /><!-- 每周六16点开启 -->
+	</bean>
+
+	<bean id="gangFightOutTimeDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="gangFightJob" />
+		<property name="targetMethod" value="out" />
+	</bean>
+	
+	<bean id="gangFightJob" class="iyunu.NewTLOL.timer.TimeJobGangFightRound" />
+	<!-- 帮派战 -->
+	
+	<!-- 在线人数日志 -->
+	<bean id="onlineNumberTimeTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="onlineNumberTimeDetail" />
+		<property name="cronExpression" value="0 0/5 * * * ?" /><!-- 5分钟执行一次 -->
+	</bean>
+
+	<bean id="onlineNumberTimeDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="onlineNumberJob" />
+		<property name="targetMethod" value="excute" />
+	</bean>
+
+	<bean id="onlineNumberJob" class="iyunu.NewTLOL.timer.TimeJobOnlineNumber" />
+	<!-- 在线人数日志 -->
+</beans>

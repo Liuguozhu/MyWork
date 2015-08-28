@@ -1,0 +1,77 @@
+###################好友协议##############################
+
+#好友信息
+message friendOrBlackInfo {
+	int64 id; #角色编号
+	string nick; #角色名
+	int64 figure;	#形象编号
+	string vocation; #职业名称
+	int32 level; #等级
+	int32 isOnline;# 0为在线,1为不在线
+}
+
+#请求添加好友列表
+message c_applyList {
+	int64 id; #角色编号
+}
+
+#申请添加好友
+message c_addFriend {
+	int64 friendId;		#好友编号
+}
+
+#申请添加好友返回信息
+message s_addFriend {
+	int32 result;	# 0、成功；1、失败
+	string reason; 	#原因
+}
+
+#确认或拒绝
+message c_confirmFriend {
+	int32 state;	# 1.确认、2.拒绝、3.一键拒绝
+	int64 friendId;		#好友编号
+}
+
+#确认或拒绝返回信息
+message s_confirmFriend {
+	int32 result;	# 0、成功；1、失败
+	string reason; 	#原因
+}
+
+#请求好友列表
+message c_friendInit {
+	int64 id;			#编号
+}
+
+#请求好友列表返回信息
+message s_friendInit {
+	int32 totleNum;			#好友上限
+}
+
+#删除好友
+message c_delFriend {
+	int64 friendId;		#好友编号
+}
+
+#删除好友返回信息
+message s_delFriend {
+	int32 result;	# 0、成功；1、失败
+	string reason; 	#原因
+	int32 totleNum; #好友上限
+}
+
+#申请添加好友提示
+message s_refreshFriendHint {
+	int32 state; #提示
+}
+
+#刷新好友列表或黑名单列表或好友申请列表
+message s_refreshFriendOrBlack {
+	int32 type; #类型(1,申请列表;2,好友列表;3,黑名单列表)
+	friendOrBlackInfo[] friendOrBlackInfoList;#好友列表或黑名单列表或好友申请列表
+}
+
+#好友通知
+message s_friendInform {
+	string reason;  #通知
+}

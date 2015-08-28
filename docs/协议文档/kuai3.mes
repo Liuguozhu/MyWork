@@ -1,0 +1,43 @@
+###################快3协议##############################
+
+
+#请求查询快3结果
+message c_QueryResultKuai3{
+	int32 roleId; #角色ID
+}
+#最次十次记录体
+message record{
+	int32 turn;#期数
+	int32 record;#记录
+}
+
+#返回快3结果
+message s_QueryResultKuai3 {
+	int32 result;	#0.成功；1.失败
+	string reason; #失败原因
+	int32 turns;#轮数
+	int32 comeOut;#上轮结果	
+	int32 timeout;#剩余时间
+	record[] records;#最近十次记录
+}
+#下注
+#message kuai3{
+#	int32 num;#选择的号码
+#	int32 times;#倍数
+#	int32 type;#选号方式   三同号单选0   （格式：333）, 三不同号1(格式：156), 三连号通选2,(格式：统一发个1上来) 二同号复选3(格式：个位数，1，2等), #和值4(格式：个位数，大于2，小于19);		
+#}
+
+#下注
+message c_joinKuai3{
+	int32 turns ;#当前轮数
+	int32 allNum;#总注数，算上倍数的一共买了多少注单注彩票。
+	string[] joinKuai3;# kuai3的集合(选择的号码=倍数=选号方式)
+}
+#下注返回
+message s_joinKuai3{
+	int32 turns;#轮数
+	int32 comeOut;#上轮结果	
+	int32 timeout;#剩余时间
+	int32 result;	#0.成功；1.失败 2轮数错误
+	string reason; #失败原因
+}

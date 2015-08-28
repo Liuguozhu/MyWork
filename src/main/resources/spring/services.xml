@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="msgHandler" scope="prototype" class="iyunu.NewTLOL.net.TLOLChannelHandler">
+	</bean>
+
+	<!-- 角色信息服务层 -->
+	<bean id="roleService" class="iyunu.NewTLOL.service.impl.role.RoleServiceImpl">
+		<property name="redisLogon" ref="redisLogon" />
+		<property name="mailService" ref="mailService" />
+	</bean>
+	<!-- 拍卖行 -->
+	<bean id="auctionService" class="iyunu.NewTLOL.service.impl.auction.AuctionServiceImpl"></bean>
+	<!-- 邮件 -->
+	<bean id="mailService" class="iyunu.NewTLOL.service.impl.mail.MailServiceImpl" />
+	<!-- 公告 -->
+	<bean id="bulletinService" class="iyunu.NewTLOL.service.impl.bulletin.BulletinServiceImpl"></bean>
+	<!--帮派 -->
+	<bean id="gangService" class="iyunu.NewTLOL.service.impl.gang.GangServiceImpl"></bean>
+	<!-- 用户 -->
+	<bean id="userService" class="iyunu.NewTLOL.service.impl.user.UserServiceImpl"></bean>
+	<!-- 双倍 -->
+	<bean id="multipleService" class="iyunu.NewTLOL.service.impl.multiple.MultipleServiceImpl"></bean>
+	<!-- 激活码 -->
+	<bean id="cdKeyService" class="iyunu.NewTLOL.service.impl.cdKey.CdKeyServiceImpl"></bean>
+	<!-- 更新补偿 -->
+	<bean id="compensateService" class="iyunu.NewTLOL.service.impl.compensate.CompensateServiceImpl"></bean>
+	<!-- 充值活动 -->
+	<bean id="payActivityService" class="iyunu.NewTLOL.service.impl.payActivity.PayActivityServiceImpl"></bean>
+	<!-- 内测充值补偿 -->
+	<bean id="payBackService" class="iyunu.NewTLOL.service.impl.payActivity.PayBackServiceImpl"></bean>
+</beans>

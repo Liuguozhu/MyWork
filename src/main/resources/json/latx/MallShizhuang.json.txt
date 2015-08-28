@@ -1,0 +1,1 @@
+[{"index":3000,"isBind":0,"itemId":21044,"level":0,"name":"时装礼包","off":100,"price":588,"priceType":"money"}]

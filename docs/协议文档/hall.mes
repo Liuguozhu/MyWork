@@ -1,0 +1,123 @@
+###################登录服务器协议##############################
+
+#注册帐号
+message c_register {
+	string name;	#用户名
+	string password;	#密码
+	string platform; #平台渠道标识
+	string type; #机型
+	string imei; #IMEI
+	string imsi; #IMSI
+}
+
+#注册帐号返回信息
+message s_register {
+	int32 result;	#0.成功；1.失败
+	string reason; #失败原因
+}
+
+#用户登录
+message c_login {
+	string name;	#用户名
+	string password;	#密码
+}
+
+#用户登录返回信息
+message s_login {
+	int32 result;	#0.成功，1.登录失败，2.停服维护，3.版本更新
+	string reason; #失败原因
+	string userId; #用户编号
+	int32 change; #是否需要修改帐号（0.是，1.否）
+}
+
+#斯凯用户登陆
+message c_skyLogin {
+	string userId; #斯凯用户编号
+	string platform; #平台渠道标识
+	string type; #机型
+	string imei; #IMEI
+	string imsi; #IMSI
+}
+
+#斯凯用户登录返回信息
+message s_skyLogin {
+	int32 result;	#0.成功，1.登录失败，2.停服维护，3.版本更新
+	string reason; #失败原因
+	string userId; #斯凯用户编号
+	int32 change; #是否需要修改帐号（0.是，1.否）
+}
+
+#当乐用户登陆
+message c_downjoyLogin {
+	string memberId; #当乐用户编号
+	string token; #用户注册或登录后返回的token参数
+	string platform; #平台渠道标识
+	string type; #机型
+	string imei; #IMEI
+	string imsi; #IMSI
+}
+
+#当乐用户登录返回信息
+message s_downjoyLogin {
+	int32 result;	#0.成功，1.登录失败，2.停服维护，3.版本更新
+	string reason; #失败原因
+	string userId; #当乐用户编号
+	int32 change; #是否需要修改帐号（0.是，1.否）
+}
+
+
+#请求服务器列表
+message c_serverList {
+	int32 number; #（发送101）
+}
+
+#服务器信息
+message server {
+	int32 zoneId; #大区
+	int32 serverId; #服务器编号
+	string name; #服务器名称
+	string url;	 #服务器路径
+	int32  port; #服务器端口
+	int32 state;	#服务器状态（0.正常运行，1.停服维护，2.新服未开启）
+	string cue;	#提示内容
+	int32 status; #状态（0.新区，1.火爆，2.流畅，3.维护）
+}
+
+#请求服务器列表返回信息
+message s_serverList {
+	server[] serverList; #服务器列表
+	string content; #登陆提示信息
+}
+
+#快速登录
+message c_quick {
+	int32 number; #（发送102）
+	string platform; #平台渠道标识
+	string type; #机型
+	string imei; #IMEI
+	string imsi; #IMSI
+}
+
+#快速登录返回信息
+message s_quick {
+	int32 result;	#0.成功，1.失败，2.停服维护，3.版本更新
+	string reason; #失败原因
+	string name;	#用户名
+	string password;	#密码
+	string userId; #用户编号
+	int32 change; #是否需要修改帐号
+	server server; #服务器信息
+}
+
+#修改密码
+message c_changePasswd {
+	string name;	#用户名
+	string phone; #绑定手机号
+	string password;	#密码
+}
+
+#修改密码返回信息
+message s_changePasswd {
+	int32 result; #返回结果（0.成功，1.失败）
+	string reason; #原因
+}

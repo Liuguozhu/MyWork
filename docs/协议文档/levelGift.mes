@@ -1,0 +1,109 @@
+###################等级礼包协议##############################
+#等级礼包初始化
+message c_levelGiftInit {
+	int64 roleId;# 角色ID
+}
+
+#等级礼包中物品信息
+message levelGiftItemInfo {
+	int32 itemId; #物品编号
+	int32 itemNum; #物品数量
+	string icon; #物品图标
+}
+
+#等级礼包信息
+message levelGiftInfo {
+	int32 level; #礼包等级
+	int32 state; #礼包状态(0为不可领取，1为可领取，2为已领取)
+	levelGiftItemInfo[] levelGiftItemInfoList; #等级礼包中的物品列表
+}
+
+#等级礼包初始化返回
+message s_levelGiftInit {
+	levelGiftInfo[] levelGiftInfoList; #等级礼包列表
+}
+
+#领取礼包
+message c_getLevelGift {
+	int32 level; #礼包等级
+}
+
+#领取礼包
+message s_getLevelGift {
+	int32 result;#0.成功；1.失败
+	string reason; #失败原因(失败什么也不做)
+	int32 level; #礼包等级
+	int32 state; #礼包状态(0为不可领取，1为可领取，2为已领取)
+}
+
+#等级礼包通知
+message s_levelGiftInform {
+	int32 state; #礼包状态(0为可领取，1为不可领取)
+}
+#VIP奖励礼包info
+message giftVipInfo{
+	int32 id;#物品ID
+	int32 num;# 物品数量
+	string icon;#物品icon
+}
+
+#VIP奖励礼包 INFO2
+message giftVipinfo2{
+	int32 type;#1黄金 2白金 3钻石
+	int32 money;#元宝
+	giftVipInfo[] giftVipList;#礼包物品列表
+}
+
+
+#请求VIP奖励礼包
+message c_queryGiftVip{
+	int64 roleId;#角色ID
+	
+}
+#请求VIP奖励礼包返回
+message s_queryGiftVip{
+	giftVipinfo2[] giftList;#返回的礼包列表
+}
+#拿VIP奖励礼包
+message c_getGiftVip{
+	int32 type;#1黄金 2白金 3钻石
+}
+#拿VIP奖励礼包
+message s_getGiftVip{
+	int32 result;#成功0 失败1
+	string reason;#原因
+}
+#七天奖励INFO
+message sevenInfo{
+	int32 id;#物品/伙伴ID
+	int32 num;#物品个数
+}
+
+#领取开服七天奖励
+message c_getSeven{
+	int32 type;#0普通领奖 1 VIP领奖
+}
+#领取开服七天奖励返回
+message s_getSeven{
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因
+}
+#查询开服七天奖励返回
+message c_querySeven{
+	int64 roleId;#角色ID
+}
+#查询开服七天奖励返回
+message s_querySeven{
+	int32 common;#0不可领取，1可领取2已领取
+	int32 vip;#0不可领取，1可领取2已领取
+	sevenInfo[] commonItem;#普通物品列表
+	sevenInfo[] vipItem;#VIP物品列表	
+	sevenInfo[] commonPartner;#普通伙伴
+	sevenInfo[] vipPartner;#VIP伙伴
+	int32 commonGold;#普通绑银
+	int32 vipGold;# vip绑银
+	int32 commonCoin;#普通银两
+	int32 vipCoin;#vip银两
+	int32 commonMoney;#普通元宝
+	int32 vipMoney;#vip元宝
+}

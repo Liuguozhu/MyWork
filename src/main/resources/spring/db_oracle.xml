@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="   
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd   
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd   
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	<!-- 数据源 -->
+	<bean id="dataSource_test" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@${db.ip}:${db.port}:${db.sid}" />
+		<property name="username" value="${db.username}" />
+		<property name="password" value="${db.password}" />
+		<property name="maxActive" value="1000" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="1" />
+	</bean>
+	
+	<bean id="dataSource_hall" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@${db.hall.ip}:${db.hall.port}:${db.hall.sid}" />
+		<property name="username" value="${db.hall.username}" />
+		<property name="password" value="${db.hall.password}" />
+		<property name="maxActive" value="1000" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="1" />
+	</bean>
+	
+		<bean id="dataSource_res" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin:@${db.res.ip}:${db.res.port}:${db.res.sid}" />
+		<property name="username" value="${db.res.username}" />
+		<property name="password" value="${db.res.password}" />
+		<property name="maxActive" value="1000" />
+		<property name="maxIdle" value="8" />
+		<property name="minIdle" value="1" />
+	</bean>
+	<!-- 数据源 -->
+
+	<!-- ibatis的工厂数据源配置1 -->
+	<bean id="sqlMapClient_test" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="/sql-map-config.xml" /><!--这里是ibatis的sqlMap文件集合 -->
+		<property name="dataSource" ref="dataSource_test" />
+	</bean>
+	
+	<bean id="sqlMapClient_hall" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="/sql-hall-config.xml" /><!--这里是ibatis的sqlMap文件集合 -->
+		<property name="dataSource" ref="dataSource_hall" />
+	</bean>
+	
+	<bean id="sqlMapClient_res" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="/sql-res-config.xml" /><!--这里是ibatis的sqlMap文件集合 -->
+		<property name="dataSource" ref="dataSource_res" />
+	</bean>
+
+</beans>  
+

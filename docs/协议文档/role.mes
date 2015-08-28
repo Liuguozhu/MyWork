@@ -1,0 +1,321 @@
+###################角色协议##############################
+#装备信息
+extern equipMsg;
+
+#部位强化信息
+extern bodyInfo;
+
+#配件信息
+extern stoneInfo;
+
+#配件部位
+extern stonePart;
+
+#服务器下发角色信息
+message s_role {
+	int64 id; #角色编号
+	string nick; #角色名
+	int64 figure;	#形象编号
+	string vocation; #职业名称
+	string[] titles; #称号列表
+	int32 titleIndex; #当前称号索引(-1为没有称号)
+	int32 level; #等级
+	int32 exp; #经验
+	int32 gold; #绑银
+	int32 money; #元宝
+	int32 expMax; #升级所需经验
+	int32 hp; #生命值
+	int32 hpMax; #生命值上限
+	int32 mp; #内力值
+	int32 mpMax; #内力值上限
+	int32 strength; #力量
+	int32 intellect; #智力
+	int32 physique; #体质
+	int32 agility; #敏捷
+	int32 free; #自由点数
+	int32 pAttack; #外功攻击
+	int32 pDefence; #外功防御
+	int32 mAttack; #内功攻击
+	int32 mDefence; #内功防御
+	int32 hit; #命中
+	int32 dodge; #闪避
+	int32 crit; #暴击
+	int32 parry; #格挡
+	int32 speed; #速度
+	int32 freeSkill; #剩余技能点数
+	int64 gangId;# 帮派ID
+	int32 jobTitle;# 0帮主1副帮主2长老3帮众4无帮派 
+	int32 tribute;#帮派贡献
+	int32 totalTribute;#帮派总贡献
+	string gangName; #帮派名字
+	int64 power; #战力
+}
+
+#属性信息
+message s_attributeInfo {
+	int32 hp; #生命值
+	int32 hpMax; #生命值上限
+	int32 mp; #内力值
+	int32 mpMax; #内力值上限
+	int32 strength; #力量
+	int32 intellect; #智力
+	int32 physique; #体质
+	int32 agility; #敏捷
+	int32 free; #自由点数
+	int32 pAttack; #外功攻击
+	int32 pDefence; #外功防御
+	int32 mAttack; #内功攻击
+	int32 mDefence; #内功防御
+	int32 hit; #命中
+	int32 dodge; #闪避
+	int32 crit; #暴击
+	int32 parry; #格挡
+	int32 speed; #速度
+	int64 power; #战力
+}
+
+#技能信息
+message skillInfo {
+	int32 skillId; #技能编号
+	int32 position; #技能位置
+	int32 state; #可学习状态(0.不可学习，1.可学习)
+}
+
+#角色登录
+message c_logon {
+	string userId;	#用户编号
+	int32 serverId; #服务器编号
+	int32 change;	#是否修改用户名
+	string platform; #平台渠道标识
+}
+
+#角色登录返回信息
+message s_logon {
+	int32 result; #结果（0.成功，1.无角色，2.登录失败）
+	string reason; #失败原因
+}
+
+#退出游戏
+message c_logout {
+	int64 roleId; #角色编号
+}
+
+#退出游戏返回信息
+message s_logout {
+	int32 result; #结果(0.成功，1.失败（强制退出）)
+}
+
+#创建角色
+message c_create {
+	string nick; #角色名
+	string userId; #用户编号
+	int64 figure; #形象编号（12，34，56）
+	int32 guildId; #门派编号（1.鼎寺，2.青轩，3.天旗，4.鬼谷）
+	int32 serverId; #服务器编号
+	int32 change;	#是否修改用户名
+}
+
+#创建角色返回信息
+message s_create {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因(若result=1)
+}
+
+#周围玩家下发开关
+message c_confirm {
+	int32 open; #开关（0.关，1.开；默认是关闭状态）
+}
+
+#周围玩家下发开关返回信息
+message s_confirm {
+	int32 result; #0.成功，1.失败
+	string reason; #失败原因
+}
+
+#修改属性点
+message c_free {
+	int32 strength; #力量
+	int32 intellect; #智力
+	int32 physique; #体质
+	int32 agility; #敏捷
+}
+
+#修改属性点返回信息
+message s_free {
+	int32 result; #0.成功，1.失败
+	string reason; #失败原因
+}
+
+#加入门派
+#message c_joinGuild {
+#	int32 guildId; #门派编号（1.鼎寺，2.青轩，3.天旗，4.鬼谷）
+#}
+
+#加入门派返回信息
+#message s_joinGuild {
+#	int32 result; #0.成功，1.失败（等级不足），2.失败（已有门派）
+#	string vocation; #职业名称
+#}
+
+#请求NPC
+#message c_npc {
+#	int32 npcId; #NPC编号
+#}
+
+#请求NPC返回信息
+#message s_npc {
+#	string content; #临时信息
+#}
+
+#查看玩家信息
+message c_lookRoleInfo {
+	int64 roleId; #对方角色编号
+}
+
+#查看玩家信息返回
+message s_lookRoleInfo {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因(若result=1)
+	int64 id; #角色编号
+	string nick; #角色名
+	int64 figure;	#形象编号
+	string vocation; #职业名称
+	string gangName; #帮派名称
+	int32 level; #等级
+	equipMsg[] equipMsgList; #装备信息列表
+	int32 vip; #vip等级（0.不是，1.黄金，2.白金，3.钻石）
+	int32 rankingLevel; #排行榜位置
+	int32 isFriend; #是不是好友(0为是好友;1为不是好友)
+	
+	int32 hpMax; #生命值上限
+	int32 mpMax; #内力值上限
+	int32 strength; #力量
+	int32 intellect; #智力
+	int32 physique; #体质
+	int32 agility; #敏捷
+	int32 free; #自由点数
+	int32 pAttack; #外功攻击
+	int32 pDefence; #外功防御
+	int32 mAttack; #内功攻击
+	int32 mDefence; #内功防御
+	int32 hit; #命中
+	int32 dodge; #闪避
+	int32 crit; #暴击
+	int32 parry; #格挡
+	int32 speed; #速度
+	int64 power; #战力
+	
+	bodyInfo[] bodyInfoList; #装备部位信息列表
+	stonePart[] stonePartList; #全部部位配件信息
+}
+
+#学习技能
+message c_roleStudySkill {
+	int32 position; #技能位置
+}
+
+#学习技能返回信息
+message s_roleStudySkill {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因(若result=1)
+	int32 freeSkill; #剩余技能点数
+}
+
+#重置技能
+message c_resetSkill {
+	int64 roleId; #角色编号
+}
+
+#重置技能返回信息
+message s_resetSkill {
+	int32 result; #0.成功，1.失败
+	string reason; #失败原因(若result=1)
+	int32 freeSkill; #剩余技能点数
+}
+
+#刷新角色技能
+message s_refreshSkill {
+	skillInfo[] skillList; #技能列表
+}
+
+#修改帐号密码
+message c_changeMsg {
+	string userName;
+	string password;
+}
+
+#修改帐号密码返回信息
+message s_changeMsg {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因
+}
+
+#获得奖励
+message s_award {
+	string award; #获得奖励
+	int32 type; #奖励类型（0.物品，1.经验，2.绑银，3.元宝，4.伙伴，5.答题积分，6.武魂，7.元气值）
+}
+
+#刷新经验值
+message s_refreshExp {
+	int32 exp; #经验值
+}
+
+#升级
+message s_upgrade {
+	int32 level; #等级
+	int32 expMax; #升级所需经验值
+	int32 exp; #经验值
+	int32 free; #自由点数
+}
+
+#刷新出战伙伴经验
+message s_refreshPExp {
+	int64 partnerId; #伙伴编号
+	int32 exp; #出战伙伴经验
+}
+
+#刷新伙伴生命值
+message s_refreshPartnerHp {
+	int64 partnerId; #伙伴编号
+	int32 hp; #生命值
+	int32 hpMax; #生命最大值
+}
+
+#伙伴升级
+message s_pUpgrade {
+	int64 partnerId; #伙伴编号
+	int32 level; #等级
+	int32 expMax; #升级所需经验值
+	int32 exp; #经验值
+}
+
+
+#拾取物品
+message c_pickup {
+	int64 uid; #箱子唯一编号编号
+}
+
+#拾取物品返回信息
+message s_pickup {
+	int32 result;	#0.成功；1.失败
+	string reason; #失败原因
+}
+
+#刷新聊天Vip开关
+message s_refreshVipChatOpen {
+	int32 openVipChat; # 聊天发送VIP开关(0为开，1为关)
+}
+
+#重新连接协议
+message c_relogon {
+	int64 roleId; #角色编号
+	int32 mapId; #地图编号
+	int32 x; #x坐标
+	int32 y; #y坐标
+}
+
+#重新连接协议
+message s_relogon {
+	int32 result;	#0.成功；1.失败
+}

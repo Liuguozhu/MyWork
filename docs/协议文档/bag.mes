@@ -1,0 +1,264 @@
+###################背包协议##############################
+
+#附加属性
+message addPropertyInfo {
+	string type; #类型（0.内功，1.外功，2.内防，3.外防，4.生命值，5.内力值，6.速度，7.命中，8.闪避，9.暴击，10.格挡）
+	int32 value; #数值
+	int32 maxValue; #最大值
+}
+
+#藏宝图信息
+message drawingMsg {
+	int32 mapId; #地图编号
+	int32 x; #x坐标
+	int32 y; #y坐标
+}
+
+#格子信息
+message cellInfo {
+	int32 empty; #0.格子为空，1.格子非空
+	int32 type; #物品类型（0.装备，1.宝石，2.技能书，3.药品，36.藏宝图）
+	int32 index; #格子索引
+	int32 itemId; #物品编号
+	int32 num; #物品数量
+	string icon; #物品图标
+	int32 mark; #是否提示（0.不提示，1.可以使用）
+	int32 isDeal; #是否可以交易
+	int32 star; #星（装备才会下发）
+	addPropertyInfo[] addPropertyInfoList; #附加属性集合（装备才会下发）
+	drawingMsg drawingMsg; #藏宝图信息
+	string timeOut; #到期时间
+}
+
+#刷新背包协议
+message s_refreshBag {
+	int32 sum; #背包总格子数量
+	cellInfo[] cellInfoList; #有变化的格子
+}
+
+#宝石
+message cellStone {
+	int32 empty; #0.格子为空，1.格子非空
+	int32 index; #格子索引
+	int32 itemId; #物品编号
+	int32 num; #物品数量
+	string icon; #物品图标
+	int32 isDeal; #是否可以交易
+}
+
+#刷新宝石背包协议
+message s_refreshStoneBag {
+	int32 sum; #宝石背包总格子数量
+	cellStone[] cellStoneList; #有变化的格子
+}
+
+#装备
+message equipMsg {
+	int32 itemId; #物品编号
+	string icon; #物品图标
+	int32 part; #部位
+	int32 isDeal; #是否可以交易
+	int32 star; #星
+	addPropertyInfo[] addPropertyInfoList; #附加属性集合
+	int32 luck; #幸运值
+	string timeOut; #到期时间
+}
+
+#刷新装备
+message s_refreshEquip {
+	equipMsg[] equipInfoList;
+}
+
+#背包拓展
+message c_bagExpand {
+	int32 expandNum; #拓展数量
+}
+
+#背包拓展返回信息
+message s_bagExpand {
+	int32 result;	#0.成功；1.失败
+	string reason; #失败原因
+	int32 sum; #仓库总格子数量
+}
+
+#物品使用
+message c_useItem {
+	int32 index; #背包格子索引
+	int32 num; #数量
+}
+
+#物品使用返回信息
+message s_useItem {
+	int32 result;	#0.成功；1.失败
+	string reason; #失败原因
+}
+
+#丢弃物品
+message c_discardItem {
+	int32 type; #类型（1.背包，2.宝石背包）
+	int32 itemIndex;	#物品的背包索引
+}
+
+#丢弃物品返回信息
+message s_discardItem {
+	int32 result;	#0.成功；1.失败
+	string reason; #失败原因
+}
+
+#穿装备
+message c_wearEquip {
+	int32 index;	#背包索引
+}
+
+#穿装备返回信息
+message s_wearEquip {
+	int32 result; # 0.成功，1.失败
+	string reason; 	#失败原因
+}
+
+#卸装备
+message c_unloadEquip {
+	int32 part; #部位(0. 武器，1.衣服，2.鞋子，3.帽子，4.戒指，5.项链)
+}
+
+#卸装备返回信息
+message s_unloadEquip {
+	int32 result; # 0.成功，1.失败
+	string reason; 	#失败原因
+}
+
+#整理背包
+message c_sortBag {
+	int32 type; #类型（1.背包，2.宝石背包）
+}
+
+#整理背包返回信息
+message s_sortBag {
+	int32 result; # 0.成功，1.失败
+	string reason; 	#失败原因
+}
+
+
+#刷新仓库协议
+message s_refreshWarehouse {
+	int32 sum; #仓库总格子数量
+	cellInfo[] cellInfoList; #有变化的格子
+}
+
+#仓库拓展
+message c_warehouseExpand {
+	int32 expandNum; #拓展数量
+}
+
+#仓库拓展返回信息
+message s_warehouseExpand {
+	int32 result;	#0.成功；1.失败
+	string reason; #失败原因
+	int32 sum; #仓库总格子数量
+}
+
+#打开仓库
+message c_openWarehouse {
+	int32 type; #打开方式（0,NPC处打开;1,随身仓库）
+}
+
+#打开仓库信息返回
+message s_openWarehouse {
+	int32 result; # 0.成功，1.失败
+	string reason; 	#失败原因
+}
+
+#整理仓库
+message c_sortWarehouse {
+	int64 roleId;	#角色编号
+}
+
+#整理仓库返回信息
+message s_sortWarehouse {
+	int32 result; # 0.成功，1.失败
+	string reason; 	#失败原因
+}
+
+#存入
+message c_addWarehouse {
+	int32 index; #背包格子索引
+	int32 num; #物品数量
+}
+
+#存入信息返回
+message s_addWarehouse {
+	int32 result; 	#0.成功，1.失败
+	string reason; 	#失败原因
+}
+
+#取出
+message c_getWarehouse {
+	int32 index; #仓库格子索引
+	int32 num; #物品数量
+}
+
+#取出返回信息
+message s_getWarehouse {
+	int32 result;	#0.成功；1.失败
+	string reason; 	#失败原因
+}
+
+#开箱子
+message c_openXiangzi {
+	int32 index; #背包格子索引	
+}
+
+#开箱子返回信息
+message s_openXiangzi {
+	int32 result;	#0.成功；1.失败
+	string reason; 	#失败原因
+	string icon; #物品图标
+	int32 num; #数量
+}
+
+#改名
+message c_changeNick {
+	string nick; #名字
+}
+
+#改名返回信息
+message s_changeNick {
+	int32 result;	#0.成功；1.失败
+	string reason; 	#失败原因
+}
+
+#物品合成
+message c_itemMake {
+	int32 type; #类型（1.背包，2.宝石背包）
+	int32 index; #物品的背包索引
+	int32 isBind; #使用绑定材料（0.不使用(即不绑定)，1.使用，2.混合使用）
+	int32 num; #制作数量
+}
+
+#物品合成信息返回
+message s_itemMake {
+	int32 result;	# 0、成功；1、失败
+	string reason; 	#失败原因
+}
+
+#存仓库银两
+message c_addWarehouseCoin {
+	int32 coin;# 要存入的银两
+}
+
+#存仓库银两返回
+message s_addWarehouseCoin {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因
+}
+
+#取仓库银两
+message c_getWarehouseCoin {
+	int32 coin;# 要取出的银两
+}
+
+#取仓库银两返回
+message s_getWarehouseCoin {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因
+}

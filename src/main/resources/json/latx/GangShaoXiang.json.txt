@@ -1,0 +1,1 @@
+[{"exp":350,"expBuff":2,"goldBuff":1,"level":1,"type":"Lv1"},{"exp":1000,"expBuff":4,"goldBuff":3,"level":2,"type":"Lv2"},{"exp":3000,"expBuff":6,"goldBuff":5,"level":3,"type":"Lv3"},{"exp":5000,"expBuff":8,"goldBuff":7,"level":4,"type":"Lv4"},{"exp":8000,"expBuff":10,"goldBuff":9,"level":5,"type":"Lv5"}]

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="baseDao" abstract="true">
+		<property name="sqlMapClient" ref="sqlMapClient_test"/>
+	</bean>
+	
+	<bean id="baseHallDao" abstract="true">
+		<property name="sqlMapClient" ref="sqlMapClient_hall"/>
+	</bean>
+	
+	<bean id="baseResDao" abstract="true">
+		<property name="sqlMapClient" ref="sqlMapClient_res"/>
+	</bean>
+	
+	<bean id="roleDao" class="iyunu.NewTLOL.dao.impl.RoleDaoImpl" parent="baseDao" />
+	
+	<bean id="auctionDao" class="iyunu.NewTLOL.dao.impl.AuctionDaoImpl" parent="baseDao" >
+			<property name="redisTemplate" ref="stringRedisTemplate" />
+	</bean>
+	
+	<bean id="mailDao" class="iyunu.NewTLOL.dao.impl.MailDaoImpl" parent="baseDao" />
+	
+	<bean id="gangDao" class="iyunu.NewTLOL.dao.impl.GangDaoImpl" parent="baseDao" />
+	
+	<bean id="bulletinDao" class="iyunu.NewTLOL.dao.impl.BulletinDaoImpl" parent="baseDao" />
+	
+	<bean id="multipleDao" class="iyunu.NewTLOL.dao.impl.MultipleDaoImpl" parent="baseDao" />
+	
+	<bean id="cdKeyDao" class="iyunu.NewTLOL.dao.impl.CdKeyDaoImpl" parent="baseDao" />
+	
+	<bean id="compensateDao" class="iyunu.NewTLOL.dao.impl.CompensateDaoImpl" parent="baseDao" />
+	
+	<bean id="payBackDao" class="iyunu.NewTLOL.dao.impl.PayBackInfoDaoImpl" parent="baseDao" />
+	
+	<!-- 登录服务器数据源 -->
+	<bean id="userDao" class="iyunu.NewTLOL.dao.impl.UserDaoImpl" parent="baseHallDao" />
+	
+	<!-- 资源数据源 -->
+	<bean id="payActivityDao" class="iyunu.NewTLOL.dao.impl.PayActivityDaoImpl" parent="baseResDao" />
+</beans>

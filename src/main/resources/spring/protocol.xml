@@ -1,0 +1,747 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<!-- 基本 -->
+	<bean id="c_login" scope="prototype" class="iyunu.NewTLOL.net.protocol.logon.Login"><!-- 大厅登录协议（防止客户端发上来断开连接使用） -->
+	</bean>
+	<bean id="c_live" scope="prototype" class="iyunu.NewTLOL.net.protocol.base.Live"><!-- 心跳 -->
+	</bean>
+	<bean id="c_liveTest" scope="prototype" class="iyunu.NewTLOL.net.protocol.base.LiveTest"><!-- 心跳 -->
+	</bean>
+	<bean id="c_confirm" scope="prototype" class="iyunu.NewTLOL.net.protocol.base.Confirm"> <!-- 周围玩家下发开关 -->
+	</bean>
+	<bean id="c_pickup" scope="prototype" class="iyunu.NewTLOL.net.protocol.base.Pickup"> <!-- 拾取箱子 -->
+	</bean>
+	<bean id="c_kefu" scope="prototype" class="iyunu.NewTLOL.net.protocol.base.KeFu"> <!-- 提交问题 -->
+	</bean>
+	<bean id="c_clientLog" scope="prototype" class="iyunu.NewTLOL.net.protocol.base.ClientLog"> <!-- 客户端错误日志 -->
+	</bean>
+	<bean id="c_cdkey" scope="prototype" class="iyunu.NewTLOL.net.protocol.base.CdKey"> <!-- 兑换激活码 -->
+	</bean>
+	<bean id="c_superClient" scope="prototype" class="iyunu.NewTLOL.net.protocol.base.SuperClient"> <!-- 超级用户 -->
+		<property name="roleService" ref="roleService" />
+	</bean>
+	<bean id="c_binding" scope="prototype" class="iyunu.NewTLOL.net.protocol.base.Binding"> <!-- 绑定手机号 -->
+	</bean>
+	<bean id="c_changeNick" scope="prototype" class="iyunu.NewTLOL.net.protocol.base.ChangeNick"> <!-- 改名 -->
+		<property name="roleService" ref="roleService" />
+	</bean>
+	<bean id="c_pick" scope="prototype" class="iyunu.NewTLOL.net.protocol.base.Pick"> <!-- 采集 -->
+	</bean>
+	<bean id="c_closeTeam" scope="prototype" class="iyunu.NewTLOL.net.protocol.base.CloseTeam"> <!-- 队伍开关 -->
+	</bean>
+	<bean id="c_closeFriend" scope="prototype" class="iyunu.NewTLOL.net.protocol.base.CloseFriend"> <!-- 好友开关 -->
+	</bean>
+	<bean id="c_closeWhisper" scope="prototype" class="iyunu.NewTLOL.net.protocol.base.CloseWhisper"> <!-- 私聊开关 -->
+	</bean>
+	<bean id="c_energyInit" scope="prototype" class="iyunu.NewTLOL.net.protocol.base.EnergyInit"> <!-- 请求活力值 -->
+	</bean>
+	<!-- 基本 -->
+	
+	
+	<!-- 角色 -->
+	<bean id="c_logon" scope="prototype" class="iyunu.NewTLOL.net.protocol.logon.Logon"> <!-- 登录 -->
+		<property name="roleService" ref="roleService" />
+		<property name="redisLogon" ref="redisLogon" />
+	</bean>
+	<bean id="c_create" scope="prototype" class="iyunu.NewTLOL.net.protocol.logon.Create"> <!-- 创建角色 -->
+		<property name="roleService" ref="roleService" />
+		<property name="redisCenter" ref="redisCenter" />
+		<property name="mailService" ref="mailService" />
+		<property name="payBackService" ref="payBackService" />
+	</bean>
+	<bean id="c_free" scope="prototype" class="iyunu.NewTLOL.net.protocol.logon.Free"> <!-- 角色加点 -->
+	</bean>
+	<bean id="c_joinGuild" scope="prototype" class="iyunu.NewTLOL.net.protocol.logon.JoinGuild"> <!-- 加入门派 -->
+	</bean>
+	<bean id="c_lookRoleInfo" scope="prototype" class="iyunu.NewTLOL.net.protocol.logon.LookRoleInfo"> <!-- 查看玩家信息 -->
+	</bean>
+	<bean id="c_logout" scope="prototype" class="iyunu.NewTLOL.net.protocol.logon.Logout"> <!-- 退出游戏 -->
+	</bean>
+	<bean id="c_changeMsg" scope="prototype" class="iyunu.NewTLOL.net.protocol.logon.ChangeMsg"> <!-- 修改帐号密码 -->
+		<property name="userService" ref="userService" />
+	</bean>
+	<bean id="c_relogon" scope="prototype" class="iyunu.NewTLOL.net.protocol.logon.Relogon"> <!-- 重新登录 -->
+		<property name="roleService" ref="roleService" />
+	</bean>
+	<!-- 角色 -->
+	
+	<!-- 角色技能 -->
+	<bean id="c_resetSkill" scope="prototype" class="iyunu.NewTLOL.net.protocol.skill.ResetSkill"> <!-- 技能重置 -->
+	</bean>
+	<bean id="c_roleStudySkill" scope="prototype" class="iyunu.NewTLOL.net.protocol.skill.RoleStudySkill"> <!-- 学习技能 -->
+	</bean>
+	<!-- 角色技能 -->
+	
+	<!-- 任务 -->
+	<bean id="c_getTask" scope="prototype" class="iyunu.NewTLOL.net.protocol.task.GetTask"> <!-- 接取任务 -->
+	</bean>
+	<bean id="c_getGuildTask" scope="prototype" class="iyunu.NewTLOL.net.protocol.task.GetGuildTask"> <!-- 接取门派任务 -->
+	</bean>
+	<bean id="c_getGhostTask" scope="prototype" class="iyunu.NewTLOL.net.protocol.task.GetGhostTask"> <!-- 接取江湖追杀令 -->
+	</bean>
+	<bean id="c_giveUpTask" scope="prototype" class="iyunu.NewTLOL.net.protocol.task.GiveUpTask"> <!-- 放弃任务 -->
+	</bean>
+	<bean id="c_finishTask" scope="prototype" class="iyunu.NewTLOL.net.protocol.task.FinishTask"> <!-- 完成任务 -->
+	</bean>
+	<bean id="c_specialTask" scope="prototype" class="iyunu.NewTLOL.net.protocol.task.SpecialTask"> <!-- 特殊任务 -->
+	</bean>
+	<bean id="c_getTaskCycle" scope="prototype" class="iyunu.NewTLOL.net.protocol.task.GetTaskCycle"> <!-- 环任务 -->
+	</bean>
+	<bean id="c_taskFinishQuickly" scope="prototype" class="iyunu.NewTLOL.net.protocol.task.TaskFinishQuickly"> <!-- 一键完成 -->
+	</bean>
+	<!-- 任务 -->
+	
+	<!-- 拍卖行 -->
+	<bean id="c_auction" scope="prototype" class="iyunu.NewTLOL.net.protocol.auction.QueryAuction"><!-- 查询拍卖行物品 -->
+		<property name="auctionService" ref="auctionService" />
+	</bean>
+	<bean id="c_addAuction" scope="prototype" class="iyunu.NewTLOL.net.protocol.auction.AddAuction"><!-- 添加拍卖行物品 -->
+	   <property name="auctionService" ref="auctionService" />
+	</bean>
+	<bean id="c_addAuctionPartner" scope="prototype" class="iyunu.NewTLOL.net.protocol.auction.AddAuctionPartner"><!-- 添加拍卖行宠物 -->
+		<property name="auctionService" ref="auctionService" />
+	</bean>
+	<bean id="c_addAuctionMoney" scope="prototype" class="iyunu.NewTLOL.net.protocol.auction.AddAuctionMoney"><!-- 添加拍卖行元宝 -->
+		<property name="auctionService" ref="auctionService" />
+	</bean>
+	<bean id="c_forceDeleteAuction" scope="prototype" class="iyunu.NewTLOL.net.protocol.auction.ForceDeleteAuction"><!-- 强制下架物品 -->
+		<property name="auctionService" ref="auctionService" />
+	</bean>
+	<bean id="c_confirmDeleteAuction" scope="prototype" class="iyunu.NewTLOL.net.protocol.auction.ConfirmDeleteAuction"><!-- 确认强制下架物品 -->
+		<property name="auctionService" ref="auctionService" />
+	</bean>
+	<bean id="c_auctionType" scope="prototype" class="iyunu.NewTLOL.net.protocol.auction.QueryAuctionType"><!-- 请求拍卖类型-->
+		<property name="auctionService" ref="auctionService" />
+	</bean>
+	<bean id="c_myAuction" scope="prototype" class="iyunu.NewTLOL.net.protocol.auction.QueryMyAuction"><!-- 请求我的拍卖-->
+		<property name="auctionService" ref="auctionService" />
+	</bean>
+	<bean id="c_viewAuctionPartner" scope="prototype" class="iyunu.NewTLOL.net.protocol.auction.ViewAuctionPartner"><!-- 查看拍卖的宠物-->
+		<property name="auctionService" ref="auctionService" />
+	</bean>
+	<!-- 拍卖行 -->
+	
+	<!-- VIP礼包 -->
+	<bean id="c_getGiftVip" scope="prototype" class="iyunu.NewTLOL.net.protocol.giftVip.GetGiftVip"><!-- 拿VIP奖励 -->
+	</bean>
+	<bean id="c_queryGiftVip" scope="prototype" class="iyunu.NewTLOL.net.protocol.giftVip.QueryGiftVip"><!-- 请求VIP奖励 -->
+	</bean>
+	<!-- VIP礼包 -->
+	
+	<!--邮件  -->
+	<bean id="c_mailList" scope="prototype" class="iyunu.NewTLOL.net.protocol.mail.MailList"><!-- 请求邮件 -->
+		</bean>
+	<bean id="c_delMail" scope="prototype" class="iyunu.NewTLOL.net.protocol.mail.DelMail"><!-- 删除邮件 -->
+		</bean>
+	<bean id="c_delReadMail" scope="prototype" class="iyunu.NewTLOL.net.protocol.mail.DelReadMail"><!-- 删除已读 -->
+		</bean>
+	<bean id="c_delAllMail" scope="prototype" class="iyunu.NewTLOL.net.protocol.mail.DelAllMail"><!-- 删除全部 -->
+		</bean>
+	<bean id="c_readMail" scope="prototype" class="iyunu.NewTLOL.net.protocol.mail.ReadMail"><!--标记为已读，点击读时客户端下发  -->
+	</bean>
+	<bean id="c_getItemMail" scope="prototype" class="iyunu.NewTLOL.net.protocol.mail.GetItemMail"><!--取出邮件中的附件-->
+	</bean>	
+	<!--邮件  -->
+	
+	<!-- 聚魂  -->
+	<bean id="c_juhun" scope="prototype" class="iyunu.NewTLOL.net.protocol.juhun.JuhunGo"><!-- 执行聚魂动作 -->
+	</bean>
+	<bean id="c_receivejuhun" scope="prototype" class="iyunu.NewTLOL.net.protocol.juhun.JuhunPick"><!-- 收取聚魂 -->
+	</bean>
+	<bean id="c_juhunCZ" scope="prototype" class="iyunu.NewTLOL.net.protocol.juhun.JuhunCZ"><!-- 重置聚魂 -->
+	</bean>
+	<bean id="c_initJuhun" scope="prototype" class="iyunu.NewTLOL.net.protocol.juhun.JuhunInit"><!-- 聚魂初始化 -->
+	</bean>	
+		
+	<!-- 伙伴功能 -->
+	<bean id="c_partnerRefresh" scope="prototype" class="iyunu.NewTLOL.net.protocol.partner.PartnerRefresh"><!-- 刷新客栈伙伴 -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_partnerRefreshActive" scope="prototype" class="iyunu.NewTLOL.net.protocol.partner.PayExchangePartnerRefresh"><!--积分榜 刷新客栈伙伴 -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_studySkill" scope="prototype" class="iyunu.NewTLOL.net.protocol.partner.PartnerStudySkill"><!-- 学习技能 -->
+	</bean>
+	<bean id="c_fightPartner" scope="prototype" class="iyunu.NewTLOL.net.protocol.partner.FightPartner"><!-- 设置出战伙伴 -->
+	</bean>
+	<bean id="c_cancelParnter" scope="prototype" class="iyunu.NewTLOL.net.protocol.partner.CancelPartner"><!-- 取消出战伙伴 -->
+	</bean>
+	<bean id="c_partnerOut" scope="prototype" class="iyunu.NewTLOL.net.protocol.partner.PartnerOut"><!-- 解雇伙伴 -->
+	</bean>
+	<bean id="c_partnerUpGrade" scope="prototype" class="iyunu.NewTLOL.net.protocol.partner.PartnerUpGrade"><!-- 伙伴升级 -->
+	</bean>
+	<bean id="c_partnerAdvanced" scope="prototype" class="iyunu.NewTLOL.net.protocol.partner.PartnerAdvanced"><!-- 伙伴进阶 -->
+	</bean>
+	<bean id="c_lookPartnerInfo" scope="prototype" class="iyunu.NewTLOL.net.protocol.partner.LookPartnerInfo"><!-- 查看他人的伙伴信息 -->
+	</bean>
+	<bean id="c_partnerEvolve" scope="prototype" class="iyunu.NewTLOL.net.protocol.partner.PartnerEvolve"><!-- 伙伴进化 -->
+	</bean>
+	<bean id="c_partnerCapability" scope="prototype" class="iyunu.NewTLOL.net.protocol.partner.PartnerCapability"><!-- 伙伴增加潜力值 -->
+	</bean>
+	<!-- 伙伴功能 -->
+	
+	
+	<!-- 好友功能 -->
+	<bean id="c_applyList" scope="prototype" class="iyunu.NewTLOL.net.protocol.friend.ApplyList"><!-- 请求好友申请列表 -->
+		<property name="roleService" ref="roleService" />
+	</bean>
+	<bean id="c_friendInit" scope="prototype" class="iyunu.NewTLOL.net.protocol.friend.FriendInit"><!-- 好友列表 -->
+		<property name="roleService" ref="roleService" />
+	</bean>
+	<bean id="c_addFriend" scope="prototype" class="iyunu.NewTLOL.net.protocol.friend.AddFriend"><!-- 申请添加好友 -->
+		<property name="roleService" ref="roleService" />
+	</bean>
+	<bean id="c_confirmFriend" scope="prototype" class="iyunu.NewTLOL.net.protocol.friend.ConfirmFriend"><!-- 添加好友确认信息 -->
+		<property name="roleService" ref="roleService" />
+	</bean>
+	<bean id="c_delFriend" scope="prototype" class="iyunu.NewTLOL.net.protocol.friend.DelFriend"><!-- 删除好友 -->
+		<property name="roleService" ref="roleService" />
+	</bean>
+	<!-- 好友功能 -->
+	
+	
+	<!-- 聊天功能 -->
+	<bean id="c_openVipChat" scope="prototype" class="iyunu.NewTLOL.net.protocol.chat.OpenVipChat"><!-- 聊天发送VIP开关 -->
+	</bean>
+	<bean id="c_chatSend" scope="prototype" class="iyunu.NewTLOL.net.protocol.chat.ChatSend"><!-- 发送聊天 -->
+	</bean>
+	<bean id="c_whisperSend" scope="prototype" class="iyunu.NewTLOL.net.protocol.chat.WhisperSend"><!-- 私聊 -->
+	</bean>
+	<!-- 聊天功能 -->
+	
+	
+	<!-- 商城 -->
+	<bean id="c_initMall" scope="prototype" class="iyunu.NewTLOL.net.protocol.mall.InitMall"><!-- 商城初始化 -->
+	</bean>
+	<bean id="c_buyMall" scope="prototype" class="iyunu.NewTLOL.net.protocol.mall.BuyMall"><!-- 商城购买物品 -->
+	</bean>
+	<bean id="c_buyMallLess" scope="prototype" class="iyunu.NewTLOL.net.protocol.mall.BuyMallLess"><!-- 单独购买 -->
+	</bean>
+	<!-- 商城 -->
+	
+	
+	<!-- 公告功能 -->
+	<bean id="c_systemBulletin" scope="prototype" class="iyunu.NewTLOL.net.protocol.bulletin.SystemBulletin"><!-- 系统公告 -->
+	</bean>
+	<!-- 公告功能 -->
+	
+	
+	<!-- 战斗 -->
+	<bean id="c_encounter" scope="prototype" class="iyunu.NewTLOL.net.protocol.battle.Encounter"><!-- 遇怪 -->
+	</bean>
+	<bean id="c_command" scope="prototype" class="iyunu.NewTLOL.net.protocol.battle.Command"><!-- 战斗指令 -->
+	</bean>
+	<bean id="c_fight" scope="prototype" class="iyunu.NewTLOL.net.protocol.battle.Fight"><!-- 遇怪 -->
+	</bean>
+	<!-- 战斗 -->
+	
+	
+	<!-- 地图 -->
+	<bean id="c_changeMap" scope="prototype" class="iyunu.NewTLOL.net.protocol.map.ChangeMap"><!-- 过地图 -->
+	</bean>
+	<bean id="c_coord" scope="prototype" class="iyunu.NewTLOL.net.protocol.map.Coord"><!-- 刷新坐标 -->
+	</bean>
+	<bean id="c_aroundAllRole" scope="prototype" class="iyunu.NewTLOL.net.protocol.map.AroundAllRole"><!-- 请求周围所有玩家列表 -->
+	</bean>
+	<bean id="c_chooseAroundAllRole" scope="prototype" class="iyunu.NewTLOL.net.protocol.map.ChooseAroundAllRole"><!-- 筛选周围玩家 -->
+	</bean>
+	<bean id="c_transmit" scope="prototype" class="iyunu.NewTLOL.net.protocol.map.Transmit"><!-- 传送  -->
+	</bean>
+	<!-- 地图 -->
+	
+	
+	<!-- 组队功能 -->
+	<bean id="c_teamInfo" scope="prototype" class="iyunu.NewTLOL.net.protocol.team.TeamInit"><!-- 请求队伍信息 -->
+	</bean>
+	<bean id="c_createTeam" scope="prototype" class="iyunu.NewTLOL.net.protocol.team.CreateTeam"><!-- 创建队伍 -->
+	</bean>
+	<bean id="c_leaveTeam" scope="prototype" class="iyunu.NewTLOL.net.protocol.team.LeaveTeam"><!-- 离开队伍 -->
+	</bean>
+	<bean id="c_removeTeam" scope="prototype" class="iyunu.NewTLOL.net.protocol.team.RemoveTeam"><!-- 解散队伍 -->
+	</bean>
+	<bean id="c_inviteToTeam" scope="prototype" class="iyunu.NewTLOL.net.protocol.team.InviteToTeam"><!-- 邀请入队 -->
+	</bean>
+	<bean id="c_chooseToTeam" scope="prototype" class="iyunu.NewTLOL.net.protocol.team.ChooseToTeam"><!-- 客户端选择同意或是拒绝邀请入队 -->
+	</bean>
+	<bean id="c_aroundTeams" scope="prototype" class="iyunu.NewTLOL.net.protocol.team.AroundTeams"><!-- 请求周围队伍 -->
+	</bean>
+	<bean id="c_addTeam" scope="prototype" class="iyunu.NewTLOL.net.protocol.team.AddTeam"><!-- 申请加入队伍 -->
+	</bean>
+	<bean id="c_allowToTeam" scope="prototype" class="iyunu.NewTLOL.net.protocol.team.AllowToTeam"><!-- 客户端选择同意或是拒绝申请入队 -->
+	</bean>
+	<bean id="c_kickout" scope="prototype" class="iyunu.NewTLOL.net.protocol.team.Kickout"><!-- 请离队伍 -->
+	</bean>
+	<bean id="c_transferLeader" scope="prototype" class="iyunu.NewTLOL.net.protocol.team.TransferLeader"><!-- 移交队长  -->
+	</bean>
+	<!-- 组队功能 -->
+	
+	
+	<!-- 帮派 -->
+	<bean id="c_createGang" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.CreateGang"><!-- 创建帮派-->
+			<property name="gangService" ref="gangService" />
+			<property name="redisCenter" ref="redisCenter" />
+	</bean>		
+	<bean id="c_askGang" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.AskGang"><!-- 申请加入帮派-->
+			<property name="gangService" ref="gangService" />
+	</bean>		
+	<bean id="c_cancelAskGang" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.CancelAskGang"><!-- 撤销申请加入帮派-->
+			<property name="gangService" ref="gangService" />
+	</bean>		
+	<bean id="c_queryGang" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.QueryGangMember"><!-- 请求帮派信息-->
+			<property name="gangService" ref="gangService" />
+	</bean>		
+	<bean id="c_delGang" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.DelGang"><!-- 删除帮派-->
+			<property name="gangService" ref="gangService" />
+	</bean>	
+	<bean id="c_confirmAsk" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.ConfirmAsk"><!-- 加入帮派批准-->
+			<property name="gangService" ref="gangService" />
+	</bean>	
+	<bean id="c_gangList" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.GetGangList"><!-- 请求帮派列表-->
+			<property name="gangService" ref="gangService" />
+	</bean>	
+	<bean id="c_gangOperate" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.GangOperate"><!-- 帮派的操作，升职，踢人等-->
+			<property name="gangService" ref="gangService" />
+	</bean>	
+	<bean id="c_gangMain" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.QueryGangMain"><!-- 查询帮派的主要信息-->
+			<property name="gangService" ref="gangService" />
+	</bean>	
+	<bean id="c_queryAsk" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.QueryAsk"><!-- 查询申请入帮的列表-->
+			<property name="gangService" ref="gangService" />
+	</bean>	
+	<bean id="c_updateBulletin" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.UpdateBulletin"><!-- 修改帮公告-->
+			<property name="gangService" ref="gangService" />
+	</bean>	
+	<bean id="c_quitGang" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.QuitGang"><!-- 退出帮派-->
+			<property name="gangService" ref="gangService" />
+	</bean>	
+	<bean id="c_shaoXiang" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.ShaoXiang"><!-- 烧香-->
+	</bean>
+	<bean id="c_shaoXiangInit" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.ShaoXiangInit"><!-- 烧香初始化-->
+	</bean>
+	<bean id="c_gangMapEnter" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.GangMapEnter"><!-- 进入帮派地图-->
+	</bean>
+	<bean id="c_gangLog" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.GangLog"><!-- 帮派日志-->
+	</bean>
+	<bean id="c_gangActivityList" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.GangActivityList"><!-- 帮派活动列表-->
+	</bean>
+	<bean id="c_inviteGang" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.InviteGang"><!-- 邀请加入帮派-->
+	</bean>
+	<bean id="c_confirmInvite" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.ConfirmInvite"><!-- 确认邀请加入帮派-->
+	</bean>
+	<bean id="c_gangMute" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.Mute"><!-- 禁言-->
+	</bean>
+	<bean id="c_activeAward" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.ActiveAward"><!-- 活跃度领奖 -->
+	</bean>
+	<bean id="c_QueryWelfareGang" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.QueryWelfareGang"><!-- 查询帮派福利 -->
+	</bean>
+	<bean id="c_GetWelfareGang" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.GetWelfareGang"><!-- 领取帮派福利 -->
+	</bean>
+	<bean id="c_gangTaskList" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.GangTaskList"><!-- 帮派任务初始化 -->
+	</bean>
+	<bean id="c_getGangTaskItem" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.RecGangTask"><!-- 帮派任务奖励领取 -->
+	</bean>
+	<bean id="c_getFinalGangTaskItem" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.RecFinalGangTask"><!-- 帮派任务最终奖励领取 -->
+	</bean>
+	<!-- 帮派 -->
+	
+	<!-- 帮派战 -->
+	<bean id="c_gangFightInit" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.fight.GangFightInit"><!-- 帮派战初始化 -->
+	</bean>
+	<bean id="c_fightApply" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.fight.FightApply"><!-- 帮派战报名 -->
+	</bean>
+	<bean id="c_lookFightApply" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.fight.LookFightApply"><!-- 查看帮派战报名 -->
+	</bean>
+	<bean id="c_againstList" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.fight.AgainstList"><!-- 帮派战对阵列表 -->
+	</bean>
+	<bean id="c_enterGangFightMap" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.fight.EnterGangFightMap"><!-- 进入帮战地图 -->
+	</bean>
+	<bean id="c_quitGangFightMap" scope="prototype" class="iyunu.NewTLOL.net.protocol.gang.fight.QuitGangFightMap"><!-- 退出帮战地图 -->
+	</bean>
+	<!-- 帮派战 -->
+	
+	<!-- 快3 -->
+	<bean id="c_QueryResultKuai3" scope="prototype" class="iyunu.NewTLOL.net.protocol.kuai3.QueryResult"><!-- 查询猜猜看-->
+	</bean>
+	<bean id="c_joinKuai3" scope="prototype" class="iyunu.NewTLOL.net.protocol.kuai3.JoinKuai3"><!-- 下注猜猜看-->
+	</bean>
+	
+	<!-- 猎技功能 -->
+	<bean id="c_huntskillInfo" scope="prototype" class="iyunu.NewTLOL.net.protocol.huntskill.HuntskillInfo"><!-- 初始化猎技 -->
+	</bean>
+	<bean id="c_enterMap" scope="prototype" class="iyunu.NewTLOL.net.protocol.huntskill.EnterMap"><!-- 请求进入猎技地图 -->
+	</bean>
+	<bean id="c_quitMap" scope="prototype" class="iyunu.NewTLOL.net.protocol.huntskill.QuitMap"><!-- 请求退出猎技地图 -->
+	</bean>
+	<!-- 猎技功能 -->
+	
+	
+	<!-- 强化 -->
+	<bean id="c_bodyIntensify" scope="prototype" class="iyunu.NewTLOL.net.protocol.intensify.BodyIntensify"><!-- 部位强化 -->
+	</bean>
+	<bean id="c_stoneMake" scope="prototype" class="iyunu.NewTLOL.net.protocol.intensify.StoneMake"><!-- 装备配件制作 -->
+	</bean>
+	<bean id="c_stoneSlot" scope="prototype" class="iyunu.NewTLOL.net.protocol.intensify.StoneSlot"><!-- 打孔 -->
+	</bean>
+	<bean id="c_stoneInlay" scope="prototype" class="iyunu.NewTLOL.net.protocol.intensify.StoneInlay"><!-- 配件镶嵌 -->
+	</bean>
+	<bean id="c_stoneUnload" scope="prototype" class="iyunu.NewTLOL.net.protocol.intensify.StoneUnload"><!-- 取下配件 -->
+	</bean>
+	<bean id="c_stoneUp" scope="prototype" class="iyunu.NewTLOL.net.protocol.intensify.StoneUp"><!-- 宝石合成-->
+	</bean>
+	<bean id="c_equipResolve" scope="prototype" class="iyunu.NewTLOL.net.protocol.intensify.EquipResolve"><!-- 装备分解 -->
+	</bean>
+	<bean id="c_equipStar" scope="prototype" class="iyunu.NewTLOL.net.protocol.intensify.EquipStar"><!-- 装备升星 -->
+	</bean>
+	<bean id="c_intensifyStoneUp" scope="prototype" class="iyunu.NewTLOL.net.protocol.intensify.IntensifyStoneUp"><!-- 宝石镶嵌升级 -->
+	</bean>
+	<!-- 强化 -->
+	
+	<!-- 神兵 -->
+	<bean id="c_makeShenbing" scope="prototype" class="iyunu.NewTLOL.net.protocol.shenbing.MakeShenbing"><!-- 神兵兑换 -->
+	</bean>
+	<bean id="c_shenbingUp" scope="prototype" class="iyunu.NewTLOL.net.protocol.shenbing.ShenbingUp"><!-- 神兵升级 -->
+	</bean>
+	<bean id="c_shenbingReset" scope="prototype" class="iyunu.NewTLOL.net.protocol.shenbing.ShenbingReset"><!-- 神兵重置 -->
+	</bean>
+	<bean id="c_shenbingUpStar" scope="prototype" class="iyunu.NewTLOL.net.protocol.shenbing.ShenbingUpStar"><!-- 合成升星 -->
+	</bean>
+	<!-- 神兵 -->
+	
+	
+	<!-- 背包-->
+	<bean id="c_useItem" scope="prototype" class="iyunu.NewTLOL.net.protocol.bag.UseItem"><!-- 使用物品 -->
+	</bean>
+	<bean id="c_discardItem" scope="prototype" class="iyunu.NewTLOL.net.protocol.bag.DiscardItem"><!-- 丢弃物品 -->
+	</bean>
+	<bean id="c_wearEquip" scope="prototype" class="iyunu.NewTLOL.net.protocol.bag.WearEquip"><!-- 穿装备 -->
+	</bean>
+	<bean id="c_unloadEquip" scope="prototype" class="iyunu.NewTLOL.net.protocol.bag.UnloadEquip"><!-- 卸装备 -->
+	</bean>
+	<bean id="c_sortBag" scope="prototype" class="iyunu.NewTLOL.net.protocol.bag.SortBag"><!-- 整理背包 -->
+	</bean>
+	<bean id="c_bagExpand" scope="prototype" class="iyunu.NewTLOL.net.protocol.bag.BagExpand"><!-- 背包拓展 -->
+	</bean>
+	<bean id="c_openXiangzi" scope="prototype" class="iyunu.NewTLOL.net.protocol.bag.OpenXiangzi"><!-- 开箱子 -->
+	</bean>
+	<!-- 背包-->
+	
+	<!-- 经脉-->
+	<bean id="c_jingMaiInit" scope="prototype" class="iyunu.NewTLOL.net.protocol.jingMai.JingMaiInit"><!-- 经脉初始化   -->
+	</bean>
+	<bean id="c_lightenJingMai" scope="prototype" class="iyunu.NewTLOL.net.protocol.jingMai.LightenJingMai"><!-- 点亮经脉  -->
+	</bean>
+	<bean id="c_jinMaiText" scope="prototype" class="iyunu.NewTLOL.net.protocol.jingMai.JingMaiText"><!-- 经脉说明  -->
+	</bean>	
+	<bean id="c_jingMaiUse" scope="prototype" class="iyunu.NewTLOL.net.protocol.jingMai.JingMaiUse"><!-- 经脉使用培元丹  -->
+	</bean>	
+	<!-- 经脉-->
+	
+	<!-- 排行榜 -->
+	<bean id="c_rankList" scope="prototype" class="iyunu.NewTLOL.net.protocol.billboard.RankList"><!-- 排行榜列表请求  -->
+	</bean>
+	<bean id="c_rankInit" scope="prototype" class="iyunu.NewTLOL.net.protocol.billboard.RankInit"><!-- 排行榜列表标题请求  -->
+	</bean>
+<!-- 	<bean id="c_rank" scope="prototype" class="iyunu.NewTLOL.net.protocol.billboard.Rank">排行榜请求  -->
+<!-- 	</bean> -->
+	<!-- 排行榜 -->
+	
+	<!-- 仓库 -->
+	<bean id="c_openWarehouse" scope="prototype" class="iyunu.NewTLOL.net.protocol.warehouse.OpenWarehouse"><!-- 打开仓库  -->
+	</bean>
+	<bean id="c_sortWarehouse" scope="prototype" class="iyunu.NewTLOL.net.protocol.warehouse.SortWarehouse"><!-- 整理仓库  -->
+	</bean>
+	<bean id="c_addWarehouse" scope="prototype" class="iyunu.NewTLOL.net.protocol.warehouse.AddWarehouse"><!-- 存入  -->
+	</bean>
+	<bean id="c_getWarehouse" scope="prototype" class="iyunu.NewTLOL.net.protocol.warehouse.GetWarehouse"><!-- 取出  -->
+	</bean>
+	<bean id="c_warehouseExpand" scope="prototype" class="iyunu.NewTLOL.net.protocol.warehouse.WarehouseExpand"><!--仓库拓展 -->
+	</bean>
+	<bean id="c_getWarehouseCoin" scope="prototype" class="iyunu.NewTLOL.net.protocol.warehouse.GetWarehouseCoin"><!--取出仓库银两-->
+	</bean>
+	<bean id="c_addWarehouseCoin" scope="prototype" class="iyunu.NewTLOL.net.protocol.warehouse.AddWarehouseCoin"><!--银两存入仓库 -->
+	</bean>
+	<!-- 仓库 -->
+	
+	<!-- 充值 -->
+	<bean id="c_alipay" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.Alipay"><!-- 支付宝充值  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_payFirstAward" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.PayFirstAward"><!-- 首冲领奖  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_lookFirstAward" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.LookFirstAward"><!-- 请求充值领奖数据  -->
+	</bean>
+	<bean id="c_upmp" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.Upmp"><!-- 银联请求充值  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_yeeBao" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.YeeBao"><!-- 易宝请求充值  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_sikaiPay" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.SikaiPay"><!-- 斯凯请求充值  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_downJoyPay" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.DownJoyPay"><!-- 当乐请求充值  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_uc" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.Uc"><!-- UC请求充值  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_baidu" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.Baidu"><!-- 百度请求充值  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_baiduQuery" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.BaiduQuery"><!-- 百度充值查询  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_xiaomi" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.Xiaomi"><!-- 小米请求充值  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_xiaomiQuery" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.XiaomiQuery"><!-- 小米充值查询  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_anzhi" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.Anzhi"><!-- 安智请求充值  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_anzhiQuery" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.AnzhiQuery"><!-- 安智充值查询  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_lenovo" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.Lenovo"><!-- 联想请求充值  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_qihu" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.Qihu"><!-- 奇虎360请求充值  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_wandoujia" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.Wandoujia"><!-- 豌豆荚请求充值  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_yingyonghui" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.Yingyonghui"><!-- 豌豆荚请求充值  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_oppo" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.Oppo"><!-- OPPO请求充值  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_huawei" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.Huawei"><!-- 华为请求充值  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_haimaIos" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.HaimaIos"><!-- 海马请求充值（IOS）  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_baiduIos" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.BaiduIos"><!-- 百度IOS请求充值（IOS）  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_kuaiyongIos" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.KuaiyongIos"><!-- 快用IOS请求充值（IOS）  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_ppIos" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.PPIos"><!-- PPIOS请求充值（IOS）  -->
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_tongbutuiIos" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.TongbutuiIos"><!-- 同步推IOS请求充值（IOS）  --> 
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<bean id="c_aisiIos" scope="prototype" class="iyunu.NewTLOL.net.protocol.pay.AisiIos"><!-- 爱思IOS请求充值（IOS）  --> 
+		<property name="redisCenter" ref="redisCenter" />
+	</bean>
+	<!-- 充值 -->
+	
+	<!-- 每日答题 -->
+	<bean id="c_reqQuestion" scope="prototype" class="iyunu.NewTLOL.net.protocol.question.ReqQuestion"><!-- 问题请求  -->
+	</bean>
+	<bean id="c_answer" scope="prototype" class="iyunu.NewTLOL.net.protocol.question.Answer"><!-- 提交答案  -->
+	</bean>
+	<!-- 每日答题 -->
+	
+	
+	<!-- 副本 -->
+	<bean id="c_raids_init" scope="prototype" class="iyunu.NewTLOL.net.protocol.raids.RaidsInit"><!-- 副本初始化  -->
+	</bean>
+	<bean id="c_raids_comeIn" scope="prototype" class="iyunu.NewTLOL.net.protocol.raids.RaidsComeIn"><!-- 进入副本  -->
+	</bean>
+	<bean id="c_raids_comeOut" scope="prototype" class="iyunu.NewTLOL.net.protocol.raids.RaidsComeOut"><!-- 退出副本  -->
+	</bean>
+	<bean id="c_raids_next" scope="prototype" class="iyunu.NewTLOL.net.protocol.raids.RaidsNext"><!-- 副本下层  -->
+	</bean>
+	<!-- 副本 -->
+	
+	<!-- 试炼 -->
+	<bean id="c_enterTrials" scope="prototype" class="iyunu.NewTLOL.net.protocol.trials.TrialsEnter"><!-- 进入试炼  -->
+	</bean>
+	<bean id="c_kill" scope="prototype" class="iyunu.NewTLOL.net.protocol.trials.TrialsKill"><!-- 击杀  -->
+	</bean>
+	<bean id="c_sweepingTrials" scope="prototype" class="iyunu.NewTLOL.net.protocol.trials.SweepingTrials"><!-- 扫荡试练  -->
+	</bean>
+	<bean id="c_resetTrials" scope="prototype" class="iyunu.NewTLOL.net.protocol.trials.ResetTrials"><!-- 重置试练  -->
+	</bean>
+	<!-- 试炼 -->
+	
+	<!-- 签到 -->
+	<bean id="c_doSign" scope="prototype" class="iyunu.NewTLOL.net.protocol.sign.DoSign"><!-- 请求执行签到  -->
+	</bean>
+	<bean id="c_addSign" scope="prototype" class="iyunu.NewTLOL.net.protocol.sign.AddSign"><!-- 请求补签-->
+	</bean>
+	<bean id="c_pickSign" scope="prototype" class="iyunu.NewTLOL.net.protocol.sign.PickSign"><!-- 请求领取礼包  -->
+	</bean>
+	<bean id="c_querySign" scope="prototype" class="iyunu.NewTLOL.net.protocol.sign.QuerySign"><!-- 请求查询签到-->
+	</bean>
+	<!-- 签到 -->
+	
+	<!-- 连续登录 -->
+<!-- 	<bean id="c_getContinue" scope="prototype" class="iyunu.NewTLOL.net.protocol.continueLogon.QueryCon">请求查询连续登录 -->
+<!-- 	</bean> -->
+<!-- 	<bean id="c_pickCon" scope="prototype" class="iyunu.NewTLOL.net.protocol.continueLogon.PickCon">请求领取连续登录 -->
+<!-- 	</bean> -->
+	<!-- 连续登录 -->
+	
+	<!-- 大礼包 -->
+	<bean id="c_openSurprise" scope="prototype" class="iyunu.NewTLOL.net.protocol.base.OpenSurprise"><!-- 开启大礼包 -->
+	</bean>
+	<!-- 大礼包 -->
+
+	<!-- 等级礼包 -->
+	<bean id="c_levelGiftInit" scope="prototype" class="iyunu.NewTLOL.net.protocol.levelGift.LevelGiftInit"><!-- 等级礼包初始化-->
+	</bean>
+	<bean id="c_getLevelGift" scope="prototype" class="iyunu.NewTLOL.net.protocol.levelGift.GetLevelGift"><!-- 领取礼包 -->
+	</bean>
+	<!-- 等级礼包  -->
+	
+	<!-- 小助手 -->
+	<bean id="c_getHelperAward" scope="prototype" class="iyunu.NewTLOL.net.protocol.helper.GetHelperAward"><!-- 领取礼包 -->
+	</bean>
+<!-- 	<bean id="c_dailyActive" scope="prototype" class="iyunu.NewTLOL.net.protocol.helper.DailyActiveInit">每日活动 -->
+<!-- 	</bean> -->
+	<!-- 小助手 -->
+	
+	<!-- 活动 -->
+	<bean id="c_rotation" scope="prototype" class="iyunu.NewTLOL.net.protocol.activity.Rotatio"><!-- 开启转盘 -->
+	</bean>
+	<bean id="c_onlineAwardInit" scope="prototype" class="iyunu.NewTLOL.net.protocol.activity.OnlineAwardInit"><!-- 在线礼包初始化-->
+	</bean>
+	<bean id="c_onlineAward" scope="prototype" class="iyunu.NewTLOL.net.protocol.activity.OnlineAward"><!-- 领取在线礼包 -->
+	</bean>
+	<bean id="c_huntTreasure" scope="prototype" class="iyunu.NewTLOL.net.protocol.activity.HuntTreasure"><!-- 寻宝 -->
+	</bean>
+	<bean id="c_huntTreasureGet" scope="prototype" class="iyunu.NewTLOL.net.protocol.activity.HuntTreasureGet"><!-- 寻宝获得物品 -->
+	</bean>
+	<bean id="c_drawingGet" scope="prototype" class="iyunu.NewTLOL.net.protocol.activity.DrawingGet"><!-- 藏宝图获得物品 -->
+	</bean>
+	<bean id="c_changeCoin" scope="prototype" class="iyunu.NewTLOL.net.protocol.activity.change.ChangeCoin"><!-- 兑换银两 -->
+	</bean>
+	<bean id="c_changeGold" scope="prototype" class="iyunu.NewTLOL.net.protocol.activity.change.ChangeGold"><!-- 兑换绑银 -->
+	</bean>
+	<bean id="c_enterFairyland" scope="prototype" class="iyunu.NewTLOL.net.protocol.activity.EnterFairyland"><!-- 进入秘境 -->
+	</bean>
+	<bean id="c_queryPayExchange" scope="prototype" class="iyunu.NewTLOL.net.protocol.activity.payExchange.QueryPayExchange"><!-- 请求积分榜 -->
+	</bean>	
+	<bean id="c_queryDaily" scope="prototype" class="iyunu.NewTLOL.net.protocol.activity.daily.QueryDaily"><!-- 请求日常任务-->
+	</bean>	
+	<bean id="c_recDaily" scope="prototype" class="iyunu.NewTLOL.net.protocol.activity.daily.RecDaily"><!-- 领取日常任务 -->
+	</bean>	
+	<!-- 活动 -->
+	
+	<!-- 充值活动 -->
+	<bean id="c_activityPayInit" scope="prototype" class="iyunu.NewTLOL.net.protocol.activityPay.ActivityPayInit"><!-- 充值活动初始化 -->
+	</bean>
+	<bean id="c_activityPayInfoInit" scope="prototype" class="iyunu.NewTLOL.net.protocol.activityPay.ActivityPayInfoInit"><!-- 充值活动信息初始化 -->
+	</bean>
+	<bean id="c_activityPayAward" scope="prototype" class="iyunu.NewTLOL.net.protocol.activityPay.ActivityPayAward"><!-- 充值活动领奖 -->
+	</bean>
+	
+	<bean id="c_payEverydayInit" scope="prototype" class="iyunu.NewTLOL.net.protocol.activityPay.PayEverydayInit"><!-- 每日充值优惠 -->
+	</bean>
+	<bean id="c_queryPlusMoney" scope="prototype" class="iyunu.NewTLOL.net.protocol.activity.plusMoney.QueryPlusMoney"><!-- 查询累计充值-->
+	</bean>
+	<bean id="c_recPlusMoney" scope="prototype" class="iyunu.NewTLOL.net.protocol.activity.plusMoney.RecPlusMoney"><!-- 领取累计充值-->
+	</bean>
+	<!-- 充值活动 -->
+	
+	<!-- 血战 -->
+	<bean id="c_joinBlood" scope="prototype" class="iyunu.NewTLOL.net.protocol.blood.JoinBlood"><!-- 参加血战 -->
+	</bean>
+	<bean id="c_quitBlood" scope="prototype" class="iyunu.NewTLOL.net.protocol.blood.QuitBlood"><!-- 退出血战 -->
+	</bean>
+	<bean id="c_queryBloodHong" scope="prototype" class="iyunu.NewTLOL.net.protocol.blood.QueryBloodHong"><!-- 查询红方排名 -->
+	</bean>
+	<bean id="c_queryBloodLan" scope="prototype" class="iyunu.NewTLOL.net.protocol.blood.QueryBloodLan"><!-- 查询蓝方排名 -->
+	</bean>
+	<bean id="c_queryMark" scope="prototype" class="iyunu.NewTLOL.net.protocol.blood.QueryMark"><!-- 查询双方总分 -->
+	</bean>
+	<bean id="c_bloodAchieve" scope="prototype" class="iyunu.NewTLOL.net.protocol.blood.BloodAchieve"><!-- 查询血战文字  -->
+	</bean>
+	<bean id="c_bloodSelf" scope="prototype" class="iyunu.NewTLOL.net.protocol.blood.BloodSelf"><!-- 查询个人信息  -->
+	</bean>
+	<!-- 血战 -->
+	
+	<!-- 龙之江湖协议 -->
+	<bean id="c_transmitData" scope="prototype" class="iyunu.NewTLOL.net.protocol.lzjh.TransmitData"><!-- 新手引导透传数据-->
+	</bean>
+	<bean id="c_transmitSpecialData" scope="prototype" class="iyunu.NewTLOL.net.protocol.lzjh.TransmitSpecialData"><!-- 新手引特殊导透传数据-->
+	</bean>
+	<!-- 龙之江湖协议 -->
+	
+	<!-- 语聊 -->
+	<bean id="c_initRoomId" scope="prototype" class="iyunu.NewTLOL.net.protocol.room.InitRoomId"><!-- 请求房间号 -->
+	</bean>
+	<!-- 语聊 -->
+	
+	<!-- 开服七天 -->
+	<bean id="c_getSeven" scope="prototype" class="iyunu.NewTLOL.net.protocol.seven.GetSeven"><!-- 领取七天奖励-->
+	</bean>
+	<bean id="c_querySeven" scope="prototype" class="iyunu.NewTLOL.net.protocol.seven.QuerySeven"><!-- 查询七天奖励-->
+	</bean>
+	
+	<!-- 千层塔 -->
+	<bean id="c_qctInit" scope="prototype" class="iyunu.NewTLOL.net.protocol.qiancengta.QctInit"><!-- 千层塔初始化-->
+	</bean>
+	<bean id="c_challengeQct" scope="prototype" class="iyunu.NewTLOL.net.protocol.qiancengta.ChallengeQct"><!-- 挑战-->
+	</bean>
+	<bean id="c_autoChallengeQct" scope="prototype" class="iyunu.NewTLOL.net.protocol.qiancengta.AutoChallengeQct"><!-- 自动挑战-->
+	</bean>
+	<bean id="c_resetQct" scope="prototype" class="iyunu.NewTLOL.net.protocol.qiancengta.ResetQct"><!-- 重置千层塔-->
+	</bean>
+	<bean id="c_qctRanking" scope="prototype" class="iyunu.NewTLOL.net.protocol.qiancengta.QctRanking"><!-- 千层塔排行榜-->
+	</bean>
+	<!-- 千层塔 -->
+	
+	<!-- 物品合成 -->
+	<bean id="c_itemMake" scope="prototype" class="iyunu.NewTLOL.net.protocol.itemMake.ItemMake"><!-- 物品合成 -->
+	</bean>
+	<!-- 物品合成 -->
+	
+	<!-- 矿区 -->
+	<bean id="c_queryMiningList" scope="prototype" class="iyunu.NewTLOL.net.protocol.mining.QueryMiningList"><!-- 查询矿区列表-->
+	</bean>
+	<bean id="c_queryMining" scope="prototype" class="iyunu.NewTLOL.net.protocol.mining.QueryMining"><!-- 查询单个矿区-->
+	</bean>
+	<bean id="c_getMining" scope="prototype" class="iyunu.NewTLOL.net.protocol.mining.GetMining"><!-- 采矿-->
+	</bean>
+	<bean id="c_recMining" scope="prototype" class="iyunu.NewTLOL.net.protocol.mining.RecMining"><!-- 收矿-->
+	</bean>
+	<bean id="c_robMining" scope="prototype" class="iyunu.NewTLOL.net.protocol.mining.RobMining"><!-- 抢矿-->
+	</bean>
+	<!-- 矿区 -->
+	
+	<!-- 发布令 -->
+	<bean id="c_taskFblInit" scope="prototype" class="iyunu.NewTLOL.net.protocol.activity.fbl.TaskFblInit"><!-- 发布令初始化-->
+	</bean>
+	<bean id="c_taskFblRelease" scope="prototype" class="iyunu.NewTLOL.net.protocol.activity.fbl.TaskFblRelease"><!-- 发布任务-->
+	</bean>
+	<bean id="c_taskFblMy" scope="prototype" class="iyunu.NewTLOL.net.protocol.activity.fbl.TaskFblMy"><!-- 我发布的任务-->
+	</bean>
+	<bean id="c_taskFblCancel" scope="prototype" class="iyunu.NewTLOL.net.protocol.activity.fbl.TaskFblCancel"><!-- 撤销任务-->
+	</bean>
+	<bean id="c_taskFblGet" scope="prototype" class="iyunu.NewTLOL.net.protocol.activity.fbl.TaskFblGet"><!-- 接取发布令任务-->
+	</bean>
+	<bean id="c_taskFblAward" scope="prototype" class="iyunu.NewTLOL.net.protocol.activity.fbl.TaskFblAward"><!-- 接取发布令任务领奖-->
+	</bean>
+	<!-- 发布令 -->
+	<!-- 恶魔岛 -->
+	<bean id="c_queryEmo" scope="prototype" class="iyunu.NewTLOL.net.protocol.emo.QueryEmo"><!-- 查询恶魔岛-->
+	</bean>
+	<bean id="c_enterEmo" scope="prototype" class="iyunu.NewTLOL.net.protocol.emo.EnterEmo"><!-- 进入恶魔岛-->
+	</bean>
+	<bean id="c_buyEmoCount" scope="prototype" class="iyunu.NewTLOL.net.protocol.emo.BuyEmoCount"><!-- 购买恶魔岛次数-->
+	</bean>	
+</beans>

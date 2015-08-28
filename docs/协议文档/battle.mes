@@ -1,0 +1,130 @@
+###################战斗协议##############################
+
+#队伍成员信息
+message memberInfo {
+	int32 index; #索引
+	int64 id; #编号
+	string name; #名称
+	int64 figure; #形象编号
+	int32 type; #类型（0.角色，1.伙伴，2.怪物）
+	int32 hp; #生命值
+	int32 hpMax; #生命值上限
+	int32 mp; #内力值
+	int32 mpMax; #内力值上限
+	int32 side; #队伍方位（0和1）0是自己
+	int32 shenbingId; #神兵编号
+	int32 shizhuangId; #时装编号（0.无，1.第一套时装）
+	int32 worth; #评分
+}
+
+#遇怪
+message c_encounter {
+	int32 type; #战斗类型（0.野外遇怪，1.NPC战斗任务，2.杀地图上明怪）
+	int64 goal; #战斗目标（type=1,表示任务编号；type=2,表示唯一编号）
+}
+
+#遇怪返回信息
+message s_encounter {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因
+}
+
+#遇怪下发动画、数据
+message s_encounter_result {
+	int64 battleId; #战斗编号
+	int32 turn; #轮数
+	memberInfo[] members; #敌对队伍信息
+	int32 battleType; #类型，0.正常战斗，1.剧情一，2.剧情二，-1.自动战斗
+}
+
+#战斗指令
+message c_command {
+	int64 battleId; #战斗编号
+	int32 index; #自己在队伍中的索引
+	int32 type; #类型（0.攻，1.防，2.逃跑，3.使用物品，4.召唤伙伴）
+	int64 skill; #技能编号、背包索引、伙伴编号
+	int32 foeIndex; #攻击对象索引
+	int32 turn; #轮数
+	int32 pFoeIndex; #伙伴攻击对象索引
+	int32 pType; #类型（0.攻，1.防，2.逃跑，3.使用物品）
+	int32 pItemIndex; #背包索引
+}
+
+#战斗指令返回信息
+message s_command {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因
+}
+
+#攻击者
+message attackerInfo {
+	int32 index; #索引
+	int32[] hp; #生命值变化量
+	int32 mp; #内力值变化量
+	int32 addBuff; #增加BUFF
+	int32 isDead; #是否死亡（1.是，0.否）
+	int32 type; #类型（0.攻，1.防，2.逃跑，3.使用物品，4.召唤伙伴）
+	int64 skill; #使用技能编号（type=0则表示技能编号，0为普通攻击；type=2则0表示逃跑失败，1表示逃跑成功；type=3则表示使用物品的编号；type=4则表示出战伙伴的编号）
+}
+	
+#被攻击者
+message defenderInfo {
+	int32 index; #索引
+	int32 hp; #生命值变化量
+	int32 mp; #内力值变化量
+	int32[] addBuffs; #增加BUFF
+	int32[] subBuffs; #减少buff
+	int32 crit; #被暴击（0.未暴击，1.暴击）
+	int32 parry; #格挡（0.未格挡，1.格挡）
+	int32 miss; #闪避（0.未闪避，1.闪避）
+	int32 isDead; #是否死亡（1.是，0.否）
+	int32 isDefense; #是否防御（0.否，1.是）
+	int32 skill; #被攻击者使用的技能 （0是无操作）
+}
+
+#BUFF者信息
+message buffAminInfo {
+	int32 index; #索引
+	int32 buffId; #buff编号（无用）
+	int32 hp; #生命值变化量
+	int32 isDead; #是否死亡（1.是，0.否）
+}
+
+#每组BUFF动画
+message buffInfo {
+	buffAminInfo[] buffAminInfoList; #BUFF动画集合
+}
+
+#buff状态信息
+message buffState {
+	int32 index; #索引
+	int32[] buffs; #减少buff
+}
+
+#战斗信息
+message battleAminInfo {
+	attackerInfo attacker; #攻击者
+	defenderInfo[] defenders;	#被攻击者
+	memberInfo member; #伙伴
+}
+
+#下发战斗结果，动画，数据
+message s_fight_result {
+	int32 result; #是否战斗结束（0.未结束，1.胜利，2.失败）
+	int64 battleId; #战斗编号
+	int32 turn; #轮数
+	buffInfo[] buffInfoList; #BUFF动画集合
+	battleAminInfo[] battleAminInfoList; #战斗动画集合
+	buffState[] buffStateList; #buff状态集合
+}
+
+#战斗PVP
+message c_fight {
+	int64 roleId; #角色编号
+}
+
+#战斗PVP返回信息
+message s_fight {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因
+}

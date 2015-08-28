@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BulletinSQL">
+	<typeAlias alias="chatBulletin" type="iyunu.NewTLOL.model.bulletin.BulletinChat" />
+	<typeAlias alias="rockBulletin" type="iyunu.NewTLOL.model.bulletin.BulletinRock" />
+	
+	
+	<resultMap id="chat" class="chatBulletin">
+		<result property="id" column="NID" />
+		<result property="content" column="SCONTENT" />
+		<result property="start" column="DSTARTTIME" />
+		<result property="end" column="DENDTIME"  />
+		<result property="period" column="NPERIOD" />
+	</resultMap>
+	
+	<resultMap id="rock" class="rockBulletin">
+		<result property="id" column="NID" />
+		<result property="content" column="SCONTENT" />
+		<result property="start" column="DSTARTTIME" />
+		<result property="end" column="DENDTIME"  />
+		<result property="period" column="NPERIOD" />
+		<result property="number" column="NNUMBER" />
+	</resultMap>
+	
+	
+	<select id="querySys" resultClass="String" parameterClass="String">
+		<![CDATA[
+			select SCONTENT from NEW_TLOL_BULLETIN_SYS_$srv$
+		]]>
+	</select>
+	
+	<select id="queryChat" resultMap="chat" parameterClass="String">
+		<![CDATA[
+			select NID, SCONTENT, DSTARTTIME, DENDTIME, NPERIOD from NEW_TLOL_BULLETIN_CHAT_$srv$
+		]]>
+	</select>
+	
+	<select id="queryRock" resultMap="rock" parameterClass="String">
+		<![CDATA[
+			select NID, SCONTENT, DSTARTTIME, DENDTIME, NPERIOD, NNUMBER from NEW_TLOL_BULLETIN_ROCK_$srv$
+		]]>
+	</select>
+	
+		<select id="queryLogon" resultClass="String" parameterClass="String">
+		<![CDATA[
+			select SCONTENT from NEW_TLOL_BULLETIN_LOGON_$srv$
+		]]>
+	</select>
+	
+</sqlMap>

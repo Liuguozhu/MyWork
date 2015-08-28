@@ -1,0 +1,157 @@
+###################任务协议##############################
+
+#收集物品
+message taskItem {
+	int32 itemId; #物品编号
+	int32 itemNum; #物品数量
+	int32 itemMax; #需要总数
+}
+
+#收集怪物
+message taskMonster {
+	int64 monsterId; #怪物编号
+	int32 monsterNum; #怪物数量
+	int32 monsterMax; #需要总数
+}
+
+#英雄帖怪物
+message yxtMonster {
+	int32 monsterNum; #怪物数量
+	int32 monsterMax; #需要总数
+}
+
+#采集物品
+message taskCollected {
+	int32 itemId; #物品编号
+	int32 itemNum; #物品数量
+	int32 itemMax; #需要总数
+}
+
+#奖励物品
+message taskAwardItem {
+	int32 itemId; #物品编号
+	int32 num; #数量
+}
+
+#伙伴奖励
+message taskAwardPartner {
+	int32 index; #伙伴索引
+	int32 num; #数量
+}
+
+#任务信息
+message taskInfo {
+	int32 taskId; #任务编号
+	int32 state; #任务状态（0.不可接取，1.可接取，2.未完成，3.已完成，4.失败）
+	int32 category; #任务种类（0.主线任务，1.支线任务，2.剧情任务，3.门派任务，4.江湖追杀令，5.英雄帖，6.发布令任务，7.环任务）
+	int32 exp; #奖励经验
+	int32 gold; #奖励绑银
+	int32 coin; #奖励银两
+	int32 skill; #技能点数
+	int32 receiver; #完成任务NPC
+	taskAwardItem[] taskAwardItemList; #奖励物品
+	taskAwardPartner[] taskAwardPartnerList; #奖励伙伴
+	taskItem[] taskItemList; #已收集物品
+	taskCollected[] taskCollectedList; #已采集物品
+	taskMonster[] taskMonsterList; #已杀怪
+	yxtMonster[] yxtMonsterList; #英雄帖已杀怪
+}
+
+#刷新任务（角色上线时下发所有任务信息）
+message s_refreshTask {
+	taskInfo[] taskInfoList; #任务信息集合
+}
+
+#接取任务
+message c_getTask {
+	int32 taskId; #任务编号
+}
+
+#接取任务返回信息
+message s_getTask {
+	int32 result; #0.成功，1.失败
+	string reason; #失败原因
+	int32 taskId; #任务编号
+}
+
+#放弃任务
+message c_giveUpTask {
+	int32 taskId; #任务编号
+}
+
+#放弃任务返回信息
+message s_giveUpTask {
+	int32 result; #0.成功，1.失败
+	string reason; #失败原因
+	int32 taskId; #任务编号
+}
+
+#完成任务
+message c_finishTask {
+	int32 taskId; #任务编号
+	int32 type; #0.正常，1.花费银两，20%领取
+}
+
+#完成任务返回信息
+message s_finishTask {
+	int32 result; #0.成功，1.失败
+	string reason; #失败原因
+	int32 taskId; #任务编号
+}
+
+#接取门派任务
+message c_getGuildTask {
+	int64 roleId; #角色编号（无用）
+}
+
+#刷新门派任务数量
+message s_refreshGuildTaskNum {
+	int32 num; #门派任务数量
+}
+
+#接取江湖追杀令任务
+message c_getGhostTask {
+	int64 roleId; #角色编号（无用）
+}
+
+#刷新江湖追杀令任务数量
+message s_refreshGhostTaskNum {
+	int32 num; #江湖追杀令任务数量
+}
+
+#采集
+message c_pick {
+	int32 id; #采集物品的编号
+}
+
+#采集返回信息
+message s_pick {
+	int32 result; #0.成功，1.失败
+	string reason; #失败原因
+}
+
+#完成特殊任务
+message c_specialTask {
+	int32 type; #1.第一个任务，2.第二个任务
+}
+
+#接取环任务
+message c_getTaskCycle {
+	int64 roleId; #角色编号（无用）
+}
+
+#刷新环任务数量
+message s_refreshCycleTaskNum {
+	int32 num; #环任务数量
+}
+
+#一键完成
+message c_taskFinishQuickly {
+	int32 id; #编号（1.江湖追杀令，2.环任务）
+}
+
+#一键完成返回信息
+message s_taskFinishQuickly {
+	int32 result; #0.成功，1.失败
+	string reason; #失败原因
+}

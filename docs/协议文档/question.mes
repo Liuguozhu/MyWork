@@ -1,0 +1,52 @@
+###################答题协议##############################
+#问题请求
+message c_reqQuestion {
+	int64 roleId;	#角色编号
+}
+
+#题目信息
+message questionInfo {
+	int32 id; #问题编号
+	string type; #题型
+	string question; #问题
+	string answerOne; #答案1
+	string answerTwo; #答案2
+	string answerThree; #答案3
+	string answerFour; #答案4
+	int32 answerTure; #正确答案
+}
+
+
+#答题请求信息返回
+message s_reqQuestion {
+	int32 result;	#0成功，1失败
+	string reason;	#失败原因
+	int32 totleTureNum; #答对题目数量
+	int32 totleGold; #答题获得金钱
+	questionInfo[] questionInfoList; #题目信息列表
+}
+
+#答题
+message c_answer {
+	int32 id; #问题编号
+	int32 submitAnswer; #提交答案
+	int32 type; #答题类型(0为答题,1为一键答题,2为元宝答一道题)
+}
+
+#答题信息返回
+message s_answer {
+	int32 result;	#0成功，1失败
+	string reason;	#失败原因
+	int32 totleTureNum; #答对题目数量
+	int32 totleGold; #答题获得金钱
+}
+
+#刷新答题积分
+message s_refreshScore {
+	int32 score; # 答题积分
+}
+
+#每日答题通知
+message s_answerInform {
+	int32 type; #0为非答题时间;1为到答题时间，弹框
+}

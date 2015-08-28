@@ -1,0 +1,1 @@
+[{"level":1,"monster":10357},{"level":29,"monster":10358},{"level":30,"monster":10359},{"level":40,"monster":10360},{"level":50,"monster":10361},{"level":60,"monster":10362},{"level":55,"monster":10363}]

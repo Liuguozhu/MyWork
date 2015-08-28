@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CdKeySQL">
+	<typeAlias alias="cdKey" type="iyunu.NewTLOL.model.base.CdKeyInfo" />
+	
+	<resultMap id="cdKeyResult" class="cdKey">
+		<result property="cdKey" column="SCDKEY" />
+		<result property="itemId" column="NITEMID" />
+		<result property="state" column="NSTATE" />
+		<result property="type" column="NTYPE" />
+	</resultMap>
+	
+	<select id="query" resultMap="cdKeyResult"  parameterClass="String">
+		<![CDATA[
+			select SCDKEY,
+			       NITEMID,
+			       NSTATE,
+			       NTYPE
+			  from NEW_TLOL_CDKEY
+			 where ( SSERVER = 'srv000' or SSERVER = #value# ) and NSTATE = 0
+		]]>
+	</select>
+	
+	<update id="delete" parameterClass="String">
+		<![CDATA[
+			update NEW_TLOL_CDKEY set NSTATE = 1 where SCDKEY = #value#
+		]]>
+	</update>
+	
+</sqlMap>

@@ -1,0 +1,14 @@
+###################客服协议##############################
+
+#提交客服
+message c_kefu {
+	int32 type;#1 提交BUG 2 投诉 3提交建议
+	string title;#标题
+	string content;#内容
+}
+
+#提交客服返回
+message s_kefu {
+	int32 result;#0 成功1失败
+	string reason;#原因
+}

@@ -1,0 +1,81 @@
+###################副本协议##############################
+
+#难度信息
+message degreeInfo {
+	int32 raidsId; #副本编号（注：查询JSON依据）
+	int32 degree; #难度（0.普通，1.困难，2.深渊）
+}
+
+#副本信息
+message raidsInfo {
+	int32 raidsIndex; #副本索引
+	degreeInfo[] degreeInfoList; #难度信息列表
+	int32 number; #剩余次数（注：-1为无限次）
+}
+
+#副本初始化
+message c_raids_init {
+	int64 roleId; #角色编号（无用）
+}
+
+#副本初始化返回信息
+message s_raids_init {
+	raidsInfo[] raidsInfoList; #副本列表
+	int32 doubleTime; #双倍时间（大于0，则表示倒计时；-1则表示未开始）
+}
+
+#副本格子信息
+message raidsCellInfo {
+	int32 index; #格子索引
+	int32 state; #格子状态（0.未通关，1.通关）
+	int32 number; #人数
+}
+
+#小地图
+message s_refresh_miniMap {
+	raidsCellInfo[] raidsCellInfoList; #小地图
+}
+
+#刷新副本地图状态
+message s_refresh_raids {
+	int32 floorMax; #总层数
+	int32 state; #整个副本状态（0.未通关，1.通关）
+	int32 floor; #当前层数
+	int32 floorState; #本层状态（0.未通关，1.通关）
+	int32 index; #当前格子位置
+	int32 cellState; #当前格子状态（0.未通关，1.通关）
+}
+
+#进入副本
+message c_raids_comeIn {
+	int32 raidsId; #副本编号（注：查询JSON依据）
+}
+
+#进入副本返回信息
+message s_raids_comeIn {
+	int32 result;	#0.成功；1.失败
+	string reason; #失败原因
+}
+
+
+#退出副本
+message c_raids_comeOut {
+	int64 roleId; #角色编号
+}
+
+#退出副本返回信息
+message s_raids_comeOut {
+	int32 result;	#0.成功；1.失败
+	string reason; #失败原因
+}
+
+#副本下层
+message c_raids_next {
+	int32 floor; #当前层数
+}
+
+#副本下层返回信息
+message s_raids_next {
+	int32 result;	#0.成功；1.失败
+	string reason; #失败原因
+}

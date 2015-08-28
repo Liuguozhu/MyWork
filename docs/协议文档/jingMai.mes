@@ -1,0 +1,49 @@
+###################经脉协议##############################
+
+#经脉说明体
+message jingMaiT{
+	string name;#名字
+	int32 value;#值
+}
+#初始化经脉
+message c_jingMaiInit {
+	int64 id; #角色编号
+}
+
+#初始化经脉信息返回
+message s_jingMaiInit {
+	int32 note; #将要点亮经脉编号
+}
+
+#点亮经脉
+message c_lightenJingMai {
+	int32 note; #经脉编号
+}
+
+#点亮经脉
+message s_lightenJingMai {
+	int32 result; # 0.成功，1.失败
+	string reason;  #失败原因
+	int32 note; #将要点亮经脉编号
+}
+
+#经脉说明请求
+message c_jinMaiText{
+	int64 roleId;#角色ID
+}
+
+#经脉说明请求返回
+message s_jinMaiText{
+	jingMaiT[]  jingMais;#经脉集合
+}
+
+#使用培元丹
+message c_jingMaiUse {
+	int64 id; #角色编号
+}
+
+#使用培元丹返回信息
+message s_jingMaiUse {
+	int32 result; # 0.成功，1.失败
+	string reason;  #失败原因
+}

@@ -1,0 +1,197 @@
+###################刷新协议##############################
+
+#刷新元宝
+message s_refreshMoney {
+	int32 money; #元宝
+}
+
+#刷新绑银
+message s_refreshGold {
+	int32 gold; #绑银
+}
+
+#刷新元气值
+message s_refreshYuanQi {
+	int32 yuanQi; #元气值 
+}
+
+#刷新血和蓝数据
+message s_refreshHpAndMp {
+	int32 hp; #生命值
+	int32 hpMax; #生命最大值
+	int32 mp; #内力值
+	int32 mpMax; #内力最大值
+}
+
+#刷新剩余屏蔽怪时间
+message s_refreshCloaking {
+	int32 cloaking; #剩余屏蔽怪时间
+}
+
+#刷新等级排行榜位置
+message s_refreshRankingLevel {
+	int32 rankingLevel; #等级排行榜位置
+}
+
+#刷新技能点
+message s_refreshFree {
+	int32 freeSkill; #剩余技能点数
+}
+
+message vipInfo {
+	int32 vip; #vip等级
+	string desc; #截至日期
+}
+
+#刷新VIP
+message s_refreshVip {
+	int32 vip; #vip等级（0.不是，1.黄金，2.白金，3.钻石）
+	vipInfo[] vipInfoList; #vip信息
+}
+
+#刷新帮贡
+message s_refreshTribute {
+	int32 tribute; #帮派贡献
+	int32 totalTribute; #帮派总贡献
+}
+
+#刷新帮等级
+message s_refreshGangLevel {
+	int32 level; #帮派等级
+}
+#刷新帮当前人数
+message s_refreshGangNum{
+	int32 num; #帮派当前人数
+}
+#刷新帮总人数
+message s_refreshGangSize{
+	int32 size; #帮派总人数
+}
+#刷新帮派经验
+message s_refreshGangExp{
+	string exp; #帮派经验
+}
+#刷新帮派人气值
+message s_refreshGangActive{
+	int32 active; #帮派人气值
+}
+#level    num  size   exp   active  
+
+#刷新大礼包
+message s_refreshSurprise {
+	int32 id; #礼包编号
+}
+
+#打开礼包
+message c_openSurprise {
+	int32 id; #礼包编号
+}
+
+#打开礼包返回信息
+message s_openSurprise {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因
+}
+
+#通知客户端目标地点
+message s_refreshTargetSite {
+	int32 mapId; #目标地图编号
+	int32 x; #x坐标
+	int32 y; #y坐标
+}
+
+#刷新战力
+message s_refreshPower{
+	int64 power;#战力
+}
+
+
+
+#刷新名称
+message s_refreshNick {
+	string nick; #名称
+}
+
+
+#刷新开服七天过后，取消图标
+message s_refreshSevenEnd{
+	int32 flag;#数字 1--7 之间是活动期间，其它数字不显示图标，没有此活动
+}
+
+#刷新VIP奖励标记
+message s_refreshVipGift{
+	int32 flag; #0没领过 1已领黄金，2已领白金 3 已领钻石
+}
+
+#刷新银两
+message s_refreshCoin {
+	int32 coin; #银两
+}
+
+#刷新绑银使用上限
+message s_refreshGoldLimit {
+	int32 goldLimit; #绑银使用上限
+}
+
+#刷新今日已使用绑银数量
+message s_refreshGoldNum {
+	int32 goldNum; #已使用绑银数量
+}
+
+#刷新血战通知
+message s_refreshBloodSend {
+	int32 type; #1开始
+}
+
+#刷新新服活动
+message s_refreshActivityNew {
+	int32 state; #新服活动状态（0.未开启，1.开启）
+}
+
+#刷新每日优惠活动状态
+message s_refreshActivityPay {
+	int32 state; #新服活动状态（0.未开启，1.开启）
+}
+#刷新获得延迟通知
+message s_refreshRewardDelay{
+	string word;#得到了什么
+}
+#刷新仓库银两
+message s_refreshWareHouseCoin{
+	int32 coin;#仓库里的银两
+}
+#刷新缺少
+message s_refreshNoCoin{
+	int32 type;#(1绑银2银两3元宝)
+}
+#刷新缺少物品
+message s_refreshNoitem{
+	int32 itemId;#物品ID
+	int32 num;#数量
+	int32 price;#单价
+}
+#刷新已领取的首充双倍
+message s_refreshFirstDouble{
+	int32[] haveFirst;#已经领取过的首次双倍
+}
+#刷新充值累计值
+message s_refreshPlusMoney{
+	int32 plusMoney;#累计充值的钱
+}
+#刷新充值累计值满了关图标
+message s_refreshPlusMoneyFlag{
+	int32 plusMoneyFlag;#0开 1关
+}
+#刷新积分榜开关
+message s_refreshPayExchange{
+	int32 state;#0关 1开
+}
+#刷新日常任务状态
+message s_refreshRecDaily{
+	int32 id;#任务ID
+	int32 flag;#0不可领 1可领 2已领
+}
+#刷新日常任务图标
+message s_refreshDailyTask{
+	int32 state;#0关 1开
+}

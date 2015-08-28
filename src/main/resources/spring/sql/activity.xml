@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ActivitySQL">
+	<typeAlias alias="activity" type="iyunu.NewTLOL.model.activity.Activity" />
+	
+	<resultMap id="activityResult" class="activity">
+		<result property="id" column="NID" />
+		<result property="name" column="SNAME" />
+		<result property="startTime" column="SSTARTTIME" />
+		<result property="endTime" column="SENDTIME" />
+		<result property="type" column="NTYPE" />
+	</resultMap>
+	
+	<select id="query" resultMap="activityResult" parameterClass="String">
+		<![CDATA[
+			select NID, SNAME, SSTARTTIME, SENDTIME, NTYPE from NEW_TLOL_ACTIVITY_DAILY_$srv$
+		]]>
+	</select>
+	
+</sqlMap>

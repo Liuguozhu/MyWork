@@ -1,0 +1,47 @@
+###################商城协议##############################
+
+#商城物品信息
+message mallInfo {
+	int32 index; #索引
+	int32 itemId; #物品编号
+	string name; #名称
+	int32 price; #价格
+	string icon; #图片icon
+	int32 isBuy; #是否可以购买（0.可以，1.不可以）
+	int32 level; #需要等级
+	int32 off; #折扣
+}
+
+#初始化商城
+message c_initMall {
+	int32 type; #类型，0.暂无，1.商店，2.帮派商店，3.药品，4.材料，5.时装，6.伙伴，7.其他，8.银两，9.Vip专属
+	int32 page; #页数
+}
+
+#初始化商城返回信息
+message s_initMall {
+	int32 totalPage; #总页数
+	mallInfo[] mallInfoList; #商城物品列表
+}
+
+#商城购买
+message c_buyMall {
+	int32 index; #索引
+	int32 number; #物品数量
+}
+
+#商城购买返回信息
+message s_buyMall {
+	int32 result; #0.成功，1.失败
+	string reason; #失败原因
+}
+#单独购买
+message c_buyMallLess{
+	int32 id;#物品ID
+	int32 number;#物品数量
+}
+#单独购买返回
+message s_buyMallLess{
+	int32 result; #0.成功，1.失败
+	string reason; #失败原因
+}

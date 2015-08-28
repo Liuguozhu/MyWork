@@ -1,0 +1,40 @@
+#######################猎技协议##########################
+
+#初始化猎技
+message c_huntskillInfo {
+	int64 id;	#角色编号
+}
+
+#初始化猎技信息返回
+message s_huntskillInfo {
+	int32 result;	# 0.成功，1.失败
+	string reason; 	#失败原因
+	int32 score;			#猎技积分
+}
+
+#请求进入猎技地图
+message c_enterMap {
+	int64 id;	#角色编号
+}
+
+#请求进入猎技地图信息返回
+message s_enterMap {
+	int32 result;	# 0.成功，1.失败
+	string reason; 	#失败原因
+	int32 time; #猎技活动剩余时间
+}
+
+
+#请求退出猎技地图
+message c_quitMap {
+	int64 id;	#角色编号
+}
+
+#请求退出猎技地图
+message s_quitMap {
+	int32 result;	# 0.成功，1.失败
+	string reason; 	#失败原因
+}
+
+
+#################################################

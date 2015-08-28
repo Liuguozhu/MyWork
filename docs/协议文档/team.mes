@@ -1,0 +1,176 @@
+#######################组队协议##########################
+
+#队伍消息信息
+message teamMessageInfo {
+	int32 teamId;			#队伍ID
+	int64 headerId;			#队长ID
+	int64 teamerId;			#队员ID
+	string describe;		#描述
+}
+
+
+#队伍成员信息
+message teamerInfo {
+	int64 id;			#角色编号
+	int32 level;			#等级
+	string nick;			#昵称
+	int32 power;			#战力
+	int32 position;		#队伍中所在的位置(0,队长；1,队员；2,队员)
+	int64 figure;	#形象编号
+	string vocation; #职业名称
+	int32 shizhuangId; #时装编号（0.无，1.第一套时装）
+}
+
+
+#队伍信息
+message s_teamInfo {
+	int32 teamId;			#队伍编号
+	string teanName;  #队伍名称
+	teamerInfo[] teamerInfoList;	#队伍成员信息列表
+}
+
+#请求队伍信息
+message c_teamInit {
+	int64 id;			#角色编号
+}
+
+#请求队伍信息返回
+message s_teamInit {
+	int32 result;	# 0.成功，1.失败
+	string reason; 	#失败原因
+	int32 state;  #组队状态（1，有队伍；2，没有队伍）
+}
+
+#创建队伍
+message c_createTeam {	
+	string teanName;		#队伍名称
+}
+
+
+#创建队伍返回信息
+message s_createTeam {
+	int32 result;	# 0.成功，1.失败
+	string reason; 	#失败原因
+}
+
+#离开队伍
+message c_leaveTeam {	
+	int64 id;			#角色编号	
+}
+
+#离开队伍返回信息
+message s_leaveTeam {
+	int32 result;			# 0.成功，1.失败
+	string reason; 			#失败原因
+}
+
+#解散队伍
+message c_removeTeam {	
+	int64 id;			#角色编号	
+}
+
+#解散队伍信息返回
+message s_removeTeam {
+	int32 result;			# 0.成功，1.失败
+	string reason; 			#失败原因
+}
+
+#邀请入队
+message c_inviteToTeam {
+	int64 teamerId;			#队员ID
+}
+
+#邀请入队返回信息
+message s_inviteToTeam {
+	int32 result;			# 0.成功，1.失败
+	string reason; 			#失败原因
+}
+
+#同时向客户端发送请求入队消息
+message s_sendToTeam {
+	teamMessageInfo[] teamMessageInfoList; #队伍消息信息列表
+}
+
+#客户端选择同意或是取消
+message c_chooseToTeam {
+	int32 teamId;			#队伍ID
+	int32 chooseResult;		#选择结果(0,同意;1,取消)
+}
+
+#客户端选择同意或是取消返回信息
+message s_chooseToTeam {
+	int32 result;			# 0.成功，1.失败
+	string reason;			#失败原因
+}
+
+#请求周围队伍
+message c_aroundTeams {
+	int64 roleId; #页数
+}
+
+#请求周围队伍返回信息
+message s_aroundTeams {
+	s_teamInfo[] teamInfoList;	#队伍信息列表
+}
+
+#申请加入队伍
+message c_addTeam {
+	int64 headerId;			#队长ID
+}
+
+#申请加入队伍返回信息
+message s_addTeam {
+	int32 result;			# 0.成功，1.失败
+	string reason; 			#失败原因
+}
+
+#同时向客户端发送请求加入消息
+message s_sendAddTeam {
+	teamMessageInfo[] teamMessageInfoList; #队伍消息信息列表
+}
+
+#客户端选择同意或是取消
+message c_allowToTeam {
+	int64 teamerId;			#队员ID
+	int32 chooseResult;		#选择结果(0,同意;1,取消)
+}
+
+#客户端选择同意或是取消返回信息
+message s_allowToTeam {
+	int32 result;			# 0.成功，1.失败
+	string reason; 			#失败原因
+}
+
+#请离队伍
+message c_kickout {
+	int64 teamerId;			#队员ID
+}
+
+#请离队伍信息返回
+message s_kickout {
+	int32 result;			# 0.成功，1.失败
+	string reason; 			#失败原因
+}
+
+#队伍状态
+message s_teamState {
+	int32 state;  #组队状态（1，解散队伍；2，被踢出队伍）
+}
+
+#移交队长
+message c_transferLeader {
+	int64 headerId;	 #新队长ID
+}
+
+#移交队长
+message s_transferLeader {
+	int32 result; # 0.成功，1.失败
+	string reason; #失败原因
+}
+
+#队伍通知
+message s_teamInform {
+	string reason;  #通知
+	
+}
+#################################################

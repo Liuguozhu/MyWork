@@ -1,0 +1,26 @@
+用户登录验证
+session zset(userId, serverId) // 用户编号，服务器编号
+
+
+
+等级榜
+level_rank[serverId] list(roleId)
+level_award[serverId] zset(roleId, award)
+
+power_rank[serverId] long(roleId)
+power_award[serverId] boolean
+
+power_award_1[serverId] list(roleId)
+power_award_2[serverId] list(roleId)
+
+rank_score[serverId] zset(roleId, score)
+gang_pay[serverId]  zset(gangId, score)
+gang_pay_award[serverId] list(roleId)
+role_pay_day[serverId]  zset(roleId, score)
+
+role_pay_first_temp[serverId] long(roleId)
+role_pay_first_value[serverId] int(score)
+role_pay_first[serverId]  long(roleId)
+role_pay_first_award[serverId] boolean
+
+partner_award[serverId] zset(roleId, score)

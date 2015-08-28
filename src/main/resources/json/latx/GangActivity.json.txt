@@ -1,0 +1,1 @@
+[{"award":"帮贡","icon":"baishen","index":1,"level":1,"name":"拜神","time":0},{"award":"大量帮贡","icon":"bangpairuqin","index":2,"level":2,"name":"帮派入侵","time":1}]

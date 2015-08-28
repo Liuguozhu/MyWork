@@ -1,0 +1,1 @@
+[{"index":1,"isBind":0,"item":50019,"probability1":5000,"probability2":1000},{"index":2,"isBind":0,"item":50020,"probability1":4000,"probability2":2400},{"index":3,"isBind":0,"item":50021,"probability1":800,"probability2":5000},{"index":4,"isBind":0,"item":50022,"probability1":100,"probability2":1000},{"index":5,"isBind":0,"item":50023,"probability1":100,"probability2":500}]

@@ -1,0 +1,124 @@
+#######################帮派战协议##########################
+
+
+#帮派战循环赛对阵信息
+message againstRoundInfo {
+	string firstGangName; #第一个帮派名字
+	string secondGangName; #第二个帮派名字
+	int32 type; #用于区分我的帮派（0为我的帮派对阵,非0为其他）
+}
+
+#淘汰赛各场次战斗结果状态
+message resultState {
+	int32 fightNum; #场次 
+	int32 state; #0为初始状态,1为胜利,2为失败
+}
+
+#帮派战淘汰赛对阵信息
+message againstOutInfo {
+	int32 index; #对战列表位置索引
+	string gangName; #帮派名字
+}
+
+#帮派战报名信息
+message fightApplyInfo {
+	string gangName; #帮派名字
+	int32 num;#当前人数
+	int32 size;#最大人数
+	int32 score; #帮派战积分
+	int32 isApply; #今日是否已报名（0.未报名，1.已报名）
+}
+
+
+#帮派战初始化
+message c_gangFightInit {
+	int64 roleId; #角色编号（无用）
+}
+
+#帮派战初始化
+message s_gangFightInit {
+	int32 type; #类型(0.循环赛，1.淘汰赛，2.报名, 3.等待时间)
+	int32 state; #状态（0.不显示，1.报名，2.距离开始，3.入场，4.战斗，5.距离报名）
+	int32 time; #剩余时间（秒）
+	string champion; #冠军帮名称
+}
+
+#请求对阵表
+message c_againstList {
+	int64 roleId; #角色编号（无用）
+} 
+
+#请求对阵表信息返回
+message s_againstList {
+	int32 type; #类型(0.循环赛，1.淘汰赛，2.无对阵表)
+	int32 fightNum; #场次
+	int32 state; #状态（0.不显示，1.报名，2.距离开始，3.入场，4.战斗，5.距离报名）
+	int32 time; #剩余时间（秒）
+	againstRoundInfo[] againstRoundInfoList; #循环赛对阵信息列表
+	againstOutInfo[] againstOutInfoList; #淘汰赛对阵信息列表
+}
+
+#查看报名
+message c_lookFightApply {
+	int32 page; #页数
+}
+
+#查看报名信息返回
+message s_lookFightApply {
+	int32 page; #页数
+	int32 sum; #总页数
+	fightApplyInfo[] fightApplyInfoList; #报名信息列表
+}
+
+#报名
+message c_fightApply {
+	int64 roleId; #角色编号（无用）
+}
+
+#报名信息返回
+message s_fightApply {
+	int32 result; #0成功1失败
+	string reason; #成功/失败原因
+}
+
+#进入帮战地图
+message c_enterGangFightMap {
+	int64 roleId; #角色编号（无用）
+}
+
+#进入帮战地图信息返回
+message s_enterGangFightMap {
+	int32 result; #0成功1失败
+	string reason; #成功/失败原因
+	int32 fightTime; #战斗开始倒计时(秒)
+	int32 outTime; #离开倒计时（分）
+}
+
+#退出帮战地图
+message c_quitGangFightMap {
+	int64 roleId; #角色编号（无用）
+}
+
+#退出帮战地图信息返回
+message s_quitGangFightMap {
+	int32 result; #0成功1失败
+	string reason; #成功/失败原因
+}
+
+#刷新帮派战状态
+message s_refreshGangFightState {
+	int32 type; #(0.为循环赛，1.为淘汰赛，2.报名；3.不能报名)
+}
+
+#帮派战奖励通知
+message s_gangFightAward {
+	string name; #帮战名称
+	int32 result; #帮战结果（0.胜利，1.失败）
+	int32 number; #参与人数
+	int32 gangExpBase; #帮会经验—参与奖
+	int32 expBase; #个人经验—参与奖
+	int32 goldBase; #个人绑银—参与奖
+	int32 gangExp; #帮会经验—结果奖
+	int32 tribute; #个人贡献—结果奖
+	int32 coin; #个人银两—结果奖
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="MultipleSQL">
+	<typeAlias alias="multiple" type="iyunu.NewTLOL.model.multiple.Multiple" />
+	
+	<resultMap id="multipleResult" class="multiple">
+		<result property="expMul" column="NEXPMUL" />
+		<result property="expMulStart" column="DEXPMULSTART" />
+		<result property="expMulEnd" column="DEXPMULEND"  />
+		<result property="expMulStartH" column="NEXPMULSTARTH"  />
+		<result property="expMulEndH" column="NEXPMULENDH" />
+		<result property="expMulStartM" column="NEXPMULSTARTM" />
+		<result property="expMulEndM" column="NEXPMULENDM" />
+		
+		<result property="goldMul" column="NGOLDMUL" />
+		<result property="goldMulStart" column="DGOLDMULSTART" />
+		<result property="goldMulEnd" column="DGOLDMULEND"  />
+		<result property="goldMulStartH" column="NGOLDMULSTARTH"  />
+		<result property="goldMulEndH" column="NGOLDMULENDH" />
+		<result property="goldMulStartM" column="NGOLDMULSTARTM" />
+		<result property="goldMulEndM" column="NGOLDMULENDM" />
+	</resultMap>
+	
+	<select id="query" resultMap="multipleResult" parameterClass="String">
+		<![CDATA[
+			select NEXPMUL, DEXPMULSTART, DEXPMULEND, NEXPMULSTARTH, NEXPMULENDH, NEXPMULSTARTM, NEXPMULENDM, NGOLDMUL, DGOLDMULSTART, DGOLDMULEND, NGOLDMULSTARTH, NGOLDMULENDH, NGOLDMULSTARTM, NGOLDMULENDM from NEW_TLOL_MULTIPLE_$srv$
+		]]>
+	</select>
+	
+</sqlMap>

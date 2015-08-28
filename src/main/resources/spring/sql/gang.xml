@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="GangSQL">
+	<typeAlias alias="gang" type="iyunu.NewTLOL.model.gang.Gang" />
+
+	<resultMap id="GangResult" class="gang">
+		<result property="id" column="NID" />
+		<result property="name" column="SNAME" />
+		<result property="createDate" column="DCREATED" />
+		<result property="level" column="NLEVEL" />
+		<result property="leader" column="NLEADER" />
+		<result property="viceLeader" column="SVICELEADER"  typeHandler="iyunu.NewTLOL.ibatis.HashSetLongType"  javaType="java.util.HashSet" />
+		<result property="presbyter" column="SPRESBYTER" typeHandler="iyunu.NewTLOL.ibatis.HashSetLongType"  javaType="java.util.HashSet"/>
+ 		<result property="membersString" column="SMEMBERS" typeHandler="iyunu.NewTLOL.ibatis.HashSetLongType"  javaType="java.util.HashSet"/> 
+		<result property="gangBulletin" column="SGANGBULLETIN" />
+		<result property="active" column="NACTIVE" />
+		<result property="totalTribute" column="NEXP" />
+		<result property="invasionTime" column="NINVASIONTIME" />
+	</resultMap>
+	
+	<select id="query" resultMap="GangResult"  parameterClass="String">
+		<![CDATA[
+			select NID,
+					   SNAME,
+					   DCREATED,
+				       NLEVEL,
+				       NLEADER,
+				       SVICELEADER,
+				       SPRESBYTER,
+				       SMEMBERS,
+				       SGANGBULLETIN,
+				       NACTIVE,
+				       NEXP,
+				       NINVASIONTIME
+  			from NEW_TLOL_GANG_$srv$
+		]]>
+	</select>
+
+	<insert id="insert" parameterClass="gang">
+		<![CDATA[
+		insert into NEW_TLOL_GANG_$srv$(NID, SNAME, DCREATED, NLEVEL, NLEADER, SMEMBERS, NACTIVE) 
+			values(#id#, #name#, #createDate#, #level#, #leader#, #membersString,handler=iyunu.NewTLOL.ibatis.HashSetLongType#,#active#)
+		]]>
+	</insert>
+
+	<update id="update" parameterClass="gang">
+		<![CDATA[
+			update NEW_TLOL_GANG_$srv$
+				   set SNAME = #name#,
+				       DCREATED = #createDate#,
+				       NLEVEL = #level#,
+				       NLEADER = #leader#,
+				       SVICELEADER = #viceLeader,handler=iyunu.NewTLOL.ibatis.HashSetLongType#,
+				       NACTIVE       = #active#,
+				       SPRESBYTER    = #presbyter,handler=iyunu.NewTLOL.ibatis.HashSetLongType#,
+				       SMEMBERS      = #membersString,handler=iyunu.NewTLOL.ibatis.HashSetLongType#,
+				       sgangBulletin = #gangBulletin#,
+				       NEXP          = #totalTribute#,
+				       NINVASIONTIME = #invasionTime#
+				 where NID = #id#
+		]]>
+	</update>
+
+	<delete id="delete" parameterClass="map">
+		<![CDATA[
+			delete NEW_TLOL_GANG_$srv$ where nid=#id#
+		]]>
+	</delete>
+</sqlMap>

@@ -1,0 +1,134 @@
+###################矿区协议##############################
+	
+#请求矿区列表 初始化  点开，换页时用
+message c_queryMiningList {
+	int32 page;#页数
+}
+
+#矿区初始化类
+message miningInfo {
+	int32 index;#编号
+	int32 flag;# 0无人 1有人
+	string name;# 人物名字
+	int64 roleId;#角色ID
+	int32 rate;#进度， 要除以一万
+	int32 type;# 1 金矿2银矿 3铜矿 4铁矿
+}
+
+#请求矿区列表返回
+message s_queryMiningList {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+	miningInfo[] minings;#矿区列表
+	int32 page;#当前页数
+	int32 totalPage;#总页数
+ }
+ 
+ #矿区刷新类
+message miningResInfo {
+	int32 index;#编号
+	int32 flag;# 0无人 1有人
+	string name;# 人物名字
+	int64 roleId;#角色ID
+	int32 rate;#进度， 要除以一万
+}
+ #矿区刷新协议
+message s_refreshMiningList{
+	miningResInfo[] minings;#矿区列表
+} 
+ 
+ 
+#请求矿区
+message c_queryMining{
+	int32 index;#编号
+}
+#请求矿区返回
+message s_queryMining{
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+	int32 flag;#// 0无人 1其它人2自己 ---------------对应 0占领 1抢夺 2 收取
+	int32 type;# 1 金矿2银矿 3铜矿 4铁矿 
+	int64 id;#角色ID
+	string name;#角色名字
+	string gangName;#帮派名字
+	int32 rec;#已产出的绑银
+	int64 restTime;#剩余时间
+}
+
+#采矿
+message c_getMining{
+	int32 index;#编号
+	int32 page;#页数
+}
+#采矿返回
+message s_getMining{
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+}
+#收矿
+message c_recMining{
+	int32 index;#编号
+	int32 page;#页数
+}
+#收矿返回
+message s_recMining{
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+}
+#抢矿
+message c_robMining{
+	int32 index;#编号
+	int32 page;#页数
+}
+#抢矿返回
+message s_robMining{
+	int32 result; #结果（1.失败 2.进入战斗 3无人占领，说明在玩家点击抢矿的时间，矿主收了矿，直接占矿，并返回reason）
+	string reason; #原因
+}
+#刷新被抢通知
+message s_robNotice{
+	int64 roleId;#角色ID
+	string notice;#通知内容
+}
+#恶魔岛Info
+message emoInfo{
+	int32 map;# 1恶魔巢穴 2 恶魔藏宝阁
+	int32 flag;#开关通知  0没开 1开了
+	int32 level;# 等级
+	string name;#名字
+	string time;#时间
+	string awardDes;#奖励描述
+}
+#查询恶魔岛
+message c_queryEmo{
+	int64 roleId;# 角色ID
+}
+#查询恶魔岛返回
+message s_queryEmo{
+	int32 restCount;#剩余次数
+	emoInfo[] emos;#
+}
+#进入恶魔岛
+message c_enterEmo{
+	int32 map;# 1恶魔巢穴 2 恶魔藏宝阁
+}
+#进入恶魔岛返回
+message s_enterEmo{
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+} 
+#购买恶魔岛次数 
+message c_buyEmoCount{
+	int64 roleId;#角色ID
+}
+#购买恶魔岛次数返回
+message s_buyEmoCount{
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+	int32 restCount;#剩余次数
+}
+#刷新恶魔岛开始通知
+message s_refreshEmoSend{
+	int32 type;#1 开始
+}
+ 

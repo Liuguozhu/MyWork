@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PayBackSQL">
+	<typeAlias alias="payBackInfo" type="iyunu.NewTLOL.model.base.PayBackInfo" />
+	
+	<resultMap id="payBack" class="payBackInfo">
+		<result property="userId" column="SUSERID" />
+		<result property="amt" column="NAMT" />
+		<result property="state" column="NSTATE" />
+		<result property="multiple" column="NMULTIPLE" />
+	</resultMap>
+	
+	<select id="query" resultMap="payBack" parameterClass="String">
+		<![CDATA[
+			select SUSERID, NAMT, NSTATE, NMULTIPLE from AUTO_PAY_BACK where  SUSERID = #value# and NSTATE = 0
+		]]>
+	</select>
+	
+	<update id="delete" parameterClass="String">
+		<![CDATA[
+			update AUTO_PAY_BACK set NSTATE = 1 where SUSERID = #value#
+		]]>
+	</update>
+	
+</sqlMap>

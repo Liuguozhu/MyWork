@@ -1,0 +1,75 @@
+###################试炼协议##############################
+#进入试炼
+message c_enterTrials {
+	int32 trialsId; #试炼编号
+}
+
+#进入试炼信息返回
+message s_enterTrials {
+	int32 result;	#0.成功；1.失败
+	string reason; #失败原因
+}
+
+#击杀怪物
+message c_kill {
+	int32 trialsId; #试炼编号
+	int32 position; #要击杀的位置(有8个位置，编号分别为1,2,3,4,5,6,7,8)
+}
+
+#击杀怪物信息返回
+message s_kill {
+	int32 result;	#0.成功；1.失败
+	string reason; #失败原因
+}
+
+#刷新已击杀怪物的位置
+message s_refreshKillPosition {
+	int32 position; #已经击杀的位置(有8个位置，编号分别为1,2,3,4,5,6,7,8)
+}
+
+#试炼状态
+message trialsState {
+	int32 id; #编号
+	int32 state; #状态（0.未通关，1.通关）
+	int32 position; #已经击杀的位置(有8个位置，编号分别为1,2,3,4,5,6,7,8)
+}
+
+#刷新试炼状态
+message s_refreshTrialsState {
+	int32 state; #状态（1.简单，2.普通，3.困难，4.深渊）
+	trialsState[] trialsStateList; #试炼状态
+}
+
+#扫荡试练
+message c_sweepingTrials {
+	int32 trialsId; #试炼编号
+}
+
+#扫荡试练信息返回
+message s_sweepingTrials {
+	int32 result;	#0.成功；1.失败；
+	string reason;   #失败原因
+}
+
+#重置试炼
+message c_resetTrials {
+	int32 state; #状态（1.简单，2.普通，3.困难，4.深渊）
+}
+
+#重置试炼信息返回
+message s_resetTrials {
+	int32 result;	#0.成功；1.失败
+	string reason; #失败原因
+}
+
+#试练重置次数
+message trialsReSetNum {
+	int32 state; #状态（1.简单，2.普通，3.困难，4.深渊）
+	int32 reSetNum; #重置试练次数
+}
+
+#刷新试练重置次数
+message s_refreshReSetNum {
+	trialsReSetNum[] trialsReSetNumList;#试练重置次数列表
+}
+

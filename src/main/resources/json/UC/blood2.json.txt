@@ -1,0 +1,1 @@
+[{"flag":2,"id":1,"mapid":5,"mark":5,"monster":10355,"x":71,"y":21},{"flag":2,"id":2,"mapid":5,"mark":5,"monster":10355,"x":77,"y":24},{"flag":2,"id":3,"mapid":5,"mark":5,"monster":10355,"x":56,"y":21}]

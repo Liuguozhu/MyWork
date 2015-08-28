@@ -1,0 +1,52 @@
+###################排行榜协议##############################
+
+
+#排行榜信息体
+message rankInfo {
+	int32 index; #排名
+	int64 roleId; #角色编号
+	string name; #名称
+	int64 value;#具体榜的值
+	string vocation; #职业
+
+}
+#排行榜标题体
+message rankTitleInfo{
+	int32 type;#排行榜类型
+	string name;#排行榜名字
+}
+#排行榜标题请求
+message c_rankInit{
+	int64 roleId;#角色ID
+}
+#排行榜标题请求返回
+message s_rankInit{
+	rankTitleInfo[] names;
+}
+#每个排行榜里面的题头体
+message title {
+	string name;#标题名称
+	string id;#信息体索引名称
+}
+
+#排行榜LIST信息体
+
+message rankInfoList {
+	string  rankName;#排行榜名字  如：等级排行榜
+	title[] titles;#排行榜中的标题文字 
+	rankInfo[] rankInfos;#排行榜信息体 的集合，一个榜中具体的多条数据	
+}	
+#排行榜列表请求
+message c_rankList {
+	int32 type;#0等级 1战力2洞天
+	int32 page;#第几页
+}
+
+#排行榜列表请求返回信息
+message s_rankList {
+	int32 result;#0成功 1失败
+	string reason;#原因
+	rankInfoList rankInfoLists;#返回查询排行榜
+	int32 page;#当前页数
+	int32 totalpage;#总页数
+}

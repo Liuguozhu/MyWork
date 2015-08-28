@@ -1,0 +1,591 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="RoleSQL">
+	<typeAlias alias="role" type="iyunu.NewTLOL.model.role.Role" />
+	<typeAlias alias="roleCard" type="iyunu.NewTLOL.model.role.RoleCard" />
+	
+	<resultMap id="queryResult" class="role">
+		<result property="id" column="NID" />
+		<result property="serverId" column="NSERVERID" />
+		<result property="userId" column="SUSERID" />
+		<result property="nick" column="SNICK" />
+		<result property="vocation" column="NVOCATION"  typeHandler="iyunu.NewTLOL.ibatis.VocationType"  javaType="iyunu.NewTLOL.enumeration.Vocation"/>
+		<result property="figure" column="NFIGURE" nullValue="0" />
+		<result property="date" column="DREGDATE" />
+		<result property="level" column="NLEVEL" nullValue="0" />
+		<result property="gold" column="NGOLD" nullValue="0" />
+		<result property="exp" column="NEXP" nullValue="0" />
+		<result property="money" column="NMONEY" nullValue="0" />
+		<result property="strength" column="NSTRENGTH" nullValue="0" />
+		<result property="intellect" column="NINTELLECT" nullValue="0" />
+		<result property="physique" column="NPHYSIQUE" nullValue="0" />
+		<result property="agility" column="NAGILITY" nullValue="0" />
+		<result property="free" column="NFREE" nullValue="0" />
+		<result property="hp" column="NHP" nullValue="0" />
+		<result property="mp" column="NMP" nullValue="0" />
+<!-- 		<result property="titleIndex" column="NTITLEINDEX" /> -->
+		<result property="titles" column="STITLES" typeHandler="iyunu.NewTLOL.ibatis.TitleType"  javaType="java.util.ArrayList"  />
+		<result property="gangId" column="NGANGID" />
+<!-- 		<result property="jobTitle" column="NJOBTITLE"  typeHandler="iyunu.NewTLOL.ibatis.GangJobTitleType"  javaType="iyunu.NewTLOL.model.gang.GangJobTitle"  /> -->
+		<result property="tribute" column="NTRIBUTE" />
+		<result property="bag" column="CBAG"  typeHandler="iyunu.NewTLOL.ibatis.BagType"  javaType="iyunu.NewTLOL.model.bag.Bag" />
+		<result property="partners" column="CPARTNER"  typeHandler="iyunu.NewTLOL.ibatis.PartnerType"  javaType="iyunu.NewTLOL.model.partner.instance.Partner" />
+		<result property="state" column="NSTATE" />
+		<result property="friendList" column="CFRIENDLIST"  typeHandler="iyunu.NewTLOL.ibatis.ArrayListLongType"  javaType="java.util.ArrayList" />
+		<result property="finishTasks" column="CFINISHTASK"  typeHandler="iyunu.NewTLOL.ibatis.ArrayListIntegerType"  javaType="java.util.ArrayList" />
+		<result property="tasks" column="CTASK"  typeHandler="iyunu.NewTLOL.ibatis.TaskListType"  javaType="java.util.ArrayList" />
+		<result property="skillMap" column="SSKILL" typeHandler="iyunu.NewTLOL.ibatis.HashMapIntAndIntType" javaType="java.util.HashMap" />
+		<result property="jingMaiId" column="NJINGMAIID" />
+		<result property="yuanQi" column="NYUANQI" />
+		<result property="buyGoldTime" column="NBUYGOLDTIME" />
+		<result property="useBuyGoldNum" column="NUSEBUYGOLDNUM" />
+		<result property="freeBuyGoldNum" column="NFREEBUYGOLDNUM" />
+		<result property="moneyBuyGoldNum" column="NMONEYBUYGOLDNUM" />
+		<result property="warehouse" column="CWAREHOUSE"  typeHandler="iyunu.NewTLOL.ibatis.WarehouseType"  javaType="iyunu.NewTLOL.model.bag.Warehouse" />
+		<result property="innTime" column="NINNTIME" />
+		<result property="equipments" column="CEQUIPMENTS"  typeHandler="iyunu.NewTLOL.ibatis.EquipmentsType"  javaType="java.util.HashMap" />
+		<result property="bodyIntensify" column="SBODYINTENSIFY"  typeHandler="iyunu.NewTLOL.ibatis.BodyIntensifyType"  javaType="java.util.HashMap" />
+		<result property="bodyRabbet" column="CBODYRABBET"  typeHandler="iyunu.NewTLOL.ibatis.BodyRabbetType"  javaType="java.util.HashMap" />
+		<result property="logonTime" column="NLOGONTIME" />
+		<result property="logoutTime" column="NLOGOUTTIME" />
+		<result property="logonTotals" column="nlogonTotals" />
+		<result property="logonDays" column="nlogonDays" />
+		<result property="logonContinue" column="nlogonContinue" />
+		<result property="mapInfo" column="CMAP"  typeHandler="iyunu.NewTLOL.ibatis.MapType"  javaType="iyunu.NewTLOL.model.role.MapInfo" />
+		<result property="dailyAnswerScore" column="NDAILYANSWERSCORE" />
+		<result property="shaoXiangLevel" column="NSHAOXIANGLEVEL" nullValue="0" />
+		<result property="shaoXiangExp" column="NSHAOXIANGEXP" nullValue="0" />
+		<result property="cancelBan" column="NCANCELBAN" nullValue="0" />
+		<result property="mute" column="NMUTE" nullValue="0" />
+		<result property="signList" column="SSIGNLIST"  typeHandler="iyunu.NewTLOL.ibatis.ArrayListIntegerType"  javaType="java.util.ArrayList" />
+		<result property="havePickSign" column="SHAVEPICKSIGN"  typeHandler="iyunu.NewTLOL.ibatis.ArrayListIntegerType"  javaType="java.util.ArrayList" />
+		<result property="firstSign" column="NFIRSTSIGN" nullValue="0" />
+		<result property="haveSign" column="NHAVESIGN" nullValue="0" />
+		<result property="conPick" column="SCONPICK"  typeHandler="iyunu.NewTLOL.ibatis.ArrayListIntegerType"  javaType="java.util.ArrayList" />
+		<result property="vip" column="SVIP"   typeHandler="iyunu.NewTLOL.ibatis.VipType"  javaType="iyunu.NewTLOL.model.vip.Vip"  />
+		<result property="levelGiftStateMap" column="CLEVELGIFTSTATEMAP"  typeHandler="iyunu.NewTLOL.ibatis.HashMapIntAndIntType"  javaType="java.util.HashMap" />
+		<result property="freeSkill" column="NFREESKILL" nullValue="0" />
+		<result property="sumSkill" column="NSUMSKILL" nullValue="0" />
+		<result property="buffs" column="CBUFFS"  typeHandler="iyunu.NewTLOL.ibatis.BuffRoleType"  javaType="java.util.HashMap" />
+		<result property="leaveGangTime" column="NLEAVEGANGTIME" nullValue="0" />
+		<result property="livenessScore" column="NLIVENESSNEW" nullValue="0" />
+		<result property="livenessScoreMap" column="CLIVENESSMAPNEW"  typeHandler="iyunu.NewTLOL.ibatis.LinkedHashMapIntAndIntType"  javaType="java.util.LinkedHashMap" />
+		<result property="helper" column="CHELPERNEW"  typeHandler="iyunu.NewTLOL.ibatis.HelperType"  javaType="java.util.HashMap" />
+		<result property="onlineTime" column="NONLINETIME" nullValue="0" />
+		<result property="guide" column="NGUIDE" nullValue="0" />
+		<result property="specialGuide" column="NSPECIALGUIDE" nullValue="0" />
+		<result property="guildTaskNum" column="NGUILDTASKNUM" nullValue="0" />
+		<result property="raidsNumber" column="SRAIDSNUMBER"  typeHandler="iyunu.NewTLOL.ibatis.HashMapIntAndIntType"  javaType="java.util.HashMap" />
+		<result property="onlineAwardStateMap" column="CONLINEAWARDSTATEMAP"  typeHandler="iyunu.NewTLOL.ibatis.HashMapIntAndIntType"  javaType="java.util.HashMap" />
+		<result property="ghostTaskNum" column="NGHOSTTASKNUM" nullValue="0" />
+		<result property="trials" column="CTRIALS"  typeHandler="iyunu.NewTLOL.ibatis.TrialsType"  javaType="java.util.HashMap" />
+		<result property="compensate" column="NCOMPENSATE" nullValue="0" />
+		<result property="blood" column="NBLOOD" nullValue="0" />
+		<result property="cdKeys" column="SCDKEY"  typeHandler="iyunu.NewTLOL.ibatis.ArrayListIntegerType"  javaType="java.util.ArrayList" />
+		<result property="sevenMap" column="CSEVEN"  typeHandler="iyunu.NewTLOL.ibatis.HashMapIntAndSevenType"  javaType="java.util.HashMap" />
+		<result property="innTime2" column="NINNTIME2" />
+		<result property="guildTaskSum" column="NGUILDTASKSUM" />
+		<result property="ghostTaskSum" column="NGHOSTTASKSUM" />
+		<result property="currentFloorId" column="NCURRENTFLOORID" />
+		<result property="historyFloorId" column="NHISTORYFLOORID" />
+		<result property="nullResetNum" column="NNULLRESETNUM" />
+		<result property="moneyResetNum" column="NMONEYRESETNUM" />
+		<result property="vipGift" column="NVIPGIFT" />
+		<result property="coin" column="NCOIN" />
+		<result property="costGold" column="NCOSTGOLD" />
+		<result property="openVipChat" column="NOPENVIPCHAT" />
+		<result property="activityType" column="NACTIVITYTYPE" />
+		<result property="firstPartner" column="NFIRSTPARTNER" />
+		<result property="eliteMonsterNum" column="NELITEMONSTERNUM" />
+		<result property="dailyAnswerNum" column="NDAILYANSWERNUM" />
+		<result property="totalTribute" column="NTOTALTRIBUTE" />
+		<result property="yxtTaskNum" column="NYXTTASKNUM" />
+		<result property="taskFblNum" column="NTASKFBLNUM" />
+		<result property="taskFblId" column="NTASKFBLID" />
+		<result property="warehouseCoin" column="NWAREHOUSECOIN" />
+		<result property="bagStone" column="CBAGSTONE"  typeHandler="iyunu.NewTLOL.ibatis.BagStoneType"  javaType="iyunu.NewTLOL.model.bag.BagStone" />
+		<result property="trialsState" column="NTRIALSSTATE" />
+		<result property="plusMoney" column="NPLUSMONEY" />
+		<result property="recPlusMoney" column="CRECPLUSMONEY" typeHandler="iyunu.NewTLOL.ibatis.ArrayListIntegerType"  javaType="java.util.ArrayList" />
+		<result property="firstDouble" column="CFIRSTDOUBLE"  typeHandler="iyunu.NewTLOL.ibatis.ArrayListIntegerType"  javaType="java.util.ArrayList" />
+		<result property="taskCycleNum" column="NTASKCYCLENUM" />
+		<result property="taskCycleRow" column="NTASKCYCLEROW" />
+		<result property="secPartner" column="NSECPARTNER" />
+		<result property="dailyMap" column="CDAILY"  typeHandler="iyunu.NewTLOL.ibatis.DailyMapType"  javaType="java.util.HashMap" />
+		<result property="energy" column="NENERGY" />
+		<result property="energyTime" column="NENERGYTIME" />
+		<result property="resetTrials" column="SRESETTRIALS"  typeHandler="iyunu.NewTLOL.ibatis.HashMapIntAndIntType"  javaType="java.util.HashMap" />
+		<result property="partnerMap" column="CPARTNERMAP"  typeHandler="iyunu.NewTLOL.ibatis.PartnerMapType"  javaType="java.util.HashMap"/>
+		<result property="partnerFight" column="SPARTNERFIGHT"  typeHandler="iyunu.NewTLOL.ibatis.PartnerFightType"  javaType="java.util.HashMap"/>
+		<result property="emoCount" column="NEMOCOUNT"  nullValue="0" />
+	</resultMap>
+	
+	
+	<resultMap id="queryRoleCardResult" class="roleCard">
+		<result property="id" column="NID" />
+		<result property="userId" column="SUSERID" />
+		<result property="serverId" column="NSERVERID" />
+		<result property="nick" column="SNICK" />
+		<result property="vocation" column="NVOCATION"  typeHandler="iyunu.NewTLOL.ibatis.VocationType"  javaType="iyunu.NewTLOL.enumeration.Vocation"/>
+		<result property="level" column="NLEVEL" />
+		<result property="gold" column="NGOLD" />
+		<result property="coin" column="NCOIN" />
+		<result property="exp" column="NEXP" />
+		<result property="gangId" column="NGANGID" />
+<!-- 		<result property="jobTitle" column="NJOBTITLE"  typeHandler="iyunu.NewTLOL.ibatis.GangJobTitleType"  javaType="iyunu.NewTLOL.model.gang.GangJobTitle"  /> -->
+		<result property="tribute" column="NTRIBUTE" />
+		<result property="figure" column="NFIGURE" nullValue="0" />
+		<result property="historyFloorId" column="NHISTORYFLOORID" />
+	</resultMap>
+	
+	<insert id="insert" parameterClass="role">
+		<![CDATA[
+			insert into NEW_TLOL_ROLE_$srv$
+				  (NID,
+				   NSERVERID,
+				   SUSERID,
+				   SNICK,
+				   NVOCATION,
+				   NLEVEL,
+				   NGOLD,
+				   NFIGURE,
+				   DREGDATE,
+				   NEXP,
+				   NMONEY,
+				   NSTRENGTH,
+				   NINTELLECT,
+				   NPHYSIQUE,
+				   NAGILITY,
+				   NFREE,
+				   NHP,
+				   NMP,
+				   STITLES,
+				   NGANGID,
+				   NTRIBUTE,
+				   CBAG,
+				   CBAGSTONE,
+				   CPARTNER,
+				   NSTATE,
+				   CFRIENDLIST,
+				   CFINISHTASK,
+				   CTASK,
+				   SSKILL,
+				   NJINGMAIID,
+				   NYUANQI,
+				   NBUYGOLDTIME,
+				   NUSEBUYGOLDNUM,
+				   NFREEBUYGOLDNUM,
+				   NMONEYBUYGOLDNUM,
+				   CWAREHOUSE,
+				   CEQUIPMENTS,
+				   SBODYINTENSIFY,
+				   CBODYRABBET,
+				   NLOGONTIME,
+				   NLOGONTOTALS,
+				   NLOGONDAYS,
+				   NLOGONCONTINUE,
+				   NDAILYANSWERSCORE,
+				   NSHAOXIANGLEVEL,
+				   NSHAOXIANGEXP	,
+				   SSIGNLIST,
+				   SHAVEPICKSIGN,
+				   NFIRSTSIGN,
+				   NHAVESIGN,
+				   SCONPICK,
+				   SVIP,
+				   CLEVELGIFTSTATEMAP,
+				   NFREESKILL,
+				   NSUMSKILL,
+				   CBUFFS,
+				   NLIVENESSNEW,
+				   CLIVENESSMAPNEW,
+				   CHELPERNEW,
+				   CONLINEAWARDSTATEMAP,
+				   CSEVEN,
+				   NCURRENTFLOORID,
+				   NHISTORYFLOORID,
+				   NNULLRESETNUM,
+				   NMONEYRESETNUM,
+				   NCOIN,
+				   NFIRSTPARTNER,
+				   CMAP,
+				   NENERGYTIME,
+				   SPARTNERFIGHT
+				   )
+				values
+				  (#id:NUMBER#,
+				   #serverId:NUMBER#,
+				   #userId:VARCHAR#,
+				   #nick:VARCHAR#,
+				   #vocation,handler=iyunu.NewTLOL.ibatis.VocationType#,
+				   #level:NUMBER#,
+				   #gold:NUMBER#,
+				   #figure:NUMBER#,
+				   #date:TIMESTAMP#,
+				   #exp:NUMBER#,
+				   #money:NUMBER#,
+				   #strength:NUMBER#,
+				   #intellect:NUMBER#,
+				   #physique:NUMBER#,
+				   #agility:NUMBER#,
+				   #free:NUMBER#,
+				   #hp:NUMBER#,
+				   #mp:NUMBER#,
+				   #titles,handler=iyunu.NewTLOL.ibatis.TitleType#,
+				   #gangId:NUMBER#,
+				   #tribute:NUMBER#,
+				   #bag,handler=iyunu.NewTLOL.ibatis.BagType#,
+				   #bagStone,handler=iyunu.NewTLOL.ibatis.BagStoneType#,
+				   #partners,handler=iyunu.NewTLOL.ibatis.PartnerType#,
+				   #state:NUMBER#,
+				   #friendList,handler=iyunu.NewTLOL.ibatis.ArrayListLongType#,
+				   #finishTasks,handler=iyunu.NewTLOL.ibatis.ArrayListIntegerType#,
+				   #tasks,handler=iyunu.NewTLOL.ibatis.TaskListType#,	   
+				   #skillMap,handler=iyunu.NewTLOL.ibatis.HashMapIntAndIntType#,
+				   #jingMaiId:NUMBER#,
+				   #yuanQi:NUMBER#,
+				   #buyGoldTime:NUMBER#,
+				   #useBuyGoldNum:NUMBER#,
+				   #freeBuyGoldNum:NUMBER#,
+				   #moneyBuyGoldNum:NUMBER#,
+				   #warehouse,handler=iyunu.NewTLOL.ibatis.WarehouseType#,
+				   #equipments,handler=iyunu.NewTLOL.ibatis.EquipmentsType#,
+				   #bodyIntensify,handler=iyunu.NewTLOL.ibatis.BodyIntensifyType#,
+				   #bodyRabbet,handler=iyunu.NewTLOL.ibatis.BodyRabbetType#,
+				   #logonTime:NUMBER#,
+				   #logonTotals:number#,
+				   #logonDays:number#,
+				   #logonContinue:number#,
+				   #dailyAnswerScore:number#,
+				   #shaoXiangLevel:number#,
+				   #shaoXiangExp:number#,
+				   #signList,handler=iyunu.NewTLOL.ibatis.ArrayListIntegerType#,
+				   #havePickSign,handler=iyunu.NewTLOL.ibatis.ArrayListIntegerType#,
+				   #firstSign:number#,
+				   #haveSign:number#,
+				   #conPick,handler=iyunu.NewTLOL.ibatis.ArrayListIntegerType#,
+				   #vip,handler=iyunu.NewTLOL.ibatis.VipType#,
+				   #levelGiftStateMap,handler=iyunu.NewTLOL.ibatis.HashMapIntAndIntType#,
+				   #freeSkill:number#,
+				   #sumSkill:number#,
+				   #buffs,handler=iyunu.NewTLOL.ibatis.BuffRoleType#,
+				   #livenessScore:number#,
+				   #livenessScoreMap,handler=iyunu.NewTLOL.ibatis.LinkedHashMapIntAndIntType#,
+				   #helper,handler=iyunu.NewTLOL.ibatis.HelperType#,
+				   #onlineAwardStateMap,handler=iyunu.NewTLOL.ibatis.HashMapIntAndIntType#,
+				   #sevenMap,handler=iyunu.NewTLOL.ibatis.HashMapIntAndSevenType#,
+				   #currentFloorId:number#,
+				   #historyFloorId:number#,
+				   #nullResetNum:number#,
+				   #moneyResetNum:number#,
+				   #coin:number#,
+				   #firstPartner:number#,
+				   #mapInfo,handler=iyunu.NewTLOL.ibatis.MapType#,
+				   #energyTime:number#,
+				   #partnerFight,handler=iyunu.NewTLOL.ibatis.PartnerFightType#
+				   )
+		]]>
+	</insert>
+	
+	<select id="query" resultMap="queryResult"  parameterClass="map">
+		<![CDATA[
+			select NID,
+			       NSERVERID,
+			       SUSERID,
+			       SNICK,
+			       NLEVEL,
+			       NGOLD,
+			       NFIGURE,
+			       DREGDATE,
+			       NVOCATION,
+			       NEXP,
+			       NMONEY,
+			       NSTRENGTH,
+			       NINTELLECT,
+			       NPHYSIQUE,
+			       NAGILITY,
+			       NFREE,
+			       NHP,
+			       NMP,
+			       STITLES,
+			       NGANGID,
+			       NTRIBUTE,
+			       CBAG,
+			       CBAGSTONE,
+			       CPARTNER,
+			       NSTATE,
+			       CFRIENDLIST,
+			       CFINISHTASK,
+			       CTASK,
+			       SSKILL,
+			       NJINGMAIID,
+				   NYUANQI,
+				   NBUYGOLDTIME,
+				   NUSEBUYGOLDNUM,
+				   NFREEBUYGOLDNUM,
+				   NMONEYBUYGOLDNUM,
+				   CWAREHOUSE,
+				   CEQUIPMENTS,
+				   SBODYINTENSIFY,
+				   CBODYRABBET,
+				   NLOGONTIME,
+				   NLOGOUTTIME,
+				   NINNTIME,
+				   NLOGONTOTALS,
+				   NLOGONDAYS,
+				   NLOGONCONTINUE,
+				   CMAP,
+				   NDAILYANSWERSCORE,
+				   NSHAOXIANGLEVEL,
+				   NSHAOXIANGEXP,
+				   NCANCELBAN,
+				   NMUTE,
+				   SSIGNLIST,
+				   SHAVEPICKSIGN,
+				   NFIRSTSIGN,
+				   NHAVESIGN,
+				   SCONPICK,
+				   SVIP,
+				   CLEVELGIFTSTATEMAP,
+				   NFREESKILL,
+				   NSUMSKILL,
+				   CBUFFS,
+				   NLEAVEGANGTIME,
+				   NLIVENESSNEW,
+				   CLIVENESSMAPNEW,
+				   CHELPERNEW,
+				   NONLINETIME,
+				   NGUIDE,
+				   NSPECIALGUIDE,
+				   NGUILDTASKNUM,
+				   CONLINEAWARDSTATEMAP,
+				   SRAIDSNUMBER,
+				   NGHOSTTASKNUM,
+				   CTRIALS,
+				   NCOMPENSATE,
+				   NBLOOD,
+				   SCDKEY,
+				   CSEVEN,
+				   NINNTIME2,
+				   NGUILDTASKSUM,
+				   NGHOSTTASKSUM,
+				   NCURRENTFLOORID,
+				   NHISTORYFLOORID,
+				   NNULLRESETNUM,
+				   NMONEYRESETNUM,
+				   NGHOSTTASKSUM,
+				   NVIPGIFT,
+				   NCOIN,
+				   NCOSTGOLD,
+				   NOPENVIPCHAT,
+				   NACTIVITYTYPE,
+				   NFIRSTPARTNER,
+				   NELITEMONSTERNUM,
+				   NDAILYANSWERNUM,
+				   NTOTALTRIBUTE,
+				   NYXTTASKNUM,
+				   NTASKFBLNUM,
+				   NTASKFBLID,
+				   NWAREHOUSECOIN,
+				   NTRIALSSTATE,
+				   NPLUSMONEY,
+				   CRECPLUSMONEY,
+				   CFIRSTDOUBLE,
+				   NTASKCYCLENUM,
+				   NTASKCYCLEROW,
+				   NSECPARTNER,
+				   CDAILY,
+				   NENERGY,
+				   NENERGYTIME,
+				   SRESETTRIALS,
+				   CPARTNERMAP,
+				   SPARTNERFIGHT,
+				   NEMOCOUNT
+
+			  from NEW_TLOL_ROLE_$srv$
+			 where NID = #id#
+		]]>
+	</select>
+	
+	<select id="queryRoleId" resultClass="long"  parameterClass="map">
+		<![CDATA[
+			select NID from NEW_TLOL_ROLE_$srv$ where SUSERID = #userId# and NSERVERID  = #serverId#
+		]]>
+	</select>
+	
+	<select id="check" resultClass="int" parameterClass="map">
+		<![CDATA[
+			select count(NID) from NEW_TLOL_ROLE_$srv$ where SNICK = #nick#
+		]]>
+	</select>
+	
+	<update id="update" parameterClass="role">
+		<![CDATA[
+					update NEW_TLOL_ROLE_$srv$
+					   set NLEVEL      = #level#,
+					       NGOLD       = #gold#,
+					       SNICK = #nick#,
+					       NEXP        = #exp#,
+					       NVOCATION = #vocation,handler=iyunu.NewTLOL.ibatis.VocationType#,
+					       NMONEY      = #money#,
+					       NSTRENGTH   = #strength#,
+					       NINTELLECT  = #intellect#,
+					       NPHYSIQUE   = #physique#,
+					       NAGILITY    = #agility#,
+					       NFREE       = #free#,
+					       NHP         = #hp#,
+					       NMP         = #mp#,
+					       STITLES     = #titles,handler=iyunu.NewTLOL.ibatis.TitleType#,
+					       NGANGID     = #gangId#,
+					       NTRIBUTE    = #tribute#,
+					       CBAG        = #bag,handler=iyunu.NewTLOL.ibatis.BagType#,
+					       CBAGSTONE        = #bagStone,handler=iyunu.NewTLOL.ibatis.BagStoneType#,
+					       CPARTNER    = #partners,handler=iyunu.NewTLOL.ibatis.PartnerType#,
+					       NSTATE      = #state#,
+					       CFRIENDLIST = #friendList,handler=iyunu.NewTLOL.ibatis.ArrayListLongType#,
+					       CFINISHTASK  = #finishTasks,handler=iyunu.NewTLOL.ibatis.ArrayListIntegerType#,
+					       CTASK  = #tasks,handler=iyunu.NewTLOL.ibatis.TaskListType#,
+					       SSKILL = #skillMap,handler=iyunu.NewTLOL.ibatis.HashMapIntAndIntType#,
+					       NJINGMAIID = #jingMaiId#,
+				   		   NYUANQI = #yuanQi#,
+				   		   NBUYGOLDTIME = #buyGoldTime#,
+				   		   NUSEBUYGOLDNUM = #useBuyGoldNum#,
+				           NFREEBUYGOLDNUM = #freeBuyGoldNum#,
+				           NMONEYBUYGOLDNUM = #moneyBuyGoldNum#,
+				           CWAREHOUSE = #warehouse,handler=iyunu.NewTLOL.ibatis.WarehouseType#,
+						   CEQUIPMENTS = #equipments,handler=iyunu.NewTLOL.ibatis.EquipmentsType#,
+						   SBODYINTENSIFY = #bodyIntensify,handler=iyunu.NewTLOL.ibatis.BodyIntensifyType#,
+				   		   CBODYRABBET = #bodyRabbet,handler=iyunu.NewTLOL.ibatis.BodyRabbetType#,
+				           NLOGONTIME = #logonTime#,
+				           NLOGOUTTIME = #logoutTime#,
+				           NINNTIME = #innTime#,
+				           NLOGONTOTALS=  #logonTotals#,
+					 	   NLOGONDAYS=   #logonDays#,
+				  		   NLOGONCONTINUE=#logonContinue#,
+				           CMAP=#mapInfo,handler=iyunu.NewTLOL.ibatis.MapType#,
+				           NDAILYANSWERSCORE=#dailyAnswerScore#,
+						   NSHAOXIANGLEVEL=#shaoXiangLevel#,
+						   NSHAOXIANGEXP=#shaoXiangExp#	,
+					       SSIGNLIST  = #signList,handler=iyunu.NewTLOL.ibatis.ArrayListIntegerType#,
+				   		   SHAVEPICKSIGN  = #havePickSign,handler=iyunu.NewTLOL.ibatis.ArrayListIntegerType#,
+				  		   NFIRSTSIGN=#firstSign#,
+				  		   NHAVESIGN=#haveSign#,
+				  		   SCONPICK= #conPick,handler=iyunu.NewTLOL.ibatis.ArrayListIntegerType#,
+				  		   SVIP= #vip,handler=iyunu.NewTLOL.ibatis.VipType#,
+				  		   CLEVELGIFTSTATEMAP = #levelGiftStateMap,handler=iyunu.NewTLOL.ibatis.HashMapIntAndIntType#,
+				   		   NFREESKILL = #freeSkill#,
+				  		   NSUMSKILL = #sumSkill#,
+				  		   CBUFFS = #buffs,handler=iyunu.NewTLOL.ibatis.BuffRoleType#,
+				  		   NLEAVEGANGTIME = #leaveGangTime#,
+				           NLIVENESSNEW = #livenessScore#,
+				           CLIVENESSMAPNEW = #livenessScoreMap,handler=iyunu.NewTLOL.ibatis.LinkedHashMapIntAndIntType#,
+				  		   CHELPERNEW = #helper,handler=iyunu.NewTLOL.ibatis.HelperType#,
+				  		   NONLINETIME = #onlineTime#,
+				           NGUIDE = #guide#,
+				           NSPECIALGUIDE = #specialGuide#,
+				           NGUILDTASKNUM = #guildTaskNum#,
+				           CONLINEAWARDSTATEMAP = #onlineAwardStateMap,handler=iyunu.NewTLOL.ibatis.HashMapIntAndIntType#,
+				           SRAIDSNUMBER = #raidsNumber,handler=iyunu.NewTLOL.ibatis.HashMapIntAndIntType#,
+				           NGHOSTTASKNUM = #ghostTaskNum#,
+				           CTRIALS =  #trials,handler=iyunu.NewTLOL.ibatis.TrialsType#,
+				           NCOMPENSATE = #compensate#,
+				           NBLOOD =  #blood#,
+				           SCDKEY= #cdKeys,handler=iyunu.NewTLOL.ibatis.ArrayListIntegerType#,
+				           CSEVEN = #sevenMap,handler=iyunu.NewTLOL.ibatis.HashMapIntAndSevenType#,
+				           NINNTIME2 = #innTime2#,
+				           NGUILDTASKSUM = #guildTaskSum#,
+				           NGHOSTTASKSUM = #ghostTaskSum#,				           
+				   		   NCURRENTFLOORID = #currentFloorId#,
+				           NHISTORYFLOORID = #historyFloorId#,
+				           NNULLRESETNUM = #nullResetNum#,
+				           NMONEYRESETNUM = #moneyResetNum#,
+				           NVIPGIFT = #vipGift#,
+				           NCOIN = #coin#,
+				           NCOSTGOLD = #costGold#,
+				           NOPENVIPCHAT = #openVipChat#,
+				           NACTIVITYTYPE = #activityType#,
+				           NFIRSTPARTNER =#firstPartner#,
+				           NMUTE =#mute#,
+				           NELITEMONSTERNUM = #eliteMonsterNum#,
+				           NDAILYANSWERNUM = #dailyAnswerNum#,
+				           NTOTALTRIBUTE =#totalTribute#,
+				           NYXTTASKNUM = #yxtTaskNum#,
+				           NTASKFBLNUM = #taskFblNum#,
+				           NTASKFBLID = #taskFblId#,
+				           NWAREHOUSECOIN = #warehouseCoin#,
+				           NTRIALSSTATE = #trialsState#,
+				           NPLUSMONEY=#plusMoney#,
+				           CRECPLUSMONEY= #recPlusMoney,handler=iyunu.NewTLOL.ibatis.ArrayListIntegerType#,
+				           CFIRSTDOUBLE= #firstDouble,handler=iyunu.NewTLOL.ibatis.ArrayListIntegerType#,
+				           NTASKCYCLENUM= #taskCycleNum#,
+				           NTASKCYCLEROW= #taskCycleRow#,
+				           NSECPARTNER = #secPartner#,
+				           CDAILY = #dailyMap,handler=iyunu.NewTLOL.ibatis.DailyMapType#,
+ 						   NENERGY = #energy#,
+				   		   NENERGYTIME = #energyTime#,
+				   		   SRESETTRIALS = #resetTrials,handler=iyunu.NewTLOL.ibatis.HashMapIntAndIntType#,
+							CPARTNERMAP = #partnerMap,handler=iyunu.NewTLOL.ibatis.PartnerMapType#,
+				   			SPARTNERFIGHT = #partnerFight,handler=iyunu.NewTLOL.ibatis.PartnerFightType#,
+				   			NEMOCOUNT =#emoCount#
+		 			where NID = #id#
+		]]>
+	</update>
+	
+	<update id="delete" parameterClass="Integer">
+		<![CDATA[
+			update NEW_TLOL_ROLE_$srv$ set NSTATE = 1 where NID = #value#
+		]]>
+	</update>
+	<select id="getIdByName" resultClass="long"  parameterClass="map">
+		<![CDATA[
+			select NID from NEW_TLOL_ROLE_$srv$ where SNICK = #name#
+		]]>
+	</select>
+	
+	<select id="getRoleCard" resultMap="queryRoleCardResult"  parameterClass="map">
+		<![CDATA[
+			select NID,SUSERID, NSERVERID,SNICK,NLEVEL,NGOLD, NCOIN, NVOCATION, NEXP, NMONEY, NGANGID, NTRIBUTE, NFIGURE,NHISTORYFLOORID,NTOTALTRIBUTE from NEW_TLOL_ROLE_$srv$ where NID = #id#
+		]]>
+	</select>
+	
+	<update id="mute" parameterClass="map">
+		<![CDATA[
+			update NEW_TLOL_ROLE_$srv$ set NMUTE = NMUTE + time where NID = #id#
+		]]>
+	</update>
+	
+	<update id="updateMoney" parameterClass="role">
+		<![CDATA[
+			update NEW_TLOL_ROLE_$srv$ set NMONEY = #money# where NID = #id#
+		]]>
+	</update>
+	
+	<update id="updateVip" parameterClass="role">
+		<![CDATA[
+			update NEW_TLOL_ROLE_$srv$ set SVIP = #vip,handler=iyunu.NewTLOL.ibatis.VipType# where NID = #id#
+		]]>
+	</update>
+	<update id="updatePlusMoney" parameterClass="role">
+		<![CDATA[
+			update NEW_TLOL_ROLE_$srv$ set NPLUSMONEY = #plusMoney# where NID = #id#
+		]]>
+	</update>
+	<update id="updateDailyPay" parameterClass="role">
+		<![CDATA[
+			update NEW_TLOL_ROLE_$srv$ set   CDAILY = #dailyMap,handler=iyunu.NewTLOL.ibatis.DailyMapType# where NID = #id#
+		]]>
+	</update>	
+	<update id="updateFirstDouble" parameterClass="role">
+		<![CDATA[
+			update NEW_TLOL_ROLE_$srv$ set CFIRSTDOUBLE = #firstDouble,handler=iyunu.NewTLOL.ibatis.ArrayListIntegerType# where NID = #id#
+		]]>
+	</update>
+	
+	<update id="updateRoleCard" parameterClass="roleCard"><!-- 更新RoleCard -->
+		<![CDATA[
+			update NEW_TLOL_ROLE_$srv$ set NGANGID = #gangId# where NID = #id#
+		]]>
+	</update>
+	
+</sqlMap>

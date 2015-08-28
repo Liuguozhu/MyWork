@@ -1,0 +1,305 @@
+###################地图协议##############################
+
+#地图上物品
+message itemOnMapInfo {
+	int64 uid; #唯一编号
+	int32 itemId; #物品编号
+	string name; #名称
+	string icon; #图标
+	int32 mapId; #地图编号
+	int32 x; #x坐标
+	int32 y; #y坐标
+}
+
+#地图上怪物
+message monsterOnMapInfo {
+	int64 uid; #唯一编号
+	int32 id; #怪组合物编号
+	string name; #名称
+	string icon; #图标
+	int32 mapId; #地图编号
+	int32 x; #x坐标
+	int32 y; #y坐标
+	int32 mark;#怪物头顶图标  0是原来的战 1 是血战红 2是血战蓝
+	int32 own; #自己是否可以打（0.不可以打，1.可以打）
+	int32 taskCategory; #绑定任务种类（-1.即没有）
+}
+
+#请求过地图协议
+message c_changeMap {
+	int32 transferId; #传送点编号
+}
+
+#过地图返回信息
+message s_changeMap {
+	int32 result; #0.成功，1.失败
+	string reason; #失败原因
+}
+
+#刷新地图信息
+message s_refreshMap {
+	int32 mapId; #地图编号
+	int32 x; #x坐标
+	int32 y; #y坐标
+	int32[] npcInfoList; #NPC信息列表
+	int32[] transferInfoList; #传送点信息列表
+	int32[] collectedInfoList; #采集物品信息列表
+}
+
+#发送坐标位置
+message c_coord {
+	int32 mapId; #地图编号
+	int32 x; #x坐标
+	int32 y; #y坐标
+	int32 arriveX; #目标x坐标
+	int32 arriveY; #目标y坐标
+}
+
+#下发坐标位置
+message s_coord {
+	int32 x;
+	int32 y;
+}
+
+#周围玩家信息
+message aroundInfo {
+	int64 roleId; #角色编号
+	int32 x; #x坐标
+	int32 y; #y坐标
+	string name; #角色名称
+	int64 figure;	#形象编号
+	string gangName; #帮派名称
+	string gangJob; #帮派职位
+	int32 state; #状态（0.新增，1.修改，2.删除）
+	string vocation; #职业名称
+	int32 level; #角色等级
+	int32 isLeader; #(0不是队长,1是队长)
+	int32 arriveX; #目标x坐标
+	int32 arriveY; #目标y坐标
+	int32 vip; #vip等级（0.不是，1.黄金，2.白金，3.钻石）
+	int32 isBattle; #是否在战斗（0未战斗,1战斗）
+}
+
+#周围玩家
+message s_refreshNearby {
+	aroundInfo[] aroundInfoList; #周围玩家信息列表
+}
+
+#请求周围所有玩家列表
+message c_aroundAllRole {
+	int64 roleId; #角色编号
+}
+
+#显示周围所有玩家的信息
+message aroundAllRoleInfo {
+	int64 roleId; #角色编号
+	string name; #角色名称
+	int64 figure;	#形象编号
+	string vocation; #职业名称
+	int32 level; #等级
+}
+
+#请求周围所有玩家列表信息返回
+message s_aroundAllRole {
+	aroundAllRoleInfo[] aroundAllRoleInfoList; #周围所有玩家信息列表
+}
+
+#筛选周围玩家
+message c_chooseAroundAllRole {
+	int32 minLevel;			#下限条件等级
+	int32 maxLevel;			#上限条件等级
+}
+
+#筛选周围玩家信息返回
+message s_chooseAroundAllRole {
+	aroundAllRoleInfo[] aroundAllRoleInfoList; #周围所有玩家信息列表
+}
+
+#刷新地图上物品
+message s_refreshItemOnMap {
+	itemOnMapInfo[] itemOnMapInfoList; #地图上物品集合
+}
+
+#删除地图上物品
+message s_removeItemOnMap {
+	int64[] uids; #唯一编号集合
+}
+
+#刷新地图上怪物
+message s_refreshMonsterOnMap {
+	monsterOnMapInfo[] monsterOnMapInfoList; #地图上怪物集合
+}
+
+#删除地图上怪物
+message s_removeMonsterOnMap {
+	int64[] uids; #唯一编号集合
+}
+
+#刷新地图上传送点
+message s_refreshTransfer {
+	int32[] transferInfoList; #新增传送点信息列表
+}
+
+#删除地图上传送点
+message s_removeTransfer {
+	int32[] transferInfoList; #删除传送点信息列表
+}
+
+#传送
+message c_transmit {
+	int32 mapId; #地图编号
+	int32 x; #x坐标
+	int32 y; #y坐标
+}
+
+#传送
+message s_transmit {
+	int32 result; #0.成功，1.失败
+	string reason; #失败原因
+}
+
+
+
+#周围玩家所有信息
+message aroundAllInfo {
+	int64 roleId; #角色编号
+	int32 x; #x坐标
+	int32 y; #y坐标
+	string name; #角色名称
+	int64 figure;	#形象编号
+	string gangName; #帮派名称
+	string gangJob; #帮派职位
+	string vocation; #职业名称
+	int32 level; #角色等级
+	int32 isLeader; #(0不是队长,1是队长)
+	int32 arriveX; #目标x坐标
+	int32 arriveY; #目标y坐标
+	int32 vip; #vip等级（0.不是，1.黄金，2.白金，3.钻石）
+	int32 isBattle; #是否在战斗（0未战斗,1战斗）
+	int32 blood;#上线发送标记
+	int32 shenbingId; #神兵编号
+	int32 shizhuangId; #时装编号（0.无，1.第一套时装）
+}
+
+#刷新周围玩家所有信息
+message s_refreshNearbyAll {
+	aroundAllInfo[] aroundAllInfoList; #周围玩家所有信息
+}
+
+
+#周围玩家坐标信息
+message aroundSiteInfo {
+	int64 roleId; #角色编号
+	int32 x; #x坐标
+	int32 y; #y坐标
+	int32 arriveX; #目标x坐标
+	int32 arriveY; #目标y坐标
+}
+
+#刷新周围玩家坐标信息
+message s_refreshNearbySite {
+	aroundSiteInfo[] aroundSiteInfoList; #周围玩家坐标信息列表
+}
+
+
+#周围玩家基本信息
+message aroundBaseInfo {
+	int64 roleId; #角色编号
+	string name; #角色名称
+	int64 figure;	#形象编号
+	string vocation; #职业名称
+	int32 vip; #vip等级（0.不是，1.黄金，2.白金，3.钻石）
+}
+
+#刷新周围玩家基本信息
+message s_refreshNearbyBase {
+	aroundBaseInfo[] aroundBaseInfoList; #周围玩家基本信息列表
+}
+
+
+#周围玩家队伍信息
+message aroundTeamInfo {
+	int64 roleId; #角色编号
+	int32 isLeader; #(0.不是队长，1.是队长)
+}
+
+#刷新周围玩家队伍信息
+message s_refreshNearbyTeam {
+	aroundTeamInfo[] aroundTeamInfoList; #周围玩家队伍信息列表
+}
+
+
+#周围玩家等级信息
+message aroundLevelInfo {
+	int64 roleId; #角色编号
+	int32 level; #角色等级
+}
+
+#刷新周围玩家等级信息
+message s_refreshNearbyLevel {
+	aroundLevelInfo[] aroundLevelInfoList; #周围玩家等级信息列表
+}
+
+
+#周围玩家战斗信息
+message aroundBattleInfo {
+	int64 roleId; #角色编号
+	int32 isBattle; #是否在战斗（0未战斗,1战斗）
+}
+
+#刷新周围玩家战斗信息
+message s_refreshNearbyBattle {
+	aroundBattleInfo[] aroundBattleInfoList; #周围玩家战斗信息列表
+}
+
+#周围玩家血战信息
+message aroundBloodInfo {
+	int64 roleId; #角色编号
+	int32 blood; #0 无 1红 2蓝
+}
+
+#刷新周围玩家血战信息
+message s_refreshNearbyBlood{
+	aroundBloodInfo[] aroundBloodInfoList; #周围玩家血战信息列表
+}
+
+
+#周围玩家帮派信息
+message aroundGangInfo {
+	int64 roleId; #角色编号
+	string gangName; #帮派名称
+	string gangJob; #帮派职位
+}
+
+#刷新周围玩家帮派信息
+message s_refreshNearbyGang {
+	aroundGangInfo[] aroundGangInfoList; #周围玩家帮派信息列表
+}
+
+
+#删除周围玩家
+message s_refreshNearbyRemove {
+	int64[] roleIds; #角色编号集合
+}
+
+#周围玩家神兵信息
+message aroundShenbingInfo {
+	int64 roleId; #角色编号
+	int32 shenbingId; #神兵编号（0.无神兵）
+}
+
+#刷新周围玩家神兵信息
+message s_refreshNearbyShenbing {
+	aroundShenbingInfo[] aroundShenbingInfoList; #周围玩家神兵信息列表
+}
+
+#周围玩家时装信息
+message aroundShizhuangInfo {
+	int64 roleId; #角色编号
+	int32 shizhuangId; #时装编号（0.无，1.第一套时装）
+}
+
+#刷新周围玩家时装信息
+message s_refreshNearbyShizhuang {
+	aroundShizhuangInfo[] aroundShizhuangInfoList; #周围玩家时装信息列表
+}

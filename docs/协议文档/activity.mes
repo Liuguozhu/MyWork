@@ -1,0 +1,422 @@
+###################活动协议##############################
+
+#开启转盘
+message c_rotation {
+	int64 roleId; #角色编号（无用）
+}
+
+#开启转盘返回信息
+message s_rotation {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #结果
+	int32 index; #索引
+}
+
+#在线奖励信息
+message onlineAwardInfo {
+	int32 id; #奖励编号
+	int32 state; #礼包状态(0为不可领取，1为可领取，2为已领取)
+	int32 itemId; #物品编号
+	int32 itemNum; #物品数量
+	string icon; #物品图标
+}
+
+
+#在线奖励初始化
+message c_onlineAwardInit {
+	int64 roleId; #角色编号（无用）
+}
+
+#在线奖励初始化返回信息
+message s_onlineAwardInit {
+	int32 time; #累计在线时间（秒）
+	onlineAwardInfo[] onlineAwardInfoList; #在线奖励信息列表
+}
+
+#领取在线奖励
+message c_onlineAward {
+	int32 id; #奖励编号
+}
+
+#领取在线奖励返回信息
+message s_onlineAward {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+}
+
+#在线奖励通知
+message s_onlineAwardInform {
+	int32 state; #领取状态(0为可领取，1为不可领取)
+}
+
+#寻宝
+message c_huntTreasure {
+	int32 type; #寻宝类型（2.1000银两，3.500银两）
+}
+
+#寻宝返回信息
+message s_huntTreasure {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+	int32 index; #结果
+}
+
+#寻宝获得物品
+message c_huntTreasureGet {
+	int32 index; #结果
+	int32 type; #类型
+}
+
+#寻宝获得物品返回信息
+message s_huntTreasureGet {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+}
+
+#刷新剩余寻宝次数
+message s_refreshHuntTreasureNum {
+	int32 huntTreasureNum;
+}
+
+#藏宝图获得物品
+message c_drawingGet {
+	int32 index; #背包格子索引
+}
+
+#藏宝图获得物品返回信息
+message s_drawingGet {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+}
+
+
+
+
+#物品奖励
+message itemAwardInfo {
+	int32 itemId; #物品编号
+	int32 number; #物品数量
+}
+
+#伙伴奖励
+message partnerAwardInfo {
+	int32 partnerId; #物品编号
+	int32 number; #物品数量
+}
+
+#活动信息
+message activityInfo {
+	int32 type; #活动类型
+	string name; #活动名称
+}
+
+#活动描述信息
+message activityMsg {
+	int32 index; #索引
+	itemAwardInfo[] itemAwards; #物品集合
+	partnerAwardInfo[] partnerAwards; #伙伴集合
+	int32 gold; #绑银
+	int32 coin; #银两
+	int32 money; #元宝
+	string des; #活动描述
+	int32 state; #状态（0.不可领取，1.可以领取，2.已领取）
+}
+
+
+
+
+#充值活动初始化
+message c_activityPayInit {
+	int64 roleId; #角色编号（无用）
+}
+
+#充值活动初始化返回信息
+message s_activityPayInit {
+	activityInfo[] activityInfoList; #充值活动信息集合
+}
+
+
+#充值活动信息初始化
+message c_activityPayInfoInit {
+	int32 type; #活动类型
+}
+
+#充值活动信息初始化返回信息
+message s_activityPayInfoInit {
+	string time; #时间
+	activityMsg[] activityMsgList;
+}
+
+#充值活动领奖
+message c_activityPayAward {
+	int32 type; #活动类型
+	int32 index; #索引
+}
+
+#充值活动领奖返回信息
+message s_activityPayAward {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+}
+
+
+
+#新服活动初始化
+message c_activityNewInit {
+	int64 roleId; #角色编号（无用）
+}
+
+#新服活动初始化返回信息
+message s_activityNewInit {
+	activityInfo[] activityInfoList; #新服活动信息集合
+}
+
+#新服活动信息初始化
+message c_activityNewInfoInit {
+	int32 type; #活动类型
+}
+
+#新服活动信息初始化返回信息
+message s_activityNewInfoInit {
+	string time; #时间
+	activityMsg[] activityMsgList;
+}
+
+#新服活动领奖
+message c_activityNewAward {
+	int32 type; #活动类型
+	int32 index; #索引
+}
+
+#新服活动领奖返回信息
+message s_activityNewAward {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+}
+
+#每日充值优惠活动初始化
+message c_payEverydayInit {
+	int64 roleId; #角色编号（无用）
+}
+
+#每日充值优惠活动初始化返回信息
+message s_payEverydayInit {
+	string time; #活动时间
+	int32 amt; #充值钱数（元）
+	int32[] values; #需要充值钱数集合
+	itemAwardInfo[] items; #物品集合
+}
+
+#发布令任务信息
+message taskFblInfo {
+	int64 id; #唯一编号
+	int32 color; #品质（0.白色，1.绿色，2.蓝色，3.紫色，4.橙色）
+	string senderName; #发布者编号
+	int32 awardCoin; #奖励领取者银两
+	int32 awardExp; #奖励发布者经验
+	int32 taskId; #任务编号
+	int32 state; #状态（0.发布中，1.已被接，2.已完成）
+	int32 time; #剩余时间（秒）
+}
+
+#发布令任务初始化
+message c_taskFblInit {
+	int32 page; #页数
+}
+
+#发布令任务初始化返回信息
+message s_taskFblInit {
+	int32 page; #页数
+	int32 sumPage; #总页数
+	taskFblInfo[] taskFblInfoList; #任务集合	
+}
+
+#发布任务
+message c_taskFblRelease {
+	int32 index; #索引
+	int32 coin; #银两
+}
+
+#发布任务返回信息
+message s_taskFblRelease {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+}
+
+#我发布的任务
+message c_taskFblMy {
+	int64 roleId; #角色编号（无用）
+}
+
+#我发布的任务返回信息
+message s_taskFblMy {
+	taskFblInfo[] taskFblInfoList; #任务集合
+}
+
+#撤销发布令任务
+message c_taskFblCancel {
+	int64 id; #唯一编号
+}
+
+#撤销发布令任务返回信息
+message s_taskFblCancel {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+}
+
+#接取发布令任务
+message c_taskFblGet {
+	int64 id; #唯一编号
+}
+
+#接取发布令任务返回信息
+message s_taskFblGet {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+}
+
+#发布令任务领奖
+message c_taskFblAward {
+	int64 id; #唯一编号
+}
+
+#发布令任务领奖返回信息
+message s_taskFblAward {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+}
+
+#刷新发布令剩余次数
+message refreshTaskFblNum {
+	int32 releaseNum; #剩余发布次数
+}
+
+#兑换银两协议
+message c_changeCoin {
+	int32 money; #元宝数
+}
+
+#兑换银两协议
+message s_changeCoin {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+}
+
+#兑换绑银协议
+message c_changeGold {
+	int32 money; #元宝数
+}
+
+#兑换绑银协议
+message s_changeGold {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+}
+
+#查询充值物品info
+message plusMoneyItemInfo{
+	int32 itemId;#物品ID
+	int32 num;#数量
+	int32 bind;#1绑定  0非绑定
+}
+#查询累计充值
+message c_queryPlusMoney{
+	int32 id;#查询的页
+}
+#查询累计充值返回
+message s_queryPlusMoney{
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+	int32 flag;#是否领取过 1已领取 0 未领取
+	int32 total;#总页数
+	int32 id;#当前页数
+	int32 money;#本页需要充的钱
+	string dec;#描述
+	plusMoneyItemInfo[] items;#物品	
+}
+#领取累计充值
+message c_recPlusMoney{
+	int32 id;#领取页
+}
+#领取累计充值 返回
+message s_recPlusMoney{
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+}
+
+#进入秘境
+message c_enterFairyland {
+	int32 id; #秘境编号
+}
+
+#进入秘境返回信息
+message s_enterFairyland {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+}
+#积分榜奖励Info
+message payExInfo{
+	int32 id;#档次， 1，2，3，4，5
+	int32 partnerIndex;#伙伴ID
+	plusMoneyItemInfo[] items;#物品	
+	int32 left;#
+	int32 right;#
+}
+#请求积分榜信息
+message c_queryPayExchange{
+	int64 roleId;#角色ID
+}
+#请求积分榜信息返回
+message s_queryPayExchange{
+	int32 partnerIndex;#伙伴INDEX
+	string	despartner;#展示描述
+	string des;#描述
+	string desmoney;#花费描述
+	payExInfo[] payExs;#奖励体
+}
+
+#积分榜info
+message payExchangeInfo{
+	int32 mingCi;#名次
+	int64 roleId;#角色ID
+	string nick;#角色姓名
+	int32 mark;#分数
+}
+#请求积分榜信息返回
+message s_refreshPayExchangeContent{
+	int32 leftTime;#倒计时，秒
+	payExchangeInfo[] pays;#排行榜
+	int32 mark;#当前积分
+	int32 mingCi;#当前名次
+	int32 money;#当前元宝
+}
+#日常任务体
+message dailyInfo{
+	string name;#任务名字
+	string des;#任务描述
+	int32 type;#任务类型
+	int32 id;#任务ID
+	int32 target;#目标进度
+	int32 count;#完成进度
+	int32 flag;#0不可领 1可领 2已领
+	plusMoneyItemInfo[] items;#奖励物品
+	int32 partner;#奖励伙伴index
+	int32 money;#奖励元宝
+}
+#查询日常任务
+message c_queryDaily{
+	int64 roleId;#角色ID
+}
+#查询日常任务返回
+message s_queryDaily{
+	dailyInfo[] dailys;#日常任务集合
+}
+#领取日常任务
+message c_recDaily{
+	int32 id;#日常任务ID
+}
+#领取日常任务返回
+message s_recDaily{
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #原因
+}

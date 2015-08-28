@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="jedisConnectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory"
+		p:host-name="${redis.host}" p:port="${redis.port}" p:use-pool="true" />
+	
+	<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig" >
+		<property name="maxActive" value="${redis.pool.maxActive}" />
+		<property name="maxIdle" value="${redis.pool.maxIdle}" />
+		<property name="maxWait" value="${redis.pool.maxWait}" />
+		<property name="testOnBorrow" value="${redis.pool.testOnBorrow}" />
+	</bean>
+
+	<bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate"
+		p:connection-factory-ref="jedisConnectionFactory" />
+
+	<bean id="roleCounter" class="org.springframework.data.redis.support.atomic.RedisAtomicLong">
+		<constructor-arg value="roleCounter"/>
+		<constructor-arg ref="jedisConnectionFactory"/>
+	</bean>
+	<bean id="auctionCounter" class="org.springframework.data.redis.support.atomic.RedisAtomicLong">
+		<constructor-arg value="auctionCounter"/>
+		<constructor-arg ref="jedisConnectionFactory"/>
+	</bean>
+	<bean id="mailCounter" class="org.springframework.data.redis.support.atomic.RedisAtomicLong">
+		<constructor-arg value="mailCounter"/>
+		<constructor-arg ref="jedisConnectionFactory"/>
+	</bean>
+	<bean id="gangCounter" class="org.springframework.data.redis.support.atomic.RedisAtomicLong">
+		<constructor-arg value="gangCounter"/>
+		<constructor-arg ref="jedisConnectionFactory"/>
+	</bean>
+	<bean id="partnerCounter" class="org.springframework.data.redis.support.atomic.RedisAtomicLong">
+		<constructor-arg value="partnerCounter"/>
+		<constructor-arg ref="jedisConnectionFactory"/>
+	</bean>
+	<bean id="payCounter" class="org.springframework.data.redis.support.atomic.RedisAtomicLong">
+		<constructor-arg value="payCounter"/>
+		<constructor-arg ref="jedisConnectionFactory"/>
+	</bean>
+	
+	<bean id="redisLogon" class="iyunu.NewTLOL.redis.RedisLogon">
+		<property name="redisTemplate" ref="stringRedisTemplate" />
+	</bean>
+	
+	<bean id="redisGangFight" class="iyunu.NewTLOL.redis.RedisGangFight">
+		<property name="redisTemplate" ref="stringRedisTemplate" />
+	</bean>
+
+	<bean id="redisChampion" class="iyunu.NewTLOL.redis.RedisChampion">
+		<property name="redisTemplate" ref="stringRedisTemplate" />
+	</bean>
+	<bean id="redisMining" class="iyunu.NewTLOL.redis.RedisMining">
+		<property name="redisTemplate" ref="stringRedisTemplate" />
+	</bean>
+	<bean id="redisGangTask" class="iyunu.NewTLOL.redis.RedisGangTask">
+		<property name="redisTemplate" ref="stringRedisTemplate" />
+	</bean>	
+	<bean id="redisStopTime" class="iyunu.NewTLOL.redis.RedisStopTime">
+		<property name="redisTemplate" ref="stringRedisTemplate" />
+	</bean>	
+	<bean id="redisGangWelfare" class="iyunu.NewTLOL.redis.RedisGangWelfare">
+		<property name="redisTemplate" ref="stringRedisTemplate" />
+	</bean>
+	
+	<bean id="redisActivityPay" class="iyunu.NewTLOL.redis.RedisActivityPay">
+		<property name="redisTemplate" ref="stringRedisTemplate" />
+	</bean>
+	
+	<bean id="redisFbl" class="iyunu.NewTLOL.redis.RedisFbl">
+		<property name="redisTemplate" ref="stringRedisTemplate" />
+	</bean>
+	
+	<bean id="redisPayExchange" class="iyunu.NewTLOL.redis.RedisPayExchange">
+		<property name="redisTemplate" ref="stringRedisTemplate" />
+	</bean>
+	
+	<bean id="redisCenter" class="iyunu.NewTLOL.redis.RedisCenter">
+		<property name="roleCounter" ref="roleCounter" />
+		<property name="auctionCounter" ref="auctionCounter" />
+		<property name="mailCounter" ref="mailCounter" />
+		<property name="gangCounter" ref="gangCounter" />
+		<property name="partnerCounter" ref="partnerCounter" />
+		<property name="payCounter" ref="payCounter" />
+	</bean>
+</beans>

@@ -1,0 +1,1 @@
+[{"action":"贡酒","exp":50,"gangActivity":2,"gangTribute":50,"tribute":50},{"action":"香炉","exp":80,"gangActivity":4,"gangTribute":80,"tribute":80},{"action":"烧鸡","exp":150,"gangActivity":10,"gangTribute":150,"tribute":150},{"action":"帮派入侵","exp":0,"gangActivity":0,"gangTribute":100,"tribute":100},{"action":"帮战","exp":0,"gangActivity":0,"gangTribute":200,"tribute":200}]

@@ -1,0 +1,1 @@
+[{"id":1,"levelMax":29,"levelMin":20,"mapId":18,"x":50,"y":50},{"id":2,"levelMax":44,"levelMin":30,"mapId":19,"x":50,"y":50},{"id":3,"levelMax":55,"levelMin":45,"mapId":20,"x":50,"y":50},{"id":4,"levelMax":70,"levelMin":56,"mapId":21,"x":50,"y":50},{"id":5,"levelMax":80,"levelMin":71,"mapId":22,"x":50,"y":50}]

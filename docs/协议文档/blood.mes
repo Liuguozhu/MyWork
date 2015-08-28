@@ -1,0 +1,98 @@
+###################血战协议##############################
+
+#血战体
+message bloodInfo{
+	int64 id;#角色ID
+	int32 level;#角色等级
+	string nick;#角色名字
+	int32 mark;#角色积分
+	int32 vocation;#角色职业
+	int32 blood;#角色阵营 1红 2蓝 0无
+	int32 multiKill;#连杀数，被杀会被清空
+	int32 killNum;#杀人数，不算杀怪，只增加不减少
+	int32 dead;#被人杀次数
+	int32 hkill;#最高连杀
+}
+
+#参加血战
+message c_joinBlood {
+	int64 roleId; #角色编号（无用）
+}
+
+#参加血战返回
+message s_joinBlood {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #结果
+}
+
+#离开血战
+message c_quitBlood {
+	int64 roleId; #角色编号（无用）
+}
+#离开血战返回
+message s_quitBlood {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #结果
+}
+
+#刷新血战标记
+message s_refreshBlood {
+	int32 flag; #血战标记（1红 2蓝 0无）
+}
+
+#请求血战红方信息
+message c_queryBloodHong{
+	int64 roleId;#角色ID
+}
+#请求血战红方信息返回
+message s_queryBloodHong{
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #结果
+	bloodInfo[] bloodInfos;#血战具体信息
+}
+#请求血战蓝方信息
+message c_queryBloodLan{
+	int64 roleId;#角色ID
+}
+#请求血战蓝方信息返回
+message s_queryBloodLan{
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #结果
+	bloodInfo[] bloodInfos;#血战具体信息
+}
+
+#请求血战总分
+message c_queryMark{
+	int64 roleId;#角色ID
+}
+#请求血战总分返回
+message s_queryMark{
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #结果
+	int64 markHong;#红方总分
+	int64 markLan;#蓝方总分
+}
+#请求血战成就
+message c_bloodAchieve{
+	int64 roleId;#角色ID
+}
+#请求血战成就返回
+message s_bloodAchieve{
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #结果
+	bloodInfo shouSha;#首杀
+	bloodInfo shouShaMonster;#首杀怪
+	bloodInfo multiKill;#连杀
+}
+#请求个人信息
+message c_bloodSelf{
+	int64 roleId;#角色ID
+}
+#请求个人信息返回
+message s_bloodSelf{
+	bloodInfo self;#个人信息
+}
+#刷新倒计时
+message s_refreshTime{
+	int64 time;#离战斗结束，毫秒数
+}

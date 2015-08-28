@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PayActivitySQL">
+	<typeAlias alias="payActivityList" type="iyunu.NewTLOL.model.payActivity.res.PayActivityListRes" />
+	<typeAlias alias="payActivityInfo" type="iyunu.NewTLOL.model.payActivity.res.PayActivityInfoRes" />
+    <typeAlias alias="payExchange" type="iyunu.NewTLOL.model.activity.PayExchangeTime" />
+	<typeAlias alias="daily" type="iyunu.NewTLOL.model.daily.DailyModel" />
+	<typeAlias alias="dailyTime" type="iyunu.NewTLOL.model.activity.DailyTime" />
+	
+	
+	<resultMap id="payActivityListResult" class="payActivityList">
+		<result property="id" column="NID" />
+		<result property="type" column="NTYPE" />
+		<result property="name" column="SNAME" />
+		<result property="startTime" column="DSTARTTIME" />
+		<result property="endTime" column="DENDTIME" />
+		<result property="finishTime" column="FINISHTIME" />
+	</resultMap>
+	
+	<resultMap id="payActivityInfoResult" class="payActivityInfo">
+		<result property="id" column="NID" />
+		<result property="type" column="NTYPE" />
+		<result property="index" column="NINDEX" />
+		<result property="value" column="NVALUE" />
+		<result property="item" column="SITEM" />
+		<result property="partner" column="SPARTNER" />
+		<result property="gold" column="NGOLD" />
+		<result property="coin" column="NCOIN" />
+		<result property="money" column="NMONEY" />
+		<result property="desc" column="SDESC" />
+	</resultMap>
+	<resultMap id="payExchangeTimeResult" class="payExchange">
+		<result property="startTime" column="dpayexchangestart" />
+		<result property="endTime" column="dpayexchangeend" />
+	</resultMap>
+	<resultMap id="DailyTimeResult" class="dailyTime">
+		<result property="startTime" column="ddailystart" />
+		<result property="endTime" column="ddailyend" />
+	</resultMap>
+	<resultMap id="dailyResult" class="daily">
+		<result property="id" column="id" />
+		<result property="type" column="type"  typeHandler="iyunu.NewTLOL.ibatis.DailyType"  javaType="iyunu.NewTLOL.enumeration.EDaily"/>
+		<result property="target" column="target" />
+		<result property="monsterId" column="monsterId" />
+		<result property="itemId" column="itemId" />
+		<result property="awardString" column="awardString" />
+		<result property="name" column="name" />
+		<result property="des" column="des" />
+		<result property="partner" column="partner" />
+		<result property="money" column="money" />
+		<result property="startTime" column="startTime" />
+		<result property="endTime" column="endTime" />
+	</resultMap>
+	
+	
+	<select id="queryPayActivityList" resultMap="payActivityListResult"  parameterClass="String">
+		<![CDATA[
+			select NID, 
+				   NTYPE,
+			       SNAME,
+			       DSTARTTIME,
+			       DENDTIME,
+			       FINISHTIME
+			  from PAY_ACTIVITY_LIST_$srv$ order by NID
+		]]>
+	</select>
+	
+	<select id="queryPayActivityInfo" resultMap="payActivityInfoResult"  parameterClass="String">
+		<![CDATA[
+			select NID,
+				   NTYPE,
+				   NINDEX,
+				   NVALUE,
+			       SITEM,
+			       SPARTNER,
+			       NGOLD,
+			       NCOIN,
+			       NMONEY,
+			       SDESC
+			  from PAY_ACTIVITY_INFO_$srv$ order by NID
+		]]>
+	</select>
+	<select id="queryPayExchangeTime" resultMap="payExchangeTimeResult"  parameterClass="String">
+		<![CDATA[
+			select dpayexchangestart,dpayexchangeend
+			  from TIMECONTROL_$srv$ 
+		]]>
+	</select>
+	<select id="queryDailyTime" resultMap="DailyTimeResult"  parameterClass="String">
+		<![CDATA[
+			select ddailystart,ddailyend
+			  from TIMECONTROL_$srv$ 
+		]]>
+	</select>
+	<select id="queryDaily" resultMap="dailyResult"  parameterClass="String">
+		<![CDATA[
+			select id, type ,target, monsterid ,itemid ,awardstring,name,des,partner,money,startTime,endTime
+			  from DAILY_$srv$ 
+		]]>
+	</select>
+	<delete id="delDaily" parameterClass="String">
+		<![CDATA[
+			delete DAILY_$srv$ 
+		]]>
+	</delete>
+</sqlMap>

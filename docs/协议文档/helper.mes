@@ -1,0 +1,37 @@
+###################小助手协议##############################
+
+#刷新每日活动
+message s_refreshDailyInfo {
+
+	message dailyInfo {
+		int32 index; #索引
+		int32 state; #状态(0.可以参加，1.不可参加)
+	}
+
+	dailyInfo[] dailyInfoList; #每日活动信息列表
+}
+
+
+#刷新活跃度礼包
+message s_refreshHelperAward {
+
+	#活跃度礼包信息
+	message helperAwardInfo {
+		int32 score; #活跃度礼包积分
+		int32 state; #礼包状态(0为不可领取，1为可领取，2为已领取)
+	}
+
+	int32 activityValue; #活跃度值
+	helperAwardInfo[] helperAwardInfoList; #活跃度礼包信息列表
+}
+
+#领取活跃度礼包
+message c_getHelperAward {
+	int32 score; #活跃度礼包积分
+}
+
+#领取活跃度礼包
+message s_getHelperAward {
+	int32 result;#0.成功；1.失败
+	string reason; #失败原因(失败什么也不做)
+}

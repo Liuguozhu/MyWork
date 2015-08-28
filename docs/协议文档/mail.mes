@@ -1,0 +1,107 @@
+###################邮件协议##############################
+
+#邮件物品信息
+message mailItemInfo {
+	int32 itemId; #物品编号
+	int32 num; #数量
+	string icon;#物品图片名称
+}
+
+#邮件伙伴信息
+message mailPartnerInfo {
+	int64 partnerId; #伙伴编号
+	string photo;#伙伴图片
+}
+
+#邮件信息
+message mailInfo {
+	int64 mailId; #邮件编号
+	string title; #标题
+	string content; #内容
+	int32 read; #0未读1已读
+	string senderName; #发件人名称
+	int32 gold; #绑银
+	int32 tribute;#帮贡
+	int32 exp;#经验
+	int32 coin;#银两
+	int32 money;#元宝
+	mailItemInfo[] items; #物品编号集合
+	mailPartnerInfo[] partners;#伙伴集合
+	int32 sortId;#排序ID
+	
+}
+
+#有新邮件提示
+message s_newMail {
+	int64 roleId;#角色编号
+}
+
+#请求邮件列表
+message c_mailList {
+	int64 roleId; #角色ID
+}
+#请邮件列表返回
+message s_mailList {
+	mailInfo[] mailInfoList; #邮件列表
+	int32 restMail;#剩余未显示邮件数
+}
+
+#删除邮件请求
+message c_delMail {
+	int64[] mailIds; #邮件编号
+}
+
+#删除邮件请求返回
+message s_delMail {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #返回信息
+	mailInfo[] mailInfoList; #邮件列表
+	int32 restMail;#剩余未显示邮件数
+}
+
+#删除已读邮件请求
+message c_delReadMail {
+	int64 roleId;#角色编号
+}
+
+#删除已读邮件请求返回
+message s_delReadMail {
+	int32 result; #结果（0.成功，1.失败）
+	string reason;#返回信息
+	mailInfo[] mailInfoList; #邮件列表
+	int32 restMail;#剩余未显示邮件数
+}
+
+#删除全部邮件请求
+message c_delAllMail {
+	int64 roleId;#角色编号
+}
+
+#删除全部邮件请求返回
+message s_delAllMail {
+	int32 result; #结果（0.成功，1.失败）
+	string reason;#返回信息
+	mailInfo[] mailInfoList; #邮件列表
+	int32 restMail;#剩余未显示邮件数
+}
+
+#取出邮件物品请求
+message c_getItemMail {
+	int64 mailId;#邮件ID
+}
+
+#取出邮件物品请求返回
+message s_getItemMail {
+	int32 result; #结果（0.成功，1.失败）
+	string reason;#返回信息
+}
+
+#标记已读请求
+message c_readMail {
+	int64 mailId;#邮件ID
+}
+
+#标记已读请求返回
+message s_readMail {
+	int32 result; #结果（0.成功，1.失败）
+}

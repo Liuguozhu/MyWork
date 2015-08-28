@@ -1,0 +1,1 @@
+[{"exp":5000,"level":1,"upNum":20},{"exp":5000,"level":2,"upNum":20},{"exp":19000,"level":3,"upNum":25},{"exp":53000,"level":4,"upNum":30},{"exp":126000,"level":5,"upNum":35}]

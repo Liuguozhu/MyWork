@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="UserSQL">
+
+	<select id="queryByName" resultClass="int" parameterClass="String">
+		<![CDATA[
+			select count(SID) from NEW_TLOL_USER where SNAME =  #value#
+		]]>
+	</select>
+
+	<update id="update" parameterClass="map">
+		<![CDATA[
+			update NEW_TLOL_USER
+					   set SNAME = #userName#,
+					       SPASSWORD = #password#,
+					       NCHANGE = 1
+		 			where SID = #userId#
+		]]>
+	</update>
+	
+	<update id="updatePhone" parameterClass="map">
+		<![CDATA[
+			update NEW_TLOL_USER
+					   set NPHONE = #phone#
+		 			where SID = #userId#
+		]]>
+	</update>
+	
+	<select id="queryPhone" resultClass="String" parameterClass="String">
+		<![CDATA[
+			select NPHONE from NEW_TLOL_USER where SID = #userId#
+		]]>
+	</select>
+
+</sqlMap>

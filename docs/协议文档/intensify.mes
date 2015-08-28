@@ -1,0 +1,147 @@
+#######################锻造协议##########################
+
+#部位强化信息
+message bodyInfo {
+	int32 part;	#部位
+	int32 level; #等级
+}
+
+#刷新部位强化
+message s_refreshBody {
+	bodyInfo[] bodyInfoList; #装备部位信息列表
+}
+
+#部位强化
+message c_bodyIntensify {
+	int32 part; #部位
+	int32 number; #强化次数
+}
+
+#部位强化信息返回
+message s_bodyIntensify {
+	int32 result; #0、成功；1、失败
+	string reason; #失败原因
+}
+
+
+#配件信息
+message stoneInfo {
+	int32 position;	#配件位置
+	int32 open; #插槽是否开启（0未开启，1开启）
+	int32 id; #配件ID
+	string icon; #图标
+}
+
+#配件部位
+message stonePart {
+	int32 part;	#部位
+	stoneInfo[] stoneInfoList; #配件信息列表
+}
+
+#刷新配件信息
+message s_refreshStone {
+	stonePart[] stonePartList; #全部部位配件信息
+}
+
+#打孔
+message c_stoneSlot {
+	int32 part; #部位
+	int32 position; #配件位置
+}
+
+#打孔信息返回
+message s_stoneSlot {
+	int32 result;	# 0、成功；1、失败
+	string reason; #失败原因
+}
+
+#宝石制作
+message c_stoneMake {
+	int32 isBind; #使用绑定材料（0.不使用(即不绑定)，1.使用）
+	int32 makeAll; #0.制作1个，1.一键制作
+}
+
+#宝石制作返回信息
+message s_stoneMake {
+	int32 result; #0.成功，1.失败
+	string reason; #失败原因
+}
+
+#配件镶嵌
+message c_stoneInlay {
+	int32 part; #部位
+	int32 position; #配件位置
+	int32 stoneIndex; #配件的背包索引
+}
+
+#配件镶嵌返回信息
+message s_stoneInlay {
+	int32 result; #0.成功，1.失败
+	string reason; #失败原因
+}
+
+#宝石镶嵌升级
+message c_intensifyStoneUp {
+	int32 part; #部位
+	int32 position; #配件位置
+}
+
+#宝石镶嵌升级返回信息
+message s_intensifyStoneUp {
+	int32 result; #0.成功，1.失败
+	string reason; #失败原因
+}
+
+#取下配件
+message c_stoneUnload {
+	int32 part;			#部位
+	int32 position;			#配件位置
+}
+
+#取下配件信息返回
+message s_stoneUnload {
+	int32 result;	# 0、成功；1、失败
+	string reason; 	#失败原因
+}
+
+#宝石合成请求
+message c_stoneUp{
+	int32 isBind; #绑定0不绑 1 绑
+	int32 index1;#副宝石1
+	int32 index2;#副宝石2
+	int32 index3;#副宝石3
+	int32 index4;#副宝石4
+	int32 index5;#主宝石 背包索引
+}
+
+#宝石合成请求返回
+message s_stoneUp{
+	int32 index ;#合成成功或失败之后的宝石背包索引号
+	int32 result; #0.成功，1.条件不符失败  2.合成失败
+	string reason; #失败原因
+}
+
+#装备分解
+message c_equipResolve {
+	string indexStr; #背包索引组合
+}
+
+#装备分解返回信息
+message s_equipResolve {
+	int32 result; #0.成功，1.失败
+	string reason; #失败原因
+}
+
+#装备升星
+message c_equipStar {
+	int32 part; #部位
+	int32 isBind; #使用绑定材料（0.不使用(即不绑定)，1.使用）
+}
+
+#装备升星返回信息
+message s_equipStar {
+	int32 result; #0.成功，1.失败(材料不足)，2.升星失败
+	string reason; #失败原因
+}
+
+#################################################

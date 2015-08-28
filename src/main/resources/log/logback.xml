@@ -1,0 +1,1043 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<!-- encoders are assigned the type ch.qos.logback.classic.encoder.PatternLayoutEncoder 
+			by default -->
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+<!-- 	<root level="debug"> -->
+	<root level="info">
+		<appender-ref ref="STDOUT" />
+	</root>
+
+	<!-- 服务器日志 -->
+	<appender name="ITEM" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/item/item.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/item/item.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="item">
+		<appender-ref ref="ITEM" />
+	</logger>
+	<!-- 服务器日志 -->
+
+	<!-- 服务器日志 -->
+	<appender name="ITEMGET" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/itemGet/itemGet.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/itemGet/itemGet.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="itemGet">
+		<appender-ref ref="ITEMGET" />
+	</logger>
+	<!-- 服务器日志 -->
+
+	<!-- 服务器日志 -->
+	<appender name="SERVER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/server/server.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/server/server.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="server">
+		<appender-ref ref="SERVER" />
+	</logger>
+	<!-- 服务器日志 -->
+
+	<!-- 客户端日志 -->
+	<appender name="CLIENTLOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/clientLog/clientLog.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/clientLog/clientLog.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="clientLog">
+		<appender-ref ref="CLIENTLOG" />
+	</logger>
+	<!-- 客户端日志 -->
+
+
+	<!-- 异常日志 -->
+	<appender name="EXCEP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/excep/excep.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/excep/excep.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="excep">
+		<appender-ref ref="EXCEP" />
+	</logger>
+	<!-- 异常日志 -->
+
+	<!-- 禁言日志 -->
+	<appender name="MUTE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/mute/mute.log</file>-->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/mute/mute.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+	<logger name="mute">
+		<appender-ref ref="MUTE" />
+	</logger>
+	<!-- 禁言日志 -->
+
+	<!-- 快三开奖结果日志 -->
+	<appender name="KUAI3"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/kuai3/kuai3.log</file>-->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/kuai3/kuai3.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+	<logger name="kuai3">
+		<appender-ref ref="KUAI3" />
+	</logger>
+	<!-- 快三开奖结果日志 -->
+
+	<!-- 快三发奖结果日志 -->
+	<appender name="KUAI3RESULT"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/kuai3Result/kuai3Result.log</file>-->
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/kuai3Result/kuai3Result.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+	<logger name="kuai3Result">
+		<appender-ref ref="KUAI3RESULT" />
+	</logger>
+	<!-- 快三发奖结果日志 -->
+
+	<!-- 角色创建日志 -->
+	<appender name="ONLINECOUNTER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/onlineCounter/onlineCounter.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/onlineCounter/onlineCounter.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="onlineCounter">
+		<appender-ref ref="ONLINECOUNTER" />
+	</logger>
+	<!-- 角色创建日志 -->
+
+	<!-- 角色创建日志 -->
+	<appender name="ROLECREATE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/roleCreate/roleCreate.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/roleCreate/roleCreate.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="roleCreate">
+		<appender-ref ref="ROLECREATE" />
+	</logger>
+	<!-- 角色创建日志 -->
+
+	<!-- 角色登录日志 -->
+	<appender name="ROLELOGON" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/roleLogon/roleLogon.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/roleLogon/roleLogon.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="roleLogon">
+		<appender-ref ref="ROLELOGON" />
+	</logger>
+	<!-- 角色登录日志 -->
+
+	<!-- 角色第一次登录日志 -->
+	<appender name="ROLEFIRSTLOGON" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/roleFirstLogon/roleFirstLogon.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/roleFirstLogon/roleFirstLogon.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="roleFirstLogon">
+		<appender-ref ref="ROLEFIRSTLOGON" />
+	</logger>
+	<!-- 角色第一次登录日志 -->
+
+	<!-- 获得和消耗元宝日志 -->
+	<appender name="MONEY" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/money/money.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/money/money.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="money">
+		<appender-ref ref="MONEY" />
+	</logger>
+	<!-- 获得和消耗元宝日志 -->
+
+
+	<!-- 客服日志 -->
+	<appender name="KEFU" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/kefu/kefu.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/kefu/kefu.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="kefu">
+		<appender-ref ref="KEFU" />
+	</logger>
+	<!-- 客服日志 -->
+
+	<!-- 好友日志 -->
+	<appender name="FRIEND" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/friend/friend.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/friend/friend.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="friend">
+		<appender-ref ref="FRIEND" />
+	</logger>
+	<!-- 好友日志 -->
+
+	<!-- 经脉日志 -->
+	<appender name="JINGMAI" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/jingMai/jingMai.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/jingMai/jingMai.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="jingMai">
+		<appender-ref ref="JINGMAI" />
+	</logger>
+	<!-- 经脉日志 -->
+
+	<!-- 强化日志 -->
+	<appender name="INTENSIFY" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/intensify/intensify.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/intensify/intensify.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="intensify">
+		<appender-ref ref="INTENSIFY" />
+	</logger>
+	<!-- 强化日志 -->
+
+	<!-- 试炼日志 -->
+	<appender name="TRIALS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/trials/trials.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/trials/trials.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="trials">
+		<appender-ref ref="TRIALS" />
+	</logger>
+	<!-- 试炼日志 -->
+
+	<!-- 酒馆刷新伙伴日志 -->
+	<appender name="PARTNERREFRESH" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/partnerRefresh/partnerRefresh.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/partnerRefresh/partnerRefresh.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="partnerRefresh">
+		<appender-ref ref="PARTNERREFRESH" />
+	</logger>
+
+
+	<!-- 招募伙伴日志 -->
+	<appender name="PARTNERGET" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/partnerGet/partnerGet.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/partnerGet/partnerGet.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="partnerGet">
+		<appender-ref ref="PARTNERGET" />
+	</logger>
+	<!-- 招募伙伴日志 -->
+
+
+	<!-- 伙伴升级日志 -->
+	<appender name="PARTNERUPGRADE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/partnerUpGrade/partnerUpGrade.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/partnerUpGrade/partnerUpGrade.%d{yyyy-MM-dd}.log </fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="partnerUpGrade">
+		<appender-ref ref="PARTNERUPGRADE" />
+	</logger>
+	<!-- 伙伴升级日志 -->
+
+	<!-- 伙伴升阶日志 -->
+	<appender name="PARTNERADVANCED" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/partnerAdvanced/partnerAdvanced.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/partnerAdvanced/partnerAdvanced.%d{yyyy-MM-dd}.log </fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="partnerAdvanced">
+		<appender-ref ref="PARTNERADVANCED" />
+	</logger>
+	<!-- 伙伴升阶日志 -->
+	
+	<!-- 伙伴进化日志 -->
+	<appender name="PARTNEREVOLVE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/partnerEvolve/partnerEvolve.%d{yyyy-MM-dd}.log </fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="partnerEvolve">
+		<appender-ref ref="PARTNEREVOLVE" />
+	</logger>
+	<!-- 伙伴进化日志 -->
+	
+	<!-- 伙伴增加潜力值日志 -->
+	<appender name="PARTNERCAPABILITY" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/partnerCapability/partnerCapability.%d{yyyy-MM-dd}.log </fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="partnerCapability">
+		<appender-ref ref="PARTNERCAPABILITY" />
+	</logger>
+	<!-- 伙伴增加潜力值日志 -->
+
+
+	<!-- 聊天日志 -->
+	<appender name="CHAT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/chat/chat.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/chat/chat.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="chat">
+		<appender-ref ref="CHAT" />
+	</logger>
+
+	<!-- 邮件日志 -->
+	<appender name="MAIL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/mail/mail.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/mail/mail.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="mail">
+		<appender-ref ref="MAIL" />
+	</logger>
+
+	<!-- 商城购买日志 -->
+	<appender name="MALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/mall/mall.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/mall/mall.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="mall">
+		<appender-ref ref="MALL" />
+	</logger>
+
+	<!-- 招财日志 -->
+	<appender name="BUYGOLD" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/buyGold/buyGold.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/buyGold/buyGold.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="buyGold">
+		<appender-ref ref="BUYGOLD" />
+	</logger>
+	<!-- 招财日志 -->
+
+	<!-- 离线经验日志 -->
+	<appender name="OFFLINEEXP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/offLineExp/offLineExp.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/offLineExp/offLineExp.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="offLineExp">
+		<appender-ref ref="OFFLINEEXP" />
+	</logger>
+	<!-- 离线经验日志 -->
+
+	<!-- 穿卸装备日志 -->
+	<appender name="EQUIP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/equip/equip.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/equip/equip.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="equip">
+		<appender-ref ref="EQUIP" />
+	</logger>
+	<!-- 穿卸装备日志 -->
+
+	<!-- 仓库存取日志 -->
+	<appender name="WAREHOUSE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/warehouse/warehouse.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/warehouse/warehouse.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="warehouse">
+		<appender-ref ref="WAREHOUSE" />
+	</logger>
+	<!-- 仓库存取日志 -->
+
+	<!-- 金币日志 -->
+	<appender name="COSTGOLD" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/costGold/costGold.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/costGold/costGold.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="costGold">
+		<appender-ref ref="COSTGOLD" />
+	</logger>
+
+	<!-- 拍卖行日志 -->
+	<appender name="AUCTION" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/auction/auction.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/auction/auction.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+	<logger name="auction">
+		<appender-ref ref="AUCTION" />
+	</logger>
+	<!-- 帮派日志 -->
+	<appender name="GANG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/gang/gang.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/gang/gang.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+	<logger name="gang">
+		<appender-ref ref="GANG" />
+	</logger>
+	<!-- 经验日志 -->
+	<appender name="EXP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/exp/exp.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/exp/exp.%d{yyyy-MM-dd}.log </fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="exp">
+		<appender-ref ref="EXP" />
+	</logger>
+
+	<!-- 神兵日志 -->
+	<appender name="SHENBING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/shenbing/shenbing.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/shenbing/shenbing.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="shenbing">
+		<appender-ref ref="SHENBING" />
+	</logger>
+
+	<!-- 改名日志 -->
+	<appender name="GAIMING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/gaiming/gaiming.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/gaiming/gaiming.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="gaiming">
+		<appender-ref ref="GAIMING" />
+	</logger>
+
+	<!-- 银两日志 -->
+	<appender name="COIN" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/coin/coin.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/coin/coin.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="coin">
+		<appender-ref ref="COIN" />
+	</logger>
+	<!-- 银两日志 -->
+
+	<!-- 新服活动日志 -->
+	<appender name="ACTIVITYNEW" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/activityNew/activityNew.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/activityNew/activityNew.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="activityNew">
+		<appender-ref ref="ACTIVITYNEW" />
+	</logger>
+	<!-- 新服活动日志 -->
+
+	<!-- 千层塔日志 -->
+	<appender name="QIANCENGTA" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/qiancengta/qiancengta.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/qiancengta/qiancengta.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="qiancengta">
+		<appender-ref ref="QIANCENGTA" />
+	</logger>
+	<!-- 千层塔日志 -->
+
+	<!-- 任务日志 -->
+	<appender name="TASK" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/task/task.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/task/task.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="task">
+		<appender-ref ref="TASK" />
+	</logger>
+	<!-- 任务日志 -->
+	
+	<!-- 下线日志 -->
+	<appender name="LOGOUT" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/logout/logout.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/logout/logout.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="logout">
+		<appender-ref ref="LOGOUT" />
+	</logger>
+	<!-- 下线日志 -->
+	
+	<!-- 协议日志 -->
+	<appender name="LLP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		 <!--<file>log/llp/llp.log</file>-->  
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/llp/llp.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="llp">
+		<appender-ref ref="LLP" />
+	</logger>
+	<!-- 协议日志 -->
+	
+	<!-- 所有物品日志 -->
+	<appender name="ITEMALL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/itemAll/itemAll.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/itemAll/itemAll.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss}#$%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="itemAll">
+		<appender-ref ref="ITEMALL" />
+	</logger>
+	<!-- 所有物品日志 -->
+	
+	
+	<!--等级榜日志 -->
+	<appender name="LEVELRANKING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/ranking/levelRanking.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/ranking/levelRanking.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="levelRanking">
+		<appender-ref ref="LEVELRANKING" />
+	</logger>
+	<!-- 等级榜日志 -->
+	
+	<!--战力榜日志 -->
+	<appender name="POWERRANKING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/ranking/powerRanking.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/ranking/powerRanking.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="powerRanking">
+		<appender-ref ref="POWERRANKING" />
+	</logger>
+	<!-- 战力榜日志 -->
+	
+	<!--洞天榜日志 -->
+	<appender name="QCTRANKING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<!--<file>log/ranking/qctRanking.log</file>-->
+
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<!-- daily rollover -->
+			<fileNamePattern>log/ranking/qctRanking.%d{yyyy-MM-dd}.log</fileNamePattern>
+
+			<!-- keep 30 days' worth of history -->
+			<maxHistory>30</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="qctRanking">
+		<appender-ref ref="QCTRANKING" />
+	</logger>
+	<!-- 洞天榜日志 -->
+
+</configuration>

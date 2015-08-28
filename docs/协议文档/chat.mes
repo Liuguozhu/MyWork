@@ -1,0 +1,101 @@
+#######################聊天协议##########################
+#装备信息
+extern equipMsg;
+
+#伙伴信息
+extern partnerInfo;
+
+#聊天发送VIP开关
+message c_openVipChat {
+	int32 openVipChat; # 聊天发送VIP开关(0为开，1为关)
+}
+
+#聊天发送VIP开关信息返回
+message s_openVipChat {
+	int32 result;	# 0.成功，1.失败
+	string reason; 	#失败原因
+}
+
+#玩家发送聊天消息
+message c_chatSend {
+	int32 chatId; #聊天频道（0.系统，1.世界，2.区域，3.门派，4.帮派，5.队伍，6.喇叭，7.私聊，8.提示）
+	int32 type; #类型（0.普通，1.语音，2.队伍区域喊话）
+	string content; #聊天内容
+}
+
+#玩家发送聊天消息返回信息
+message s_chatSend {
+	int32 result;	# 0.成功，1.失败
+	string reason; 	#失败原因
+}
+
+#玩家接收聊天消息
+message s_chatReceive {
+	int32 chatId;		#聊天频道（0.系统，1.世界，2.区域，3.门派，4.帮派，5.队伍，6.喇叭，7.私聊，8.提示）	
+	int32 type; #类型（0.普通，1.语音，2.队伍区域喊话）
+	int64 senderId;	#发送者编号
+	string senderName;	#发送者名称
+	string content;		#聊天内容
+	int32 vip; #发送者vip等级（0.不是，1.黄金，2.白金，3.钻石）
+	int32 mapId;
+	int64 headerId;	#队长ID
+}
+
+#显示装备
+message c_displayEquip {
+	int32 itemId;	#装备ID
+}
+
+#显示装备返回信息
+message s_displayEquip {
+	equipMsg equipmentInfo; #装备对象
+}
+
+#显示伙伴
+message c_displayPartner {
+	int32 partnerId;	#伙伴ID
+}
+
+#显示伙伴返回信息
+message s_displayPartner {
+	partnerInfo partnerInfor; #伙伴对象
+}
+
+#私聊
+message c_whisperSend {
+	int64 receiverId; #接收者角色编号
+	string content; #聊天内容
+}
+#私聊消息返回信息
+message s_whisperSend {
+	int32 result;	# 0.成功，1.失败
+	string reason; 	#失败原因
+}
+
+#玩家接收私聊消息
+message s_whisperReceive {	
+	int64 senderId;	#发送者编号
+	string senderName;	#发送者名称
+	int64 receiverId;	#接收者编号
+	string receiverName;	#接收者名称
+	string content;		#聊天内容
+	string time; #时间
+	int32 vip; #发送者vip等级（0.不是，1.黄金，2.白金，3.钻石）
+}
+
+#房间列表
+message c_roomList {
+	int32 page; #页数
+}
+
+#请求房间号
+message c_initRoomId {
+	int32 type; #类型（0.世界，1.帮派，2.队伍）
+}
+
+#请求房间号返回信息
+message s_initRoomId {
+	string roomId; #房间号
+}
+
+#################################################

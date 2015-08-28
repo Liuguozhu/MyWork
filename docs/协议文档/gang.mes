@@ -1,0 +1,404 @@
+#######################帮派协议##########################
+
+#帮派人物属性
+message gangPro{
+	int64 roleId; # 角色ID
+	string name;# 名字
+	string vocation;#职业
+	int32 level;# 等级
+}
+
+
+#创建帮派
+message c_createGang{
+	string name;#帮派名字
+}
+#创建帮派返回
+message s_createGang{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+}
+
+#申请加入帮派
+message c_askGang{
+	int64 gangId;#帮派ID
+}
+#申请加入帮派返回
+message s_askGang{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+}
+
+#撤消申请加入帮派
+message c_cancelAskGang{
+	int64 gangId;#帮派ID
+}
+#撤消申请加入帮派返回
+message s_cancelAskGang{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+}
+
+#解散帮派
+message c_delGang{
+	int64 roleId;#角色ID
+}
+#解散帮派返回
+message s_delGang{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+}
+
+#请求帮派人员信息
+message c_queryGang{
+	int64 roleId;#角色ID
+}
+#帮派人员信息
+message gangMember{
+	int64 roleId; # 角色ID
+	string name;# 名字
+	string vocation;#职业
+	int32 level;# 等级
+	int32 jobTitle;# 帮派职位
+	int32 totalTribute;# 个人总帮贡
+	int32 isOnline;#是否在线传颜色回来
+}
+
+#请求帮派人员信息返回
+message s_queryGang{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+	gangMember[] gangMembers; #帮派信息
+}
+
+#刷新加入帮派时人物属性或者刷新人物身上帮派信息
+message s_refreshJoinGang{
+	int64 gangId;#帮派ID
+	string name; #帮派名称
+	int32 jobTitle;# 帮派职位
+	int32 tribute;# 帮贡
+	int32 totalTribute;#总帮贡
+}
+
+#加入帮派审批
+message c_confirmAsk{
+	int64 roleId;#申请加入帮派的角色的ID
+	int32 ratify;#0批准加入 1拒绝加入 2清空
+}
+
+#加入帮派审批返回
+message s_confirmAsk{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+}
+
+#帮派列表信息
+message gang{
+	int64 gangId;#帮派id
+	string name;#帮派名字
+	int32 level;#帮派级别
+	int32 size;#最大人数
+	int32 num;#当前人数
+	string leaderName;#帮主名字
+	int32 asked;#是否已申请 0未申请 1已申请
+}
+
+#请求帮派列表
+message c_gangList{
+	int32 page;#页数
+}
+
+#请求帮派列表返回
+message s_gangList{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+	gang[] gangs;#帮派信息
+	int32 totalpage;#总页数
+	int32 page;#当前页数
+	int32 pageMax;#每页最多条数
+}
+
+#帮派操作
+message c_gangOperate{
+	int64 roleId;#被操作角色ID
+	int32 type;#操作 1 提升为副帮主，2提升为长老，3踢人,4转让帮主,5副帮主降长老6 副帮主降帮众7长老降帮众
+}
+
+#帮派操作返回
+message s_gangOperate{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+}
+
+#请求帮派的主信息
+message c_gangMain{
+	int64 roleId;#角色ID
+}
+
+
+#请求帮派的主信息返回
+message s_gangMain{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+	int64 gangId;#帮派id
+	string name;#帮派名字
+	int64 leaderId;#帮主ID
+	string leaderName;#帮主名字
+	int32 level;#帮派级别
+	string exp;#帮派经验
+	int32 size;#最大人数
+	int32 num;#当前人数
+	string gangBulletin;#帮公告
+	int32 active;#活跃值
+}
+
+#查看帮派申请加入的列表
+message c_queryAsk{
+	int64 roleId;#角色ID
+}
+
+#查看帮派申请加入的列表返回
+message s_queryAsk{
+	gangPro[] gangPros;#角色具体信息
+}
+
+#修改公告
+message c_updateBulletin{
+	string gangBulletin;#帮派公告内容
+	
+}
+
+#修改公告返回
+message s_updateBulletin{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+}
+
+#退出帮派
+message c_quitGang{
+	int64 roleId;#角色ID
+}
+
+#退帮返回
+message s_quitGang{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+}
+
+#烧香初始化
+message c_shaoXiangInit {
+	int64 roleId; #角色ID
+}
+
+#烧香初始化返回信息
+message s_shaoXiangInit {
+	int32 level; #烧香等级
+	int32 exp; #烧香经验
+	int32 expMax; #烧香经验上限
+	string addDesc; #加成描述
+	int32 numLimit; #烧香总次数
+	int32 num; #剩余次数
+	string[] logList; #日志集合
+}
+
+#烧香
+message c_shaoXiang {
+	int32 type;#烧香类型1 1W 2 10W 3 30元宝
+}
+
+#烧香返回
+message s_shaoXiang{
+	int32 result; #0成功1失败
+	string reason; #成功/失败原因
+}
+
+#进入帮派地图
+message c_gangMapEnter {
+	int64 gangId;#帮派ID
+}
+
+#进入帮派地图返回信息
+message s_gangMapEnter {
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+}
+
+#离开帮派地图
+message c_gangMapOut {
+	int64 gangId;#帮派ID
+}
+
+#离开帮派地图返回信息
+message s_gangMapOut {
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+}
+
+#帮派商店购买
+message c_buyGangShop {
+	int32 index; #索引
+	int32 number; #商品数量
+}
+
+#帮派商店购买返回信息
+message s_buyGangShop {
+	int32 result; #0.成功，1.失败
+	string reason; #失败原因
+}
+
+#请求帮派日志
+message c_gangLog {
+	int64 roleId; #角色编号（无用）
+}
+
+#请求帮派日志返回信息
+message s_gangLog {
+	string[] logList; #日志集合
+}
+
+#请求帮派活动
+message c_gangActivityList {
+	int64 roleId; #角色编号（无用）
+}
+
+#帮派活动信息
+message gangActivityInfo {
+	string name; #活动名称
+	string award; #奖励内容
+	string icon; #图标
+	string time; #活动时间
+	int32 timeFlag;#0不满足 1满足
+	int32 levelFlag;#0不满足 1满足
+	int32 state; #状态（0.未开启，1.已开启）
+	int32 level;#开启的级别
+}
+
+
+#请求帮派活动返回信息
+message s_gangActivityList {
+	gangActivityInfo[] gangActivityInfoList;
+}
+
+#邀请加入帮派
+message c_inviteGang{
+	int64 roleId;#角色ID
+}
+
+#邀请加入帮派返回
+message s_inviteGang{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+}
+#确认邀请加入帮派
+message c_confirmInvite{
+	int64 roleId;#发出邀请的人的ID
+	int32 type;#0同意 1拒绝
+	int64 gangId;#要加入帮派的ID
+}
+#确认邀请加入帮派返回
+message s_confirmInvite{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+}
+#刷新帮派邀请消息
+message s_refreshInviteGang{
+	string word;#被邀请人显示的话
+	int64 gangId;#邀请人的帮派ID
+	int64 roleId;#邀请人的角色ID
+}
+#刷新帮派邀请确认消息
+message s_refreshConfirmInvite{
+	string word;#玩家确认还是拒绝,返回消息
+}
+#禁言
+message c_gangMute{
+	int64 roleId;#被禁言人的ID
+}
+#禁言返回
+message s_gangMute{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+}
+#城主帮派权限
+message s_refreshLeader{
+	int32 identity;#0无城主权限 1有城主权限 2 有冠军帮派成员权限
+}
+
+#活跃度领奖
+message c_activeAward {
+	int64 roleId;#角色ID
+}
+
+#活跃度领奖返回
+message s_activeAward {
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+}
+#查询帮派福利
+message c_QueryWelfareGang{
+	int64 roleId;#角色ID
+}
+#查询帮派福利返回
+message s_QueryWelfareGang{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+	int32 flag;#冠军帮1 非冠军帮0
+	int32 gold;#绑银
+	int32 coin;#银两
+}
+#领取帮派福利
+message c_GetWelfareGang{
+	int64 roleId;#角色ID
+}
+#领取帮派福利返回
+message s_GetWelfareGang{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+}
+#帮派任务INFO
+message gangTask{
+	int32 itemId;
+	int32 num;
+}
+
+#帮派任务初始化
+message c_gangTaskList{
+	int32 type;#0刷新界面 1刷新任务
+}
+#帮派任务初始化返回
+message gangTaskListInfo{
+	
+	int32 index;#任务index
+	int32 finish;#0未领取，1已领取
+	gangTask[] gangTask;#任务物品
+	gangTask[] awards;#任务奖励物品
+}
+#帮派任务初始化返回
+message s_gangTaskList{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+}
+#刷新任务初始化
+message s_refreshGangTaskList{
+	gangTask finalAward;#最终奖励物品
+	int32 finalFinish;#0未领取 1已领取
+	gangTaskListInfo[] gangTaskList;
+}
+#帮派任务领取
+message c_getGangTaskItem{
+	int32 index;#领取奖励
+}
+#帮派任务领取返回
+message s_getGangTaskItem{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+}
+#帮派任务最终奖励领取
+message c_getFinalGangTaskItem{
+	int64 roleId;#角色ID
+}
+#帮派任务最终奖励领取返回
+message s_getFinalGangTaskItem{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+}

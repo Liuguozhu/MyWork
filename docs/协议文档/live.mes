@@ -1,0 +1,48 @@
+###################心跳协议##############################
+
+#心跳
+message c_live {
+	int64 roleId;	#角色编号
+}
+
+#心跳返回信息
+message s_Live {
+	int32 result;	#0.成功；1.失败
+}
+
+#心跳测试
+message c_liveTest {
+	int32 index;	#测试
+}
+
+#心跳测试返回信息
+message s_liveTest {
+	int32 result;	#0.成功；1.失败
+}
+
+#队伍开关
+message c_closeTeam {
+	int32 close; #0.不屏蔽，1.屏蔽
+}
+#队伍开关返回信息
+message s_closeTeam {
+	int32 result;	#0.成功；1.失败
+}
+
+#好友开关
+message c_closeFriend {
+	int32 close; #0.不屏蔽，1.屏蔽
+}
+#好友开关返回信息
+message s_closeFriend {
+	int32 result;	#0.成功；1.失败
+}
+
+#私聊开关
+message c_closeWhisper {
+	int32 close; #0.不屏蔽，1.屏蔽
+}
+#私聊开关返回信息
+message s_closeWhisper {
+	int32 result;	#0.成功；1.失败
+}

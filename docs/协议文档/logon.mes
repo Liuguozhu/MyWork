@@ -1,0 +1,88 @@
+###################登录协议##############################
+
+#请求签到信息
+message c_querySign{
+	int64 roleId;#角色ID
+}
+
+#请求签到信息返回
+message s_querySign{
+	int32 result;#0.成功；1.失败
+	string reason; #失败原因
+	int32[] signList;#已签到列表
+	int32[] havePickSign;#已领取的礼包
+	int32 nowdate;#今天的天数
+	int32 canSign;#0不可以签到 1可以签到
+	int32 canAddSign;#0不可以补签 1可以补签
+}
+
+#执行签到
+message c_doSign{
+	int64 roleId;#角色ID
+}
+
+#执行签到返回
+message s_doSign{
+	int32 result;#0.成功；1.失败
+	string reason; #失败原因
+}
+
+#刷新签到
+message s_refreshSign{
+	int32 newSign;#新增签到号码   0为没有新增
+	int32 newPickSign;#新增领取的礼包 0为没有新增
+	int32 canSign;#0不可以签到 1可以签到
+	int32 canAddSign;#0不可以补签 1可以补签
+}
+
+#请求补签
+message c_addSign{
+	int32 roleId;
+}
+
+#补签返回
+message s_addSign {
+	int32 result;#0.成功；1.失败
+	string reason; #失败原因
+}
+
+#领取签到礼包
+message c_pickSign {
+	int32 pickId;#领取的礼包号
+}
+
+#领取签到礼包返回
+message s_pickSign {
+	int32 result;#0.成功；1.失败
+	string reason; #失败原因
+}
+
+#查询连续登录
+message c_getContinue{
+	int64 roleId;# 角色ID
+}
+
+#领取连续登录返回
+message s_getContinue{
+	int32 con;#已连续登录
+	int32[] conPick;#未领取的礼包
+	int32 result;#0.成功；1.失败
+	string reason; #失败原因
+}
+
+#领取连续登录礼包
+message c_pickCon{
+	int32 pickId;#领取的礼包号
+}
+
+#领取连续登录礼包返回
+message s_pickCon{
+	int32[] conPick;#未领取的礼包
+	int32 result;#0.成功；1.失败
+	string reason; #失败原因
+}
+
+#踢下线
+message s_kickOff {
+	string content; #内容
+}

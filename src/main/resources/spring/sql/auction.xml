@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="AuctionSQL">
+	<typeAlias alias="auction" type="iyunu.NewTLOL.model.auction.Auction" />
+
+	<resultMap id="AuctionResult" class="auction">
+		<result property="id" column="NID" />
+		<result property="ownerId" column="NOWNERID" />
+		<result property="ownerName" column="SOWNERNAME" />
+		<result property="num" column="NNUM" />
+		<result property="uid" column="NUID" />
+		<result property="tid" column="NTID" />
+		<result property="buyoutprice" column="NBUYOUTPRICE" />
+		<result property="title" column="STITLE" />
+		<result property="timeout" column="NTIMEOUT" />
+		<result property="partner" column="SPARTNER"   typeHandler="iyunu.NewTLOL.ibatis.AuctionPartnerType"  javaType="iyunu.NewTLOL.model.partner.instance.Partner"      />
+		<result property="money" column="NMONEY" />
+		<result property="itemStr"  column="SITEMSTR" />
+		<result property="srv" column="SSRV" />
+		<result property="type" column="NTYPE"  typeHandler="iyunu.NewTLOL.ibatis.AuctionType"  javaType="iyunu.NewTLOL.model.auction.EAuctionType"/>
+	</resultMap>
+
+
+	<select id="query" resultMap="AuctionResult" parameterClass="String">
+		<![CDATA[
+			select NID,NOWNERID,SOWNERNAME,NNUM,NUID,NTID,NBUYOUTPRICE, STITLE,NTIMEOUT,NMONEY,SPARTNER,SITEMSTR,SSRV,NTYPE from NEW_TLOL_AUCTION_$srv$
+		]]>
+	</select>
+
+	<select id="queryMyAuction" resultMap="AuctionResult"
+		parameterClass="role">
+		<![CDATA[
+			select NID,NOWNERID,SOWNERNAME,NNUM,NUID,NTID,NBUYOUTPRICE, STITLE,NTIMEOUT,NMONEY,SPARTNER,SITEMSTR,SSRV,NTYPE from NEW_TLOL_AUCTION_$srv$ where NOWNERID =#id#
+		]]>
+	</select>
+	
+	<insert id="insert" parameterClass="auction">
+		<![CDATA[
+		insert into NEW_TLOL_AUCTION_$srv$(NID,NOWNERID,SOWNERNAME,NNUM,NUID,NTID,NBUYOUTPRICE, STITLE,NTIMEOUT,NMONEY,SPARTNER,SITEMSTR,SSRV,NTYPE  ) 
+			values(#id#,#ownerId#,#ownerName#,#num#,#uid#,#tid#,#buyoutprice#, #title#,#timeout#,#money#,#partner,handler=iyunu.NewTLOL.ibatis.AuctionPartnerType#,#itemStr#,#srv# , #type,handler=iyunu.NewTLOL.ibatis.AuctionType#)
+		]]>
+	</insert>
+	
+	<delete id="delete" parameterClass="auction">
+		<![CDATA[
+		delete NEW_TLOL_AUCTION_$srv$ where NID= #id#
+		]]>
+	</delete>
+</sqlMap>

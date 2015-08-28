@@ -1,0 +1,46 @@
+###################神器协议###############################
+
+#神兵合成
+message c_makeShenbing {
+	int32 isBind; #使用绑定材料（0.不使用(即不绑定)，1.使用）
+}
+
+#神兵合成信息返回
+message s_makeShenbing {
+	int32 result;	# 0、成功；1、失败
+	string reason; 	#失败原因
+}
+
+#神兵升级
+message c_shenbingUp {
+	int32 type; #类型（0.正常，1.元宝）
+}
+
+#神兵升级返回信息
+message s_shenbingUp {
+	int32 result;	# 0、成功；1、失败
+	string reason; 	#失败原因
+}
+
+#神兵重置
+message c_shenbingReset {
+	int32 isBind; #使用绑定材料（0.不使用(即不绑定)，1.使用）
+}
+
+#神兵重置返回信息
+message s_shenbingReset {
+	int32 result;	# 0、成功；1、失败
+	string reason; 	#失败原因
+}
+
+#神兵升星
+message c_shenbingUpStar {
+	int32 isBind; #使用绑定材料（0.不使用(即不绑定)，1.使用）
+	int32 type; #类型（0.正常，1.元宝）
+}
+
+#神兵升星信息返回
+message s_shenbingUpStar {
+	int32 result;	# 0、成功；1、其他失败；2、升星失败
+	string reason; 	#失败原因
+}

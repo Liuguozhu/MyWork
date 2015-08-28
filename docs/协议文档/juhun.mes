@@ -1,0 +1,62 @@
+###################聚魂协议##############################
+	
+#请求聚魂
+message c_juhun {
+	int64 roleId;#角色ID
+}
+
+
+
+#请求聚魂返回
+message s_juhun {
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+	int32[] nums;#聚魂结果集
+	int32 wuHunNum;#本次应得的武魂数
+ }
+ 
+#初始化聚魂
+message c_initJuhun{
+	int64 roleId;#角色ID
+}
+
+#初始化聚魂返回
+message s_initJuhun{
+	int32 tum;#0无上次牌型，牌扣着，   1有上次牌型
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+	int32[] nums;#聚魂结果集
+	int32 wuHunNum;#本次应得的武魂数	
+}
+
+#收获聚魂
+message c_receivejuhun {
+	int64 roleId;#角色ID
+}
+#收获聚魂返回
+message s_receivejuhun {
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+	int32 wuHunNumShou;#本次应得的武魂数
+}
+
+#请求重置
+message c_juhunCZ {
+	int64 roleId;#角色ID
+	#int32[] juhuns;#客户端聚魂请求0为未锁定，不为0则是被锁定的上次的牌
+}
+
+#请求重置返回
+message s_juhunCZ {
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+	int32[] nums;#聚魂结果集
+	int32 wuHunNumCZ;#本次应得的武魂数
+
+ }
+#刷新人物聚魂信息
+message s_refreshJuhun{
+	int32 receiveJuhun;#收获聚魂次数
+	int32 juhunNum;#重置聚魂次数
+	int32 wuHun;#拥有武魂
+}

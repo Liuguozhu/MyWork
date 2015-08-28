@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="bigEndian"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="java.nio.ByteOrder.BIG_ENDIAN" />
+	</bean>
+
+	<bean id="littleEndian"
+		class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+		<property name="staticField" value="java.nio.ByteOrder.LITTLE_ENDIAN" />
+	</bean>
+
+	<bean id="channelBufferFactory" class="org.jboss.netty.buffer.HeapChannelBufferFactory">
+		<constructor-arg name="defaultOrder" ref="bigEndian" />
+	</bean>
+
+	<bean id="channelPipelineFactory" class="iyunu.NewTLOL.net.TLOLChannelPipelineFactory" />
+
+	<bean id="llpSender" class="iyunu.NewTLOL.base.net.socket.LlpSender">
+		<constructor-arg name="order" ref="bigEndian" />
+	</bean>
+	
+	<bean id="netService" class="iyunu.NewTLOL.base.net.NetService">
+		<constructor-arg name="port" value="${server.port}" />
+		<constructor-arg name="channelPipelineFactory" ref="channelPipelineFactory" />
+		<constructor-arg name="channelBufferFactory" ref="channelBufferFactory" />
+	</bean>
+	
+</beans>

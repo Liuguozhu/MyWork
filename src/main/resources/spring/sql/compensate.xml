@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="CompensateSQL">
+	<typeAlias alias="compensateInfo" type="iyunu.NewTLOL.model.compensate.Compensate" />
+	
+	<resultMap id="compensateResult" class="compensateInfo">
+		<result property="title" column="STITLE" />
+		<result property="content" column="SCONTENT" />
+		<result property="version" column="NVERSION" />
+		<result property="start" column="DSTART" />
+		<result property="end" column="DEND" />
+		<result property="item" column="NITEM" />
+		<result property="num" column="NNUM" />
+		<result property="gold" column="NGOLD" />
+		<result property="money" column="NMONEY" />
+		<result property="level" column="NLEVEL" />
+		<result property="coin" column="NCOIN" />
+	</resultMap>
+	
+	<select id="query" resultMap="compensateResult" parameterClass="String">
+		<![CDATA[
+			select STITLE, SCONTENT, NVERSION, DSTART, DEND, NITEM, NNUM, NGOLD, NMONEY, NLEVEL, NCOIN from NEW_TLOL_COMPENSATE where SSRV = #value#
+		]]>
+	</select>
+	
+</sqlMap>

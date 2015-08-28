@@ -1,0 +1,1 @@
+[{"id":13001,"itemId":20061,"map":1,"name":"洞冥草","resName":"HuaCao.png","taskId":"1086;3043;3042;3041;3040;3039;3038;","url":"transfer/transfer1/Transfer1.ExportJson","x":62,"y":44},{"id":13002,"itemId":20061,"map":2,"name":"洞冥草","resName":"HuaCao.png","taskId":"1086;3043;3042;3041;3040;3039;3038;","url":"transfer/transfer1/Transfer1.ExportJson","x":90,"y":70}]

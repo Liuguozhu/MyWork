@@ -1,0 +1,155 @@
+###################拍卖协议##############################
+extern partnerInfo;	
+	
+#拍卖信息
+message auction {
+	int64 id; #拍卖编号
+	int64 tid; #物品、伙伴编号
+	string name; #名称
+	int32 level; #等级
+	string timeout; #剩余时间	
+	string ownername; #出售者
+	int32 buyoutprice; #一口价
+	int32 color; #颜色（0.白色，1.绿色，2.蓝色，3.紫色，4.橙色）
+	int32 type;#0物品 1伙伴 2元宝
+	int32 star; #星（不是装备就为0）
+}
+
+#拍卖类型
+message auctionType {
+	string name; #拍卖类型名称
+	int32 type; #拍卖类型
+}
+
+
+#请求拍卖类型
+message c_auctionType {
+	int64 roleid; #角色ID
+}
+
+#请求拍卖类型返回
+message s_auctionType {
+	auctionType[] auctionTypes;#拍卖类型列表
+}
+
+
+#拍卖请求
+message c_auction {
+	int32 type; #物品类型
+	int32 page; #第几页
+}
+
+#拍卖请求返回
+message s_auction {
+	int32 result;#0成1败
+	string reason;#返回信息
+	int32 totalpage;#总页数
+	int32 viewpage;#当前页数
+	auction[] auctions;#拍卖信息
+}
+
+
+#添加拍卖
+message c_addAuction{
+	int32 type;#1背包 2宝石背包
+	int32 cellId;#格子ID
+	int32 num;#数量
+	int32 buyoutprice;#物品价格
+}
+
+#添加拍卖宠物
+message c_addAuctionPartner{
+	int64 partnerId;#宠物ID
+	int32 buyoutprice;#物品价格
+}
+
+#添加拍卖元宝
+message c_addAuctionMoney{
+	int32 money;#元宝数量
+	int32 buyoutprice;#物品价格
+}
+
+#添加拍卖返回
+message s_addAuction{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+}
+
+
+#强制下架拍卖
+message c_forceDeleteAuction{
+	int64 auctionid;#拍卖物品id
+}
+
+#强制下架拍卖返回
+message s_forceDeleteAuction{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因
+}
+
+
+#确认拍下物品
+message c_confirmDeleteAuction{
+	int64 auctionId;#拍卖物品id
+}
+
+#确认拍下物品返回
+message s_confirmDeleteAuction{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因 
+}
+
+
+#请求我的拍卖
+message c_myAuction{
+	int64 roleid;#角色ID
+}
+
+#请求我的拍卖返回
+message s_myAuction{
+	auction[] auctions;#拍卖信息
+}
+
+#我的拍卖之查询金币
+message c_queryAuctionGold{
+	int64 roleid;#角色ID
+}
+
+#我的拍卖之查询金币返回
+message s_queryAuctionGold{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因 
+}
+
+#我的拍卖之请求取出金币
+message c_getAuctionGold{
+	int64 roleid;#角色ID
+}
+#我的拍卖之请求取出金币返回
+message s_getAuctionGold{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因 
+	int32 auctionGold;#取出金币数
+}
+#请求宠物信息
+message c_viewAuctionPartner{
+	int64 auctionId;
+}
+#请求宠物信息返回
+message s_viewAuctionPartner{
+	partnerInfo partner; #伙伴
+}
+#请求搜索
+message c_search{
+	string key;#关键字
+	int32 levelLow;#最低等级
+	int32 levelHigh;#最高等级
+	int32 color; #颜色（0.白色，1.绿色，2.蓝色，3.紫色，4.橙色）	
+}
+#请求搜索返回
+message s_search{
+	int32 result;#0成功1失败
+	string reason;#成功/失败原因 
+	auction[] auctions;#拍卖信息
+}
+

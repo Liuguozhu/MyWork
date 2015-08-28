@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="MailSQL">
+	<typeAlias alias="mail" type="iyunu.NewTLOL.model.mail.Mail" />
+
+	<resultMap id="mailResult" class="mail">
+		<result property="mailId" column="NMAILID" />
+		<result property="title" column="STITLE" />
+		<result property="content" column="SCONTENT" />
+		<result property="read" column="NREAD" />
+		<result property="receiveId" column="NRECEIVEID" />
+		<result property="sendName" column="SSENDNAME" />
+		<result property="gold" column="NGOLD" />
+		<result property="coin" column="NCOIN" />
+		<result property="exp" column="NEXP" />
+		<result property="items" column="SITEMS" typeHandler="iyunu.NewTLOL.ibatis.HashMapIntAndIntType" javaType="java.util.HashMap" />
+		<result property="newItems" column="CNEWITEMS" typeHandler="iyunu.NewTLOL.ibatis.MailType" javaType="java.util.HashMap" />
+		<result property="time" column="DTIME" />
+		<result property="partner" column="SPARTNER"   typeHandler="iyunu.NewTLOL.ibatis.AuctionPartnerType"  javaType="iyunu.NewTLOL.model.partner.instance.Partner"      />
+		<result property="money" column="NMONEY" />	
+		<result property="tribute" column="NTRIBUTE" />	
+		
+	</resultMap>
+
+	<insert id="insert" parameterClass="mail">
+		<![CDATA[
+			insert into NEW_TLOL_MAIL_$srv$
+				  (NMAILID,
+				   STITLE,
+				   SCONTENT,
+				   NREAD,
+				   NRECEIVEID,
+				   SSENDNAME,
+				   NGOLD,
+				   SITEMS,
+				   DTIME,
+				   SPARTNER,
+				   NMONEY,
+				   CNEWITEMS,
+				   NCOIN,
+				   NEXP,
+				   NTRIBUTE
+				   )
+				values
+				  (#mailId#,
+				   #title#,
+				   #content#,
+				   #read#,
+				   #receiveId#,
+				   #sendName#,
+				   #gold#,
+				   #items,handler=iyunu.NewTLOL.ibatis.HashMapIntAndIntType#,
+				   #time#,
+				   #partner,handler=iyunu.NewTLOL.ibatis.AuctionPartnerType#,
+				   #money#,
+				   #newItems,handler=iyunu.NewTLOL.ibatis.MailType#,
+				   #coin#,
+				   #exp#,
+				   #tribute#
+				   )
+		]]>
+	</insert>
+
+	<select id="query" resultMap="mailResult" parameterClass="map">
+		<![CDATA[
+			select NMAILID,
+				   STITLE,
+				   SCONTENT,
+				   NREAD,
+				   NRECEIVEID,
+				   SSENDNAME,
+				   NGOLD,
+				   SITEMS,
+				   DTIME,
+				   SPARTNER,
+				   NMONEY,
+				   CNEWITEMS,
+				   NCOIN,
+				   NEXP,
+				   NTRIBUTE
+			  from NEW_TLOL_MAIL_$srv$
+			 where NRECEIVEID = #receiveId#
+		]]>
+	</select>
+
+	<update id="update" parameterClass="mail">
+		<![CDATA[
+					update NEW_TLOL_MAIL_$srv$
+					   set NGOLD = 0,
+					  NMONEY =0,
+					  NCOIN =0,
+					  NEXP=0,
+					  NTRIBUTE=0,
+					       SITEMS       = #items,handler=iyunu.NewTLOL.ibatis.HashMapIntAndIntType#,
+					        CNEWITEMS       = #newItems,handler=iyunu.NewTLOL.ibatis.MailType#,
+					       SPARTNER= #partner,handler=iyunu.NewTLOL.ibatis.AuctionPartnerType#
+		 			where NMAILID = #mailId#
+		]]>
+	</update>
+	
+	<update id="mark" parameterClass="mail">
+		<![CDATA[
+					update NEW_TLOL_MAIL_$srv$
+					   set  NREAD = #read#
+		 			where NMAILID = #mailId#
+		]]>
+	</update>
+
+	<delete id="delete" parameterClass="map">
+		<![CDATA[
+			delete NEW_TLOL_MAIL_$srv$ where NMAILID = #mailId#
+		]]>
+	</delete>
+	
+	<delete id="deleteRead" parameterClass="map">
+		<![CDATA[
+			delete NEW_TLOL_MAIL_$srv$ where NRECEIVEID = #receiveId# and NREAD = 1 and NGOLD <= 0 and NCOIN<=0 and NEXP<=0 and (SITEMS is null or SITEMS = '{}') and SPARTNER is null and CNEWITEMS is null
+		]]>
+	</delete>
+	
+	<delete id="clean" parameterClass="map">
+		<![CDATA[
+			delete NEW_TLOL_MAIL_$srv$  where NRECEIVEID = #receiveId# and NREAD = 1 and NGOLD <= 0  and NCOIN<=0  and NMONEY <= 0 and NEXP<=0 and (SITEMS is null or SITEMS = '{}')  and SPARTNER is null  and CNEWITEMS is null
+		]]>
+	</delete>
+	
+	<delete id="check" parameterClass="map">
+		<![CDATA[
+			delete NEW_TLOL_MAIL_$srv$  where NRECEIVEID = #receiveId# and DTIME + 30 < sysdate
+		]]>
+	</delete>
+
+</sqlMap>

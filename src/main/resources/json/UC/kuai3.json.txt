@@ -1,0 +1,1 @@
+[{"name":"和值","result":0},{"name":"三同号单选","result":180},{"name":"二同号复选","result":12},{"name":"三连号通选","result":6},{"name":"三不同号","result":30}]

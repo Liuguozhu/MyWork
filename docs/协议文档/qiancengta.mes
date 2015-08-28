@@ -1,0 +1,75 @@
+###################千层塔协议##############################
+
+#千层塔初始化
+message c_qctInit {
+	int64 roleId; #角色编号（无用）
+}
+
+#千层塔初始化信息返回
+message s_qctInit {
+	int32 currentFloorId; #当前千层塔层数
+	int32 historyFloorId; #历史千层塔层数
+	int32 nullResetNum; #免费重置次数
+	int32 moneyResetNum; #元宝重置次数
+}
+
+#挑战
+message c_challengeQct {
+	int32 currentFloorId; #当前千层塔层数
+}
+
+#挑战信息返回
+message s_challengeQct {
+	int32 result;	#0.成功；1.失败
+	string reason;   #失败原因
+}
+
+#自动挑战
+message c_autoChallengeQct {
+	int32 currentFloorId; #当前千层塔层数
+}
+
+#自动挑战信息返回
+message s_autoChallengeQct {
+	int32 result;	#0.成功；1.失败；2已到历史最高，请手动挑战
+	string reason;   #失败原因
+}
+
+#刷新千层塔当前层数
+message s_refreshCurrentFloor {
+	int32 currentFloorId; #当前千层塔层数
+	int32 historyFloorId; #历史千层塔层数
+	int32 nullResetNum; #免费重置次数
+	int32 moneyResetNum; #元宝重置次数
+}
+
+#重置千层塔
+message c_resetQct {
+	int32 type; #重置类型（0为免费，1为银两）
+}
+
+#重置千层塔信息返回
+message s_resetQct {
+	int32 result;	#0.成功；1.失败
+	string reason; #失败原因
+}
+
+#千层塔排行榜
+message c_qctRanking {
+	int64 roleId; #角色编号（无用）
+}
+
+#排行榜信息
+message qctRankingInfo {
+	int64 roleId; #角色编号
+	string name; #角色名字
+	int32 historyFloorId; #历史千层塔层数
+}
+
+#千层塔排行榜信息返回
+message s_qctRanking {
+	qctRankingInfo[] qctRankingInfoList; #千层塔排行榜信息列表
+}
+
+
+

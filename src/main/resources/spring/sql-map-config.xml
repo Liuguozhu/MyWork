@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2//EN"
+    "http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+    
+<sqlMapConfig>
+
+    <settings useStatementNamespaces="true" />
+
+    <sqlMap resource="sql/role.xml" />
+	<sqlMap resource="sql/auction.xml" />
+	<sqlMap resource="sql/gang.xml" />
+	<sqlMap resource="sql/mail.xml" />
+	<sqlMap resource="sql/bulletin.xml" />
+	<sqlMap resource="sql/activity.xml" />
+	<sqlMap resource="sql/multiple.xml" />
+	<sqlMap resource="sql/cdkey.xml" />
+	<sqlMap resource="sql/compensate.xml" />
+	<sqlMap resource="sql/payBack.xml" />
+</sqlMapConfig>

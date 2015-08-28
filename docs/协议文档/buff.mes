@@ -1,0 +1,17 @@
+###################增益状态协议##############################
+
+#BUFF信息
+message buffRoleInfo {
+	int32 id; #buff编号
+	string name; #buff名称
+	int32 state; #状态（0.新增，1.更改，2.删除）
+	int32 time; #剩余时间（秒；如果是-1则表示无时间）
+	int32 value; #剩余数量（如果是-1则表示无数量）
+	int32 type; #类型（0.角色状态，1.伙伴状态）
+	string icon; #图标
+}
+
+#刷新BUFF集合
+message s_refreshBuff {
+	buffRoleInfo[] buffInfoList; #BUFF集合
+}

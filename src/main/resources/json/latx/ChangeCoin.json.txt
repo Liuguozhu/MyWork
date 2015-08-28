@@ -1,0 +1,1 @@
+[{"coin":8400,"money":28},{"coin":21760,"money":68},{"coin":57120,"money":168},{"coin":92880,"money":258},{"coin":147440,"money":388},{"coin":235200,"money":588},{"coin":644000,"money":1288},{"coin":2021600,"money":2888}]

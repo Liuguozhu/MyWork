@@ -1,0 +1,24 @@
+#######################公告协议##########################
+
+#滚屏公告
+message s_rockScrnBulletin {
+	string content;	#公告内容
+	int32 number;	#每次播放次数
+}
+
+#系统公告
+message c_systemBulletin {
+	int64 id;	#角色编号
+}
+
+
+#系统公告返回信息
+message s_systemBulletin {
+	string content;	#公告内容
+}
+
+#登录公告
+message s_logonBulletion {
+	string content;	#公告内容
+}
+#################################################

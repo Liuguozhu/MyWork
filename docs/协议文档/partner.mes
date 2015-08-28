@@ -1,0 +1,230 @@
+###################伙伴协议##############################
+
+#伙伴信息
+message partnerInfo {
+	int32 operateFlag;#操作编号  0增加 1更新 2删除
+	int64 id; #编号
+	int32 index; #伙伴索引
+	int32 level; #等级
+	int32 exp; #经验
+	int32 innateHp; #生命资质
+	int32 innateAttack; #攻击资质
+	int32 innatePdefence; #外防资质
+	int32 innateMdefence; #内防资质
+	int32 hp; #生命值
+	int32 hpMax; #生命值上限
+	int32 pAttack; #外功攻击
+	int32 pDefence; #外功防御
+	int32 mAttack; #内功攻击
+	int32 mDefence; #内功防御
+	int32 speed; #速度
+	int32 hit; #命中
+	int32 dodge; #闪避
+	int32 crit; #暴击
+	int32 parry; #格挡
+	int32 evolveExp; #进阶经验
+	int32 turnState; #武将卡牌翻转状态（0为正，1为反）
+	int32 bind;#0不绑定 1绑定
+	int32[] partnerSkillList; #技能列表
+	int32 worth; #评分
+	int32 talent; #成长率
+	int32 capability; #潜力值
+}
+
+
+#刷新客栈伙伴
+message c_partnerRefresh {
+	int32 type; #刷新类型 type 1 手动 2 自动时间到免费
+	int32 chouType;# 是抽 的哪个 1普通 2元宝 3十连抽
+}
+#刷新客栈伙伴返回信息
+message s_partnerRefresh {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因
+	int32[] partnerIndex;#招到的伙伴列表
+}
+
+
+#招募伙伴
+#message c_partnerGet {
+#	int64 id; #伙伴编号
+#}
+#招募伙伴返回信息
+#message s_partnerGet {
+#	int32 result; #结果（0.成功，1.失败）
+#	string reason; #失败原因
+#}
+
+#资质培养
+#message c_partnerTrain {
+#	int64 id; #伙伴编号
+#	int32 index;	#洗髓丹的背包索引
+#}
+
+#资质培养信息返回
+#message s_partnerTrain {
+#	int32 result; #结果（0.成功，1.失败）
+#	string reason; #失败原因
+#	partnerInfo partner; #培养的伙伴
+#}
+
+#进阶
+#message c_partnerAdvance {
+#	int64 id; #伙伴编号
+#}
+
+#进阶信息返回
+#message s_partnerAdvance {
+#	int32 result; #结果（0.成功，1.失败）
+#	string reason; #失败原因
+#	int32 wuHun; #武魂
+#	int32 type; #暴击状态（0.正常，1为小暴击，2为大暴击）
+#	partnerInfo partner; #进阶的伙伴
+#}
+
+#学习技能
+message c_studySkill {
+	int64 id; #伙伴编号
+	int32 index;	#技能书的背包索引
+}
+
+#学习技能返回信息
+message s_studySkill {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因
+}
+
+#刷新伙伴
+message s_refreshPartner {
+	partnerInfo[] partnerList; #伙伴列表
+}
+
+#招募伙伴标记
+message  s_refreshPartnerFlag{
+	int64 innTime1;#1的下次可招时间
+	int64 innTime2;#2的下次可招时间
+}
+
+#设置出战伙伴
+message c_fightPartner {
+	int32 index; #索引（1.2.3.4.5）
+	int64 partnerId; #伙伴编号
+}
+
+#设置出战伙伴返回信息
+message s_fightPartner {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因
+}
+
+#取消出战
+message c_cancelParnter {
+	int32 index; #索引（1.2.3.4.5）
+}
+
+#取消出战伙伴返回信息
+message s_cancelParnter {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因
+}
+
+#刷新出战伙伴
+message s_refreshFightPartner {
+
+	message fightPartnerInfo {
+		int32 index; #位置
+		int64 partnerId; #0表示没有
+	}
+	
+	fightPartnerInfo[] fightPartnerInfoList; #出战伙伴集合
+}
+
+#解雇伙伴
+message c_partnerOut {
+	int64 partnerId; #伙伴编号
+}
+
+#解雇伙伴
+message s_partnerOut {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因
+}
+
+#伙伴升级
+message c_partnerUpGrade{
+	int64 id; #主伙伴
+	int64 id1;#伙伴1
+	int64 id2;#伙伴2
+	int64 id3;#伙伴3
+}
+
+#伙伴升级返回
+message s_partnerUpGrade{
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因
+}
+
+#伙伴进阶
+message c_partnerAdvanced{
+	int64 id;#主伙伴
+	int64 id1;#伙伴1
+}
+
+#伙伴进阶返回
+message s_partnerAdvanced{
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因
+}
+
+#查看他人的伙伴信息
+message c_lookPartnerInfo {
+	int64 roleId; #对方角色编号
+}
+
+#查看他人的伙伴信息返回
+message s_lookPartnerInfo {
+
+	message lookPartner {
+		int32 index; #位置
+		partnerInfo partner; #伙伴信息（空就是没有）
+	}
+
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因(若result=1)
+	lookPartner[] lookPartnerList; #伙伴列表
+}
+
+#刷新客栈伙伴积分榜活动
+message c_partnerRefreshActive {
+	int32 type; #刷新类型 type 1 一抽 2 十连抽
+}
+
+#刷新客栈伙伴返回信息积分榜活动返回
+message s_partnerRefreshActive {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因
+	int32[] partnerIndex;#招到的伙伴列表
+}
+
+#伙伴进化
+message c_partnerEvolve {
+	int64 mainId; #主伙伴编号
+	int64 subId; #副伙伴编号
+}
+
+#伙伴进化返回信息
+message s_partnerEvolve {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因
+}
+
+#增加伙伴潜力值
+message c_partnerCapability {
+	int64 partnerId; #伙伴编号
+}
+
+#增加伙伴潜力值返回信息
+message s_partnerCapability {
+	int32 result; #结果（0.成功，1.失败）
+	string reason; #失败原因
+}

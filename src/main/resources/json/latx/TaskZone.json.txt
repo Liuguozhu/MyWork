@@ -1,0 +1,1 @@
+[{"maxLevel":49,"minLevel":0,"zone":1},{"maxLevel":59,"minLevel":50,"zone":2},{"maxLevel":69,"minLevel":60,"zone":3},{"maxLevel":80,"minLevel":70,"zone":4}]

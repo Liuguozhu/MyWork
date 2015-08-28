@@ -1,0 +1,349 @@
+###################充值协议##############################
+#支付宝充值请求
+message c_alipay {
+	int64 roleId;	#角色编号
+}
+
+message s_alipay {
+	#基本参数
+	string service; #接口名称
+	string partner;	#合作者身份ID
+	string privateKey; #秘钥
+	string _input_charset; #参数编码字符集
+	string sign_type; #签名方式
+	string sign; #签名
+	string notify_url; #服务器异步通知页面路径
+	string app_id; #客户端号;
+	string appenv; #客户端来源; 
+	#业务参数
+	string out_trade_no; #商户网站唯一订单号
+	string subject; #商品名称
+	string payment_type; #支付类型
+	string seller_id; #卖家支付宝账号
+	string total_fee; #总金额
+	string body; #商品详情
+	string it_b_pay; #未付款交易的超时时间
+	string show_url; #商品展示地址
+	string extern_token; #授权令牌
+}
+
+#充值比例信息
+message payInfo {
+	int32 rmb; #人民币 
+	int32 yb; #元宝
+}
+
+#下发充值比例
+message s_payRatio {
+	payInfo[] payInfoList; #充值比例信息列表
+}
+
+#首冲领奖
+message c_payFirstAward {
+	int64 roleId;	#角色编号
+}
+
+#首冲领奖信息返回
+message s_payFirstAward {
+	int32 result; #0.成功，1.失败
+	string reason; #失败原因
+}
+
+#刷新充值领奖状态
+message s_refreshPayFristState {
+	int32 payFristState; #首冲状态（0,未首冲;1,首冲未领奖;2,首冲已领完奖）
+}
+
+#请求充值领奖数据
+message c_lookFirstAward {
+	int64 roleId;	#角色编号
+}
+
+#奖品信息
+message awardInfo{
+	int32 itemId; #物品编号
+	string icon; #物品图标
+}
+
+#请求充值领奖数据信息返回
+message s_lookFirstAward {
+	awardInfo[] awardInfoList; #奖品信息列表
+	int32 index; #伙伴索引
+}
+
+#银联充值
+message c_upmp {
+	int32 orderAmount;	#订单金额
+}
+
+#银联充值
+message s_upmp {
+	int32 result; #0.成功，1.失败
+	string reason; #失败原因
+	string tn; #交易流水号
+}
+
+#易宝充值
+message c_yeeBao {
+	string cardNo;	#充值卡号
+	string cardPwd;	#充值卡密码
+	string frpId; #充值卡类型
+	string amt; #充值金额（销卡填"0"）
+}
+
+#易宝充值
+message s_yeeBao {
+	int32 result; #0.成功，1.失败
+	string reason; #失败原因
+}
+
+#首冲礼包通知礼包通知
+message s_payInform {
+	int32 state; #礼包状态(0为可领取，1为不可领取)
+}
+
+#斯凯充值
+message c_sikaiPay {
+	int32 appVersion; #应用版本，不能含有特殊符号的整数
+	int32 price; #计费价格，单位：分
+}
+
+#斯凯充值
+message s_sikaiPay {
+	string orderInfo; #订单数据
+}
+
+#当乐充值
+message c_downJoyPay {
+	int64 roleId;	#角色编号
+}
+
+#当乐充值
+message s_downJoyPay {
+	string ext; #透传参数
+}
+
+#UC充值
+message c_uc {
+	int64 roleId;	#角色编号
+}
+
+#UC充值
+message s_uc {
+	string callbackInfo; #透传参数
+}
+
+#百度充值
+message c_baidu {
+	int64 roleId;	#角色编号
+}
+
+#百度充值
+message s_baidu {
+	string callbackInfo; #透传参数
+	string orderNumber; #订单号
+}
+
+#百度充值查询
+message c_baiduQuery {
+	string orderId;	#订单号
+}
+
+#百度充值查询
+message s_baiduQuery {
+	string errorCode; #错误码
+	string errorMsg; #错误信息
+	string result; #订单充值结果
+	string amount; #成功的金额
+}
+
+#小米充值
+message c_xiaomi {
+	int64 roleId;	#角色编号
+}
+
+#小米充值
+message s_xiaomi {
+	string callbackInfo; #透传参数
+	string orderNumber; #订单号
+}
+
+#小米充值查询
+message c_xiaomiQuery {
+	string orderId;	#订单号
+	string userId; #用户编号
+}
+
+#小米充值查询
+message s_xiaomiQuery {
+	string errorCode; #错误码
+	string errorMsg; #错误信息
+	string orderStatus; #订单状态，TRADE_SUCCESS 代表成功WAIT_BUYER_PAY 代表未支付REPEAT_PURCHASE 订购关系已经存在
+	string payFee; #支付金额,单位为分,即0.01 米币
+}
+
+#安智充值
+message c_anzhi {
+	int64 roleId;	#角色编号
+}
+
+#安智充值
+message s_anzhi {
+	string callbackInfo; #透传参数
+	string orderNumber; #订单号
+}
+
+#安智充值查询
+message c_anzhiQuery {
+	string tradenum;	#订单号
+}
+
+#安智充值查询
+message s_anzhiQuery {
+	string sc; #状态码
+	string st; #状态描述
+}
+
+#联想充值
+message c_lenovo {
+	int64 roleId;	#角色编号
+}
+
+#联想充值
+message s_lenovo {
+	string callbackInfo; #透传参数
+	string orderNumber; #订单号
+	string appKey; #商户密钥
+}
+
+#奇虎360充值
+message c_qihu {
+	int64 roleId;	#角色编号
+}
+
+#奇虎360充值
+message s_qihu {
+	string callbackInfo; #透传参数
+	string orderNumber; #订单号
+	string notifyUri; #回调地址
+}
+
+#豌豆荚充值
+message c_wandoujia {
+	int64 roleId;	#角色编号
+}
+
+#豌豆荚充值
+message s_wandoujia {
+	string callbackInfo; #透传参数
+}
+
+#应用汇充值
+message c_yingyonghui {
+	int64 roleId;	#角色编号
+}
+
+#应用汇充值
+message s_yingyonghui {
+	string callbackInfo; #透传参数
+	string orderNumber; #订单号
+	string yingyonghuiAppKey;#密钥
+	string yingyonghuiUrl;#回调地址
+}
+
+#OPPO充值
+message c_oppo {
+	int64 roleId;	#角色编号
+}
+
+#OPPO充值
+message s_oppo {
+	string callbackInfo; #透传参数
+	string orderNumber; #订单号
+	string notifyUri; #回调地址
+}
+
+#华为充值
+message c_huawei {
+	int64 roleId;	#角色编号
+}
+
+#华为充值
+message s_huawei {
+	string callbackInfo; #透传参数
+	string orderNumber; #订单号
+	string appKey; #商户密钥
+}
+
+#海马IOS充值
+message c_haimaIos {
+	int64 roleId;	#角色编号
+}
+
+#海马IOS充值
+message s_haimaIos {
+	string callbackInfo; #透传参数
+	string orderNumber; #订单号
+	string appKey; #商户密钥
+	string notifyUri; #回调地址
+}
+
+#百度IOS充值
+message c_baiduIos {
+	int64 roleId;	#角色编号
+}
+
+#百度IOS充值
+message s_baiduIos {
+	string callbackInfo; #透传参数
+	string orderNumber; #订单号
+	string appKey; #商户密钥
+}
+
+#快用IOS充值
+message c_kuaiyongIos {
+	int64 roleId;	#角色编号
+}
+
+#快用IOS充值
+message s_kuaiyongIos {
+	string callbackInfo; #透传参数
+	string orderNumber; #订单号
+	string appKey; #商户密钥
+}
+
+#PPIOS充值
+message c_ppIos {
+	int64 roleId;	#角色编号
+}
+
+#PPIOS充值
+message s_ppIos {
+	string callbackInfo; #透传参数
+	string orderNumber; #订单号
+	string appKey; #商户密钥
+}
+
+#同步推IOS充值
+message c_tongbutuiIos {
+	int64 roleId;	#角色编号
+}
+
+#同步推IOS充值
+message s_tongbutuiIos {
+	string callbackInfo; #透传参数
+	string orderNumber; #订单号
+	string appKey; #商户密钥
+}
+
+#爱思IOS充值
+message c_aisiIos {
+	int64 roleId;	#角色编号
+}
+
+#爱思IOS充值
+message s_aisiIos {
+	string callbackInfo; #透传参数
+	string orderNumber; #订单号
+	string appKey; #商户密钥
+}

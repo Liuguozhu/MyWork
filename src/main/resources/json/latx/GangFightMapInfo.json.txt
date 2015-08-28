@@ -1,0 +1,1 @@
+[{"comeInDownX":95,"comeInDownY":54,"comeInMapId":16,"comeInUpX":24,"comeInUpY":16,"comeOutMapId":3,"comeOutX":30,"comeOutY":40,"index":1}]

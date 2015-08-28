@@ -1,0 +1,1 @@
+[{"rMB":10,"ratio":100},{"rMB":30,"ratio":100},{"rMB":50,"ratio":100},{"rMB":100,"ratio":100},{"rMB":200,"ratio":100},{"rMB":300,"ratio":100},{"rMB":500,"ratio":100},{"rMB":1000,"ratio":100},{"rMB":100000,"ratio":100}]
